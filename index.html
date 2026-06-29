@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>EDT EPS</title>
+<style>
+:root{
+  --bg:#f4f3f0;--surf:#fff;--brd:#e0ddd5;--brd2:#c4c0b5;
+  --txt:#1a1917;--mut:#6b6860;--fnt:#aaa;
+  --vac:#d0cec7;--hdr:#23221f;--hdr2:#2e2d29;--htxt:#f0ede8;
+  --RH:24px;--WW:29px;--LW:148px;--GRIDW:1424px;
+  --accent:#fcd34d;
+  --gt-row:#e0f2fe;--gt-cell:#f0f9ff;--gt-brd:#38bdf8;
+  --pro-row:#ffedd5;--pro-cell:#fff7ed;--pro-brd:#fb923c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:12px}
+body.compact,body.comfort{--RH:24px;--WW:29px;--LW:148px;--GRIDW:1424px;font-size:12px}
+body.has-selection td.td-w.editable{cursor:crosshair}
+body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(252,211,77,.8);outline-offset:-2px;box-shadow:inset 0 0 0 999px rgba(252,211,77,.08)}
+
+/* TOPBAR */
+#topbar{background:var(--hdr);color:var(--htxt);padding:3px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:400;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+#topbar h1{font-size:13px;font-weight:800;white-space:nowrap;letter-spacing:.02em}
+#topbar .app-logo{width:28px;height:28px;border-radius:8px;object-fit:cover;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.22);flex-shrink:0}
+#topbar h1{display:flex;align-items:center;gap:7px}
+#installPwaBtn{border-color:rgba(14,165,233,.4);color:#7dd3fc}
+@media (display-mode:standalone){#installPwaBtn{display:none!important}}
+
+.sep{width:1px;height:17px;background:rgba(255,255,255,.12);flex-shrink:0}
+.tbtn{padding:2px 8px;border-radius:3px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:var(--htxt);font-size:10px;font-weight:500;cursor:pointer}
+.tbtn:hover{background:rgba(255,255,255,.18)}
+.tbtn.g{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.1);color:#86efac}
+.tbtn.r{border-color:rgba(248,113,113,.3);color:#fca5a5}
+.tbtn.v{border-color:rgba(200,180,255,.4);color:#d8b4fe}
+#ss{font-size:9px;color:rgba(255,255,255,.35)}
+.version-tag{font-size:9px;font-weight:600;color:rgba(255,255,255,.45);margin-left:5px}
+.tbtn.on{background:rgba(252,211,77,.18);border-color:rgba(252,211,77,.55);color:#fde68a}
+.helpbar{background:#fff7d6;border-bottom:1px solid #e8d47a;color:#4f4212;padding:6px 12px;font-size:11px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.helpbar.closed{display:none}
+.helpbar b{font-weight:700}.kbd{display:inline-block;border:1px solid rgba(0,0,0,.18);border-bottom-width:2px;background:rgba(255,255,255,.75);border-radius:3px;padding:0 4px;font-size:9px;font-weight:700;margin:0 2px}
+.helpitem{white-space:nowrap}
+
+/* PALETTE */
+#palbar{background:var(--hdr2);border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:27px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:120px}
+#palbar.closed{max-height:0;border-bottom:none}
+#palbody{padding:4px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.selbox{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 7px}
+.selbox-label{font-size:9px;color:rgba(255,255,255,.45)}
+.cagrp{display:flex;align-items:center;gap:2px;border-left:2px solid;padding-left:5px;margin-right:2px}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 6px 2px 3px;border-radius:8px;font-size:9px;font-weight:600;cursor:pointer;border:2px solid transparent;line-height:1.25;white-space:nowrap;min-height:22px}
+.chip:hover{filter:brightness(1.1)}
+.chip.on{border-color:#fff;box-shadow:0 0 0 2px rgba(252,211,77,.65),0 0 14px rgba(252,211,77,.35);transform:translateY(-1px)}
+.chip-ico{width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.28);font-size:11px;line-height:1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.chip-name{max-width:90px;overflow:hidden;text-overflow:ellipsis}
+.chip-ca{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px;background:rgba(0,0,0,.25);color:#fff}
+.chip-loc{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px;background:rgba(255,255,255,.22);color:#fff;margin-left:1px}
+.addform{display:flex;gap:3px;align-items:center;margin-left:4px}
+.addform input[type=text]{padding:2px 5px;border-radius:3px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:10px;width:90px}
+.addform input[type=text]::placeholder{color:rgba(255,255,255,.35)}
+.addform select{padding:2px 3px;border-radius:3px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:10px}
+.addform select option{background:#2e2d29}
+.addform input[type=color]{width:20px;height:20px;border-radius:2px;border:none;cursor:pointer;background:transparent;padding:1px}
+#selinfo{font-size:11px;font-weight:700;color:var(--accent);min-width:140px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}.selico{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(252,211,77,.16);border:1px solid rgba(252,211,77,.35);font-size:13px}
+.legend-mini{display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:rgba(0,0,0,.12);border-radius:6px;padding:3px 6px}
+.legend-title{font-size:8px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.05em}
+.legchip{font-size:8px;font-weight:800;color:#fff;border-radius:4px;padding:2px 5px;line-height:1}
+.clear-sel{font-size:9px;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-radius:4px;padding:2px 6px;cursor:pointer}.clear-sel:hover{background:rgba(255,255,255,.2);color:#fff}
+
+/* TABS */
+#tabbar{display:flex;padding:4px 10px 0;gap:4px;background:var(--bg);border-bottom:2px solid var(--brd2);flex-wrap:wrap;align-items:flex-end}
+.tab-label{align-self:center;font-size:9px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin:0 4px 3px 8px;opacity:.75}
+.tab-label:first-child{margin-left:0}
+.tab.prof-tab{padding:3px 8px}
+.tab.level-tab{padding:3px 8px;border-color:rgba(0,0,0,.04);background:rgba(255,255,255,.35)}
+.tab.level-tab.on{background:var(--surf)}
+.tab{padding:3px 12px;border-radius:4px 4px 0 0;font-size:11px;font-weight:500;cursor:pointer;border:1px solid transparent;color:var(--mut)}
+.tab:hover{background:var(--surf)}
+.tab.on{background:var(--surf);border-color:var(--brd2);border-bottom-color:var(--surf);color:var(--txt);font-weight:600;margin-bottom:-2px}
+.tbadge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--brd2);color:var(--mut);font-size:8px;font-weight:700;margin-left:3px}
+.tab.on .tbadge{background:var(--hdr);color:#fff}
+
+/* PANELS */
+.panel{display:none}.panel.on{display:block}
+.scroll-outer{overflow-x:auto;overflow-y:auto;max-height:calc(100vh - 96px);scrollbar-gutter:stable both-edges}
+
+/* TABLE */
+table.grid{border-collapse:collapse;table-layout:fixed;width:var(--GRIDW);min-width:var(--GRIDW);max-width:var(--GRIDW)}
+table.grid col.col-lbl{width:var(--LW);min-width:var(--LW);max-width:var(--LW)}
+table.grid col.col-day{width:var(--WW);min-width:var(--WW);max-width:var(--WW)}
+table.grid thead th{position:sticky;top:0;z-index:50;background:var(--hdr);color:var(--htxt);border:1px solid rgba(255,255,255,.06);white-space:nowrap}
+th.th-lbl{width:var(--LW);min-width:var(--LW);text-align:left;padding:0 5px;font-size:8px;position:sticky!important;left:0;z-index:65!important;background:var(--hdr)!important}
+th.th-mon{font-size:7px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;text-align:center;padding:0;height:9px;line-height:1;background:#3a3935!important;border-color:rgba(255,255,255,.08)!important}
+th.th-date{width:var(--WW);min-width:var(--WW);height:10px;font-size:8px;font-weight:700;text-align:center;padding:0;border-color:rgba(255,255,255,.10)!important;line-height:1}
+th.th-date .date-num{display:inline;min-width:0;height:auto;border-radius:0;background:transparent;box-shadow:none}
+th.th-mon.season-autumn,th.th-date.season-autumn{background:linear-gradient(135deg,#7c2d12,#c2410c)!important;color:#fff7ed!important}
+th.th-mon.season-winter,th.th-date.season-winter{background:linear-gradient(135deg,#1e3a8a,#0f766e)!important;color:#eff6ff!important}
+th.th-mon.season-spring,th.th-date.season-spring{background:linear-gradient(135deg,#15803d,#65a30d)!important;color:#f0fdf4!important}
+th.th-mon.season-summer,th.th-date.season-summer{background:linear-gradient(135deg,#0369a1,#f59e0b)!important;color:#fff7ed!important}
+th.th-date.is-vac{background:#3a3935!important;color:rgba(255,255,255,.22)!important}
+th.th-date.is-ferie{background:#7f1d1d!important;color:#fee2e2!important;font-size:8px!important;padding:0!important;overflow:hidden}
+td.td-w.is-ferie{background:#fee2e2;cursor:default!important;filter:none!important;border-color:#fca5a5}
+tfoot tr th{position:sticky;bottom:0;z-index:50;background:#181714;color:#f8fafc;border:1px solid rgba(255,255,255,.14);font-size:8px;font-weight:800;text-align:center;padding:2px 0 3px;text-shadow:0 1px 1px rgba(0,0,0,.45)}
+tfoot th.th-lbl-foot{position:sticky!important;left:0;z-index:65!important;background:#181714!important;font-size:8px;font-weight:800;color:#f8fafc;text-align:left;padding:0 6px}
+tfoot th.is-vac{background:#2f2e2a!important;color:#f8fafc!important}
+tfoot th.is-ferie{background:#4a241d!important;color:#f8fafc!important}
+
+/* CELLS */
+td.td-lbl{position:sticky;left:0;z-index:20;background:var(--surf);border-right:2px solid var(--brd2);border-bottom:1px solid var(--brd);width:var(--LW);min-width:var(--LW);padding:1px 4px;vertical-align:middle;height:var(--RH)}
+.lbl-prof{font-weight:800;font-size:10px}
+.lbl-cl{font-size:9px;color:var(--mut)}
+.lbl-day{font-size:8px;font-weight:600;padding:1px 4px;border-radius:2px;margin-left:4px}
+.lbl-h{font-size:7px;color:var(--fnt);font-style:italic}
+.row-meta{display:flex;align-items:center;gap:4px;margin-top:0}.row-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.05}.row-hour{display:inline-block;margin-top:0;border-top:0;padding-top:0}
+
+td.td-w{height:var(--RH);width:var(--WW);min-width:var(--WW);max-width:var(--WW);border:1px solid var(--brd);padding:0;position:relative;vertical-align:middle;text-align:center;overflow:hidden;cursor:default}
+td.td-w[colspan]{max-width:none}
+td.td-w.editable{cursor:default}
+td.td-w.editable:hover{filter:brightness(.94)}
+td.td-w.is-vac{background:var(--vac);cursor:default!important;filter:none!important}
+td.td-w.is-ferie{background:#fee2e2;cursor:default!important;filter:none!important;border-top-color:#fee2e2;border-bottom-color:#fee2e2}
+td.td-w.is-sf{background:repeating-linear-gradient(-45deg,#a9a69d,#a9a69d 3px,#cac7bf 3px,#cac7bf 6px);cursor:default!important;filter:none!important}
+td.td-w.is-sp{background:repeating-linear-gradient(-45deg,#fde68a,#fde68a 3px,#fff7cc 3px,#fff7cc 6px)}
+td.td-w.is-empty{background:#fff}
+tr.voie-gt td.td-lbl{background:var(--gt-row);border-left:3px solid var(--gt-brd)}
+tr.voie-pro td.td-lbl{background:var(--pro-row);border-left:3px solid var(--pro-brd)}
+tr.voie-gt td.td-w.is-empty{background:var(--gt-cell)}
+tr.voie-pro td.td-w.is-empty{background:var(--pro-cell)}
+.class-ico{display:inline-flex;align-items:center;justify-content:center;min-width:15px;height:15px;margin-right:2px;border-radius:50%;font-size:10px;background:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);padding:0 2px;line-height:1}
+.voie-tag{font-size:6.5px;font-weight:900;border-radius:6px;padding:1px 3px;margin-left:2px;letter-spacing:.03em}
+tr.voie-gt .voie-tag{background:#bae6fd;color:#075985}
+tr.voie-pro .voie-tag{background:#fed7aa;color:#9a3412}
+.cyc-card{height:100%;width:100%;display:flex;align-items:center;justify-content:center;gap:2px;padding:0 2px;pointer-events:none}
+.cyc-icon{width:15px;height:15px;min-width:15px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.24);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);font-size:10px;line-height:1}
+.cyc-info{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;overflow:hidden}
+.cyc-label{font-size:8px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding:0 2px;line-height:1.08;display:block;pointer-events:none}
+.cyc-meta{display:flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;line-height:1;pointer-events:none}
+.meta-pill{font-size:6px;font-weight:800;line-height:1;border-radius:3px;padding:1px 3px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.18)}
+.sp-label{position:absolute;left:1px;right:1px;bottom:1px;font-size:6.5px;font-weight:800;color:#5a3a00;background:rgba(255,255,255,.74);display:block;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none;border-radius:4px}
+.role-strip{position:absolute;left:1px;right:1px;bottom:1px;display:grid;grid-template-columns:repeat(var(--role-cols,1),1fr);gap:1px;pointer-events:none;z-index:2}
+.role-slot{min-width:0;display:flex;align-items:center;justify-content:center}
+.role-mini{display:inline-flex;align-items:center;justify-content:center;gap:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:50%;padding:1px 2px;font-size:7px;font-weight:900;background:rgba(255,255,255,.88);color:#3b2d0b;box-shadow:0 1px 2px rgba(0,0,0,.12);border:1px solid rgba(120,89,0,.16)}
+.role-mini.role-vidange{border-radius:4px;color:#991b1b;min-width:14px;border-color:rgba(153,27,27,.35);position:relative;font-family:Arial,sans-serif}
+.role-mini.role-vidange::after{content:'';position:absolute;left:2px;right:2px;top:50%;height:2px;background:#dc2626;transform:rotate(-32deg);border-radius:2px}
+.role-mini.role-pro{border-radius:4px;min-width:20px;padding:1px 3px;background:rgba(255,255,255,.92);color:#9a3412;border-color:rgba(154,52,18,.25);font-size:6px;letter-spacing:.02em}
+.role-list{display:flex;flex-direction:column;gap:5px;max-height:260px;overflow:auto;padding:6px;border:1px solid var(--brd);border-radius:5px;background:#faf9f6}
+.role-help{font-size:10px;line-height:1.35;color:#5f5341;background:#fff8e1;border:1px solid #f3df9a;border-radius:5px;padding:5px 7px;margin-bottom:6px}
+.role-row{display:grid;grid-template-columns:38px 54px 1fr;gap:6px;align-items:center;font-size:10px}
+.role-no{font-weight:800;color:#111;background:#ece7dc;border-radius:10px;text-align:center;padding:2px 4px}
+.role-date{color:var(--mut);font-weight:600}.lesson-role{font-size:10px;padding:3px 5px;border-radius:4px;border:1px solid var(--brd2);background:#fff;color:var(--txt)}
+.term-note{font-size:10px;color:#7c2d12;background:#ffedd5;border:1px solid #fed7aa;border-radius:5px;padding:5px 7px;margin-top:5px}
+
+
+
+/* REPÈRES VISUELS */
+tbody tr:hover td.td-lbl{filter:brightness(.96)}
+tbody tr:hover td.td-w:not(.is-vac):not(.is-ferie):not(.is-sf){box-shadow:inset 0 0 0 1px rgba(35,34,31,.18)}
+td.td-w.editable:hover::after{content:'+';position:absolute;inset:2px;border:1px dashed rgba(0,0,0,.22);border-radius:2px;color:rgba(0,0,0,.28);font-size:10px;display:flex;align-items:center;justify-content:center;pointer-events:none}
+td.td-w[data-has-cyc='1']:hover::after{content:'préciser';font-size:8px;text-transform:uppercase;letter-spacing:.04em;background:rgba(255,255,255,.2)}
+body.role-mode td.td-w[data-has-cyc='1']:hover::after{content:'préciser';font-size:9px;text-transform:uppercase;letter-spacing:.05em;background:rgba(252,211,77,.36);color:#3b2d0b;border-color:rgba(120,89,0,.25)}
+body.compact .cyc-label,body.comfort .cyc-label{font-size:8px}body.compact .cyc-icon,body.comfort .cyc-icon{width:15px;height:15px;min-width:15px;font-size:10px}body.compact .meta-pill,body.comfort .meta-pill{font-size:6px;padding:1px 2px}body.compact .lbl-day,body.comfort .lbl-day{display:none}body.compact .role-mini,body.comfort .role-mini{font-size:7px;padding:1px 2px;max-width:20px}
+
+
+.ferie-cell-label{display:none}
+.pfmp-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;letter-spacing:.08em;color:#333;opacity:.38;pointer-events:none;text-transform:uppercase}
+.partial-block-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:7px;font-weight:900;color:#5a3a00;line-height:1.05;pointer-events:none}
+.partial-block-label small{font-size:6.5px;font-weight:800;opacity:.78}
+.view-title{font-size:11px;font-weight:800;color:#2e2d29;padding:5px 10px 2px;position:sticky;left:0;z-index:5}.view-section{margin:0 8px 7px 0}.view-section h3{font-size:9px;font-weight:800;color:#4b4942;padding:3px 0 2px;position:sticky;left:0;z-index:4}.empty-view{padding:10px;color:var(--mut);font-weight:600}
+tfoot.hidden-weeks{display:none}
+#signature{position:fixed;right:10px;bottom:7px;z-index:950;font-size:10px;font-weight:800;color:rgba(35,34,31,.66);background:rgba(255,255,255,.82);border:1px solid rgba(0,0,0,.08);border-radius:999px;padding:4px 9px;box-shadow:0 2px 8px rgba(0,0,0,.10);backdrop-filter:blur(4px)}
+.admin-note{font-size:11px;color:var(--mut);line-height:1.45;background:var(--bg);border:1px solid var(--brd);border-radius:6px;padding:8px 10px}
+
+
+/* PLEIN ÉCRAN : la grille utilise toute la largeur et presque toute la hauteur */
+body.fullscreen-mode{--LW:148px;--WW:calc((100vw - 168px)/44);--GRIDW:calc(100vw - 20px)}
+body.fullscreen-mode #topbar{padding:2px 8px;gap:6px}
+body.fullscreen-mode #palbody{padding:3px 8px;gap:4px}
+body.fullscreen-mode #tabbar{padding:3px 8px 0;gap:3px}
+body.fullscreen-mode .scroll-outer{max-height:calc(100vh - 76px)}
+body.fullscreen-mode .view-title{display:none}
+body.fullscreen-mode .view-section{margin-right:4px;margin-bottom:5px}
+body.fullscreen-mode .view-section h3{padding:2px 0 1px}
+
+/* CONFLICT TOAST */
+#conflict-toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:#c0392b;color:#fff;padding:8px 18px;border-radius:6px;font-size:12px;font-weight:500;z-index:800;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+#conflict-toast.show{opacity:1}
+#conflict-toast.warn{background:#b45309}
+#conflict-toast.ok{background:#047857}
+
+/* MODAL */
+.ov{position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center}
+.ov.on{display:flex}
+.mo{background:var(--surf);border-radius:7px;padding:18px 22px;min-width:320px;max-width:470px;box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.mo h2{font-size:13px;font-weight:600;margin-bottom:12px}
+.mrow{margin-bottom:9px}
+.mrow label{display:block;font-size:10px;color:var(--mut);margin-bottom:2px}
+.mrow .mval{padding:5px 7px;border-radius:3px;border:1px solid var(--brd2);font-size:11px;background:var(--bg);color:var(--txt);display:block;width:100%}
+.mbtns{display:flex;gap:6px;justify-content:flex-end;margin-top:14px}
+.mbtns button{padding:5px 13px;border-radius:3px;font-size:11px;cursor:pointer;font-weight:500}
+.bc{background:var(--hdr);color:#fff;border:none}.bc:hover{background:#111}
+.bn{background:none;border:1px solid var(--brd2);color:var(--mut)}.bn:hover{background:var(--bg)}
+.bd{background:#fee2e2;color:#991b1b;border:1px solid #fca5a5}.bd:hover{background:#fecaca}
+
+/* TOOLTIP */
+.tip{position:fixed;z-index:700;background:#111;color:#fff;padding:3px 8px;border-radius:3px;font-size:10px;pointer-events:none;display:none;white-space:nowrap}
+
+.topselect{height:24px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:var(--htxt);border-radius:4px;font-size:10px;font-weight:650;padding:0 7px;max-width:170px}
+.topselect option{background:#2e2d29;color:#fff}
+td.td-w.is-othercyc{background:rgba(255,255,255,.34);border-color:rgba(0,0,0,.035)}
+.apsa-filter-head{display:flex;align-items:center;gap:8px;margin:5px 0 7px;font-size:11px;color:var(--mut)}
+.apsa-filter-head strong{color:var(--txt);font-size:12px}.apsa-filter-head .pill{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:999px;background:#fff;border:1px solid var(--brd)}
+.pfmp-panel{padding:7px 10px 18px}.pfmp-title{font-weight:800;font-size:13px;margin:2px 0 8px;color:var(--txt)}
+table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--brd2);font-size:10px;table-layout:fixed}
+.pfmp-table th{background:#23221f;color:#f0ede8;border:1px solid rgba(255,255,255,.08);padding:4px 6px;text-align:left}
+.pfmp-table td{border:1px solid var(--brd);padding:3px 6px;vertical-align:top;line-height:1.25}
+.pfmp-table tr.section-row td{background:#eef2f7;font-weight:800;color:#334155;font-size:10px;text-transform:uppercase;letter-spacing:.04em}.pfmp-table .pfmp-cl{font-weight:800}.pfmp-table .pfmp-date{font-weight:650;color:#334155}
+
+
+/* ADMINISTRATION */
+.mo.admin-modal{width:min(1180px,96vw);height:min(840px,92vh);max-width:none;min-width:0;padding:0;display:flex;flex-direction:column;overflow:hidden}
+.admin-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;background:var(--hdr);color:var(--htxt)}
+.admin-head h2{margin:0;font-size:14px;font-weight:800}.admin-sub{font-size:10px;color:rgba(255,255,255,.55)}
+.admin-tabs{display:flex;gap:4px;padding:8px 10px 0;background:#eee9df;border-bottom:1px solid var(--brd2);flex-wrap:wrap}
+.admin-tab{border:1px solid var(--brd2);border-bottom:none;background:rgba(255,255,255,.55);border-radius:5px 5px 0 0;padding:6px 9px;font-size:11px;font-weight:700;color:#4b5563;cursor:pointer}
+.admin-tab.on{background:#fff;color:#111827;box-shadow:0 -1px 0 #fff inset}
+.admin-body{padding:10px 12px;overflow:auto;background:#fff;flex:1}
+.admin-panel{display:none}.admin-panel.on{display:block}
+.admin-actions{display:flex;gap:6px;justify-content:flex-end;padding:8px 12px;border-top:1px solid var(--brd2);background:#f8fafc}
+.admin-note{background:#fff7d6;border:1px solid #e8d47a;color:#4f4212;border-radius:6px;padding:7px 9px;font-size:11px;line-height:1.35;margin-bottom:8px}
+.admin-grid{width:100%;border-collapse:collapse;font-size:10px;background:#fff;table-layout:fixed}
+.admin-grid th{background:#23221f;color:#f0ede8;border:1px solid rgba(255,255,255,.1);padding:4px 5px;text-align:left;font-size:9px;position:sticky;top:0;z-index:2}
+.admin-grid td{border:1px solid var(--brd);padding:3px 4px;vertical-align:middle;background:#fff}
+.admin-grid tr:nth-child(even) td{background:#fafaf8}
+.admin-grid input[type=text],.admin-grid input[type=date],.admin-grid input[type=color],.admin-grid select,.admin-field{width:100%;font-size:10px;border:1px solid #cbd5e1;border-radius:4px;padding:3px 5px;background:#fff;color:#111827}
+.admin-grid input[type=color]{height:24px;padding:1px}.admin-grid input[type=checkbox]{transform:scale(.95)}
+.admin-small{font-size:9px;color:#64748b;line-height:1.25}.admin-title{font-size:12px;font-weight:800;margin:8px 0 5px;color:#111827}
+.admin-row-actions{display:flex;gap:4px;align-items:center}.admin-mini-btn{padding:3px 6px;font-size:9px;border-radius:4px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}
+.admin-mini-btn:hover{background:#f1f5f9}.admin-mini-btn.danger{color:#991b1b;border-color:#fecaca;background:#fff5f5}
+.admin-addbar{display:flex;gap:6px;align-items:center;margin:8px 0;flex-wrap:wrap}.admin-addbar .admin-field{width:auto;min-width:120px}
+.admin-section-title{font-size:12px;font-weight:900;margin:10px 0 5px;color:#111827;display:flex;align-items:center;gap:6px}.admin-section-title::before{content:'';display:inline-block;width:5px;height:14px;border-radius:3px;background:#334155}.admin-linked{display:grid;grid-template-columns:1fr;gap:12px}.admin-hint{font-size:10px;color:#475569;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:6px;padding:6px 8px;margin:6px 0}.admin-flow{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}.admin-flow span{font-size:9px;font-weight:800;border:1px solid #cbd5e1;background:#f8fafc;border-radius:999px;padding:3px 7px;color:#334155}.admin-flow b{color:#0f172a}
+.admin-badge{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:2px 6px;background:#f1f5f9;border:1px solid #cbd5e1;font-weight:700;font-size:9px;color:#334155}
+.admin-backup{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.admin-card{border:1px solid var(--brd2);border-radius:8px;background:#fff;padding:10px}.admin-card h3{font-size:12px;margin:0 0 6px;color:#111827}.admin-card p{font-size:10px;color:#64748b;line-height:1.35;margin-bottom:8px}
+
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0C447C">
+<meta name="description" content="EDT EPS — application de programmation annuelle EPS, PWA autonome, Académie de Nantes.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+
+</head>
+<body>
+
+<div id="topbar">
+  <h1><img class="app-logo" src="assets/icons/icon-192.png" alt="Logo EDT EPS"> EDT EPS</h1>
+  <div class="sep"></div>
+  <button class="tbtn g" onclick="exportJSON()">💾 Exporter</button>
+  <button class="tbtn" onclick="importJSON()">📂 Importer</button>
+  <button class="tbtn r" onclick="clearAll()">🗑 Effacer</button>
+  <div class="sep"></div>
+  <button class="tbtn v" id="role-btn" onclick="toggleRoleMode()">✍️ Préciser Cycle</button>
+  <select id="apsa-filter" class="topselect" onchange="setApsaFilter(this.value)" title="Filtrer l’EDT complet par APSA"><option value="">🔎 Toutes APSA</option></select>
+  <button class="tbtn" onclick="toggleFullScreen()">⛶ Plein écran</button>
+  <button class="tbtn" onclick="openAdmin()">⚙️ Administration</button>
+  <div class="sep"></div>
+  <span id="ss">● Sauvegarde auto</span>
+</div>
+
+<div id="palbar">
+  <div id="palbody">
+    <div class="selbox">
+      <span class="selbox-label">APSA sélectionnée</span>
+      <span id="selinfo">— choisir</span>
+      <button class="clear-sel" onclick="clearSelection()" title="Désélectionner l’APSA">×</button>
+    </div>
+    <div class="legend-mini" title="Légende rapide des installations">
+      <span class="legend-title">Lieux</span>
+      <span class="legchip" style="background:#16a085">DH</span>
+      <span class="legchip" style="background:#8e44ad">GG</span>
+      <span class="legchip" style="background:#d35400">PG</span>
+      <span class="legchip" style="background:#c0392b">M</span>
+      <span class="legchip" style="background:#2471a3">P</span>
+    </div>
+    <div class="sep"></div>
+    <div id="pal" style="display:flex;gap:3px;flex-wrap:wrap;align-items:center"></div>
+    <div class="sep"></div>
+    <div class="addform">
+      <input type="text" id="nn" placeholder="Nom APSA…" maxlength="20">
+      <select id="nca"><option value="CA1">CA1</option><option value="CA2">CA2</option><option value="CA3">CA3</option><option value="CA4" selected>CA4</option><option value="CA5">CA5</option></select>
+      <select id="nloc"><option value="DH">DH</option><option value="GG">GG</option><option value="PG">PG</option><option value="M">M</option><option value="P">P</option></select>
+      <input type="color" id="nc" value="#6366f1">
+      <button class="tbtn" onclick="addApsa()">＋ Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<div id="tabbar"></div>
+<div id="panels"></div>
+
+<div id="conflict-toast"></div>
+<div class="ov" id="ov"><div class="mo" id="mo"></div></div>
+<div class="tip" id="tip"></div>
+<div id="signature">by Quentin Delisle</div>
+
+<script>
+'use strict';
+
+// ══ CALENDRIER ══
+function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
+function addD(d,n){const r=new Date(d);r.setDate(r.getDate()+n);return r;}
+function dKey(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function pDMY(s){const[dd,mm,yy]=s.split('/');const y=+yy<100?2000+(+yy):+yy;return new Date(y,+mm-1,+dd);}
+function fmtD(d){return`${d.getDate()}`;}
+function fmtDM(d){return`${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;}
+function seasonOf(d){const m=d.getMonth()+1;if(m===12||m<=2)return'winter';if(m>=3&&m<=5)return'spring';if(m>=6&&m<=8)return'summer';return'autumn';}
+function seasonIcon(s){return{autumn:'🍂',winter:'❄️',spring:'🌿',summer:'☀️'}[s]||'';}
+
+const VACS=[
+  {d:new Date(2026,9,17),f:new Date(2026,10,1)},
+  {d:new Date(2026,11,19),f:new Date(2027,0,3)},
+  {d:new Date(2027,1,20),f:new Date(2027,2,7)},
+  {d:new Date(2027,3,17),f:new Date(2027,4,2)},
+  {d:new Date(2027,4,5),f:new Date(2027,4,9)},
+  {d:new Date(2027,6,3),f:new Date(2027,8,1)},
+];
+const FERIES={'2026-11-11':'Armistice','2027-03-29':'Pâques','2027-04-29':'Ascension','2027-05-17':'Pentecôte'};
+function isVac(d){return VACS.some(v=>d>=v.d&&d<=v.f);}
+function ferieL(d){return FERIES[dKey(d)]||null;}
+
+const ALL_WK=[];
+for(let w=36;w<=52;w++){const m=isoMon(2026,w);ALL_WK.push({w,mon:m});}
+for(let w=1;w<=27;w++){const m=isoMon(2027,w);ALL_WK.push({w,mon:m});}
+
+function buildSlots(di){
+  return ALL_WK.map((wk,wi)=>{
+    const date=addD(wk.mon,di);
+    return{wi,date,vac:isVac(date),ferie:ferieL(date),wk};
+  });
+}
+function mthSpans(slots){
+  const sp=[];let cur=null,cnt=0,first=null;
+  slots.forEach(s=>{
+    const l=s.date.toLocaleDateString('fr-FR',{month:'short',year:'2-digit'});
+    if(l!==cur){if(cur)sp.push({l:cur,n:cnt,d:first});cur=l;cnt=1;first=s.date;}else cnt++;
+  });
+  if(cur)sp.push({l:cur,n:cnt,d:first});return sp;
+}
+
+// ══ PFMP ══
+const PF_FULL={
+  'CAP1 EL':[{f:pDMY('04/01/27'),t:pDMY('22/01/27')},{f:pDMY('07/06/27'),t:pDMY('02/07/27')}],
+  'CAP2 EL':[{f:pDMY('30/11/26'),t:pDMY('18/12/26')},{f:pDMY('03/05/27'),t:pDMY('28/05/27')}],
+  '2 TNE1':[{f:pDMY('04/01/27'),t:pDMY('22/01/27')},{f:pDMY('14/06/27'),t:pDMY('02/07/27')}],
+  '2 TNE2':[{f:pDMY('04/01/27'),t:pDMY('22/01/27')},{f:pDMY('14/06/27'),t:pDMY('02/07/27')}],
+  '2 TNE3':[{f:pDMY('04/01/27'),t:pDMY('22/01/27')},{f:pDMY('14/06/27'),t:pDMY('02/07/27')}],
+  'CAP2 MA g1':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('03/05/27'),t:pDMY('21/05/27')}],
+  'CAP2 MA g2':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('03/05/27'),t:pDMY('21/05/27')}],
+  'CAP2 MB g2':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('03/05/27'),t:pDMY('21/05/27')}],
+  '1 ETE':[{f:pDMY('23/11/26'),t:pDMY('18/12/26')},{f:pDMY('31/05/27'),t:pDMY('02/07/27')}],
+  'T ETE':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('01/02/27'),t:pDMY('19/02/27')}],
+  '1 CIEL':[{f:pDMY('23/11/26'),t:pDMY('18/12/26')},{f:pDMY('31/05/27'),t:pDMY('02/07/27')}],
+  'T CIEL':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('22/03/27'),t:pDMY('09/04/27')}],
+  '1 MELEC':[{f:pDMY('25/01/27'),t:pDMY('19/02/27')},{f:pDMY('31/05/27'),t:pDMY('02/07/27')}],
+  'T MELEC':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('22/03/27'),t:pDMY('09/04/27')}],
+  'T MVCR':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('08/03/27'),t:pDMY('26/03/27')}],
+  'T MVCC':[{f:pDMY('28/09/26'),t:pDMY('16/10/26')},{f:pDMY('08/03/27'),t:pDMY('26/03/27')}],
+};
+const PF_PART={
+  // Regroupements CAP : les MA/MB et les C n'ont pas toujours les mêmes périodes.
+  'CAP1 MA g1':[
+    {f:pDMY('25/01/27'),t:pDMY('12/02/27'),who:'CAP1MA',course:'CAP1C'},
+    {f:pDMY('22/03/27'),t:pDMY('09/04/27'),who:'CAP1C',course:'CAP1MA'},
+    {f:pDMY('14/06/27'),t:pDMY('02/07/27'),who:'CAP1MA + CAP1C',course:'aucun groupe',full:true}
+  ],
+  'CAP1 MA g2':[
+    {f:pDMY('25/01/27'),t:pDMY('12/02/27'),who:'CAP1MB',course:'CAP1C'},
+    {f:pDMY('22/03/27'),t:pDMY('09/04/27'),who:'CAP1C',course:'CAP1MB'},
+    {f:pDMY('14/06/27'),t:pDMY('02/07/27'),who:'CAP1MB + CAP1C',course:'aucun groupe',full:true}
+  ],
+  // Regroupements 1ères : périodes MV et CPA/CAV différentes, avec chevauchement fin novembre.
+  '1 CPA-MV1':[
+    {f:pDMY('02/11/26'),t:pDMY('22/11/26'),who:'1MV1',course:'1CPA'},
+    {f:pDMY('23/11/26'),t:pDMY('27/11/26'),who:'1MV1 + 1CPA',course:'aucun groupe',full:true},
+    {f:pDMY('28/11/26'),t:pDMY('18/12/26'),who:'1CPA',course:'1MV1'},
+    {f:pDMY('07/06/27'),t:pDMY('02/07/27'),who:'1CPA + 1MV1',course:'aucun groupe',full:true}
+  ],
+  '1 CAV-MV2':[
+    {f:pDMY('02/11/26'),t:pDMY('22/11/26'),who:'1MV2',course:'1CAV'},
+    {f:pDMY('23/11/26'),t:pDMY('27/11/26'),who:'1MV2 + 1CAV',course:'aucun groupe',full:true},
+    {f:pDMY('28/11/26'),t:pDMY('18/12/26'),who:'1CAV',course:'1MV2'},
+    {f:pDMY('07/06/27'),t:pDMY('02/07/27'),who:'1CAV + 1MV2',course:'aucun groupe',full:true}
+  ],
+  // Regroupements 2des : les MV partent en janvier, les CPA/CAV fin janvier-février.
+  '2 CPA-MV1':[
+    {f:pDMY('04/01/27'),t:pDMY('22/01/27'),who:'2MV1',course:'2CPA'},
+    {f:pDMY('25/01/27'),t:pDMY('12/02/27'),who:'2CPA',course:'2MV1'},
+    {f:pDMY('14/06/27'),t:pDMY('02/07/27'),who:'2CPA + 2MV1',course:'aucun groupe',full:true}
+  ],
+  '2 CPA-MV2':[
+    {f:pDMY('04/01/27'),t:pDMY('22/01/27'),who:'2MV2',course:'2CPA'},
+    {f:pDMY('25/01/27'),t:pDMY('12/02/27'),who:'2CPA',course:'2MV2'},
+    {f:pDMY('14/06/27'),t:pDMY('02/07/27'),who:'2CPA + 2MV2',course:'aucun groupe',full:true}
+  ],
+  '2 CAV-MV1':[
+    {f:pDMY('04/01/27'),t:pDMY('22/01/27'),who:'2MV1',course:'2CAV'},
+    {f:pDMY('25/01/27'),t:pDMY('12/02/27'),who:'2CAV',course:'2MV1'},
+    {f:pDMY('14/06/27'),t:pDMY('02/07/27'),who:'2CAV + 2MV1',course:'aucun groupe',full:true}
+  ],
+};
+function stageInfo(cl,date){
+  const full=(PF_FULL[cl]||[]).find(p=>date>=p.f&&date<=p.t);
+  if(full)return{type:'full',who:'tous',course:'aucun groupe'};
+  const p=(PF_PART[cl]||[]).find(p=>date>=p.f&&date<=p.t);
+  if(!p)return{type:'none'};
+  if(p.full||String(p.who).toLowerCase()==='tous')return{type:'full',who:p.who||'tous',course:p.course||'aucun groupe'};
+  return{type:'part',who:p.who,course:p.course||partialCourseLabel(cl,p.who)};
+}
+function partialCourseLabel(cl,who,course){
+  if(course)return course;
+  if(!who)return cl;
+  if(String(who).toLowerCase()==='tous')return 'aucun groupe';
+  return cl;
+}
+function samePartialStage(cl,date,who,course){
+  const info=stageInfo(cl,date);
+  return info.type==='part'&&info.who===who&&(info.course||'')===(course||'');
+}
+function stageDisplayKey(cl,date){
+  const info=stageInfo(cl,date);
+  if(info.type==='part')return 'part|'+(info.who||'')+'|'+(info.course||'');
+  return info.type;
+}
+const PFMP_CAL=[
+  {sect:'Maintenance / carrosserie / véhicules',cl:'CAP1C',desc:'1ère année CAP Carrossier Automobile',p1:'22/03/27 → 09/04/27',p2:'14/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'CAP2C',desc:'2ème année CAP Réparation des Carrosseries',p1:'28/09/26 → 16/10/26',p2:'03/05/27 → 21/05/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'2CPA/CAV',desc:'Seconde pro Carrossier Peintre Auto / Construction et aménagement des véhicules',p1:'25/01/27 → 12/02/27',p2:'14/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'1CPA/CAV',desc:'Première pro Carrossier Peintre Auto / Construction et aménagement des véhicules',p1:'23/11/26 → 18/12/26',p2:'07/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'CAP1MA / CAP1MB',desc:'1ère année CAP Maintenance des Véhicules',p1:'25/01/27 → 12/02/27',p2:'14/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'CAP2MA / CAP2MB',desc:'2ème année CAP Maintenance des Véhicules',p1:'28/09/26 → 16/10/26',p2:'03/05/27 → 21/05/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'2MV1 / 2MV2',desc:'Seconde pro Maintenance des Véhicules',p1:'04/01/27 → 22/01/27',p2:'14/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'1MV1 / 1MV2',desc:'Première pro Maintenance des Véhicules',p1:'02/11/26 → 27/11/26',p2:'07/06/27 → 02/07/27'},
+  {sect:'Maintenance / carrosserie / véhicules',cl:'TMVCC / TMVCR',desc:'Terminale pro MV / Carrosserie Peinture / Construction',p1:'28/09/26 → 16/10/26',p2:'08/03/27 → 26/03/27'},
+  {sect:'Énergie / numérique',cl:'CAP1EL',desc:'1ère année CAP Électricien',p1:'04/01/27 → 22/01/27',p2:'07/06/27 → 02/07/27'},
+  {sect:'Énergie / numérique',cl:'CAP2EL',desc:'2ème année CAP Électricien',p1:'30/11/26 → 18/12/26',p2:'03/05/27 → 28/05/27'},
+  {sect:'Énergie / numérique',cl:'2 TNE1/2/3',desc:'Seconde pro Transition numérique et énergétique',p1:'04/01/27 → 22/01/27',p2:'14/06/27 → 02/07/27'},
+  {sect:'Énergie / numérique',cl:'1MELEC',desc:'Première pro Métiers de l’électricité',p1:'25/01/27 → 19/02/27',p2:'31/05/27 → 02/07/27'},
+  {sect:'Énergie / numérique',cl:'TMELEC',desc:'Terminale pro Métiers de l’électricité',p1:'28/09/26 → 16/10/26',p2:'22/03/27 → 09/04/27'},
+  {sect:'Énergie / numérique',cl:'1 CIEL',desc:'Première pro Cybersécurité, informatique et réseaux, électronique',p1:'23/11/26 → 18/12/26',p2:'31/05/27 → 02/07/27'},
+  {sect:'Énergie / numérique',cl:'TCIEL',desc:'Terminale pro Cybersécurité, informatique et réseaux, électronique',p1:'28/09/26 → 16/10/26',p2:'22/03/27 → 09/04/27'},
+  {sect:'Énergie / numérique',cl:'1 ETE',desc:'Première Équipement technique et énergie',p1:'23/11/26 → 18/12/26',p2:'31/05/27 → 02/07/27'},
+  {sect:'Énergie / numérique',cl:'T ETE',desc:'Terminale Équipement technique et énergie',p1:'28/09/26 → 16/10/26',p2:'01/02/27 → 19/02/27'},
+];
+
+// ══ APSA ══
+let APSA=[
+  {n:'Demi-fond',ca:'CA1',loc:'DH',c:'#16a34a'},
+  {n:'Relais vitesse',ca:'CA1',loc:'DH',c:'#16a34a'},
+  {n:'Natation',ca:'CA1',loc:'P',c:'#2563eb'},
+  {n:'Golf',ca:'CA1',loc:'DH',c:'#ca8a04'},
+  {n:'Biathlon',ca:'CA1',loc:'DH',c:'#16a34a'},
+  {n:'CO',ca:'CA2',loc:'DH',c:'#14532d'},
+  {n:'Sauvetage',ca:'CA2',loc:'P',c:'#2563eb'},
+  {n:'Danse',ca:'CA3',loc:'PG',c:'#ea580c'},
+  {n:'Acrosport',ca:'CA3',loc:'PG',c:'#ea580c'},
+  {n:'Step',ca:'CA3',loc:'PG',c:'#ea580c'},
+  {n:'Badminton',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Tennis table',ca:'CA4',loc:'PG',c:'#ea580c'},
+  {n:'Hand INT',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Hand EXT',ca:'CA4',loc:'DH',c:'#16a34a'},
+  {n:'Volley',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Foot',ca:'CA4',loc:'DH',c:'#16a34a'},
+  {n:'Futsal',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Basket',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Basket 3c3',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Ultimate',ca:'CA4',loc:'DH',c:'#16a34a'},
+  {n:'Judo',ca:'CA4',loc:'PG',c:'#ea580c'},
+  {n:'Spike-Ball',ca:'CA4',loc:'PG',c:'#ea580c'},
+  {n:'Autre',ca:'CA4',loc:'GG',c:'#dc2626'},
+  {n:'Musculation',ca:'CA5',loc:'M',c:'#db2777'},
+  {n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'},
+  {n:'CED',ca:'CA5',loc:'DH',c:'#16a34a'},
+];
+const CA_COL={CA1:'#c0392b',CA2:'#27ae60',CA3:'#8e44ad',CA4:'#2471a3',CA5:'#d35400'};
+const LOC_COL={DH:'#16a085',GG:'#8e44ad',PG:'#d35400',M:'#c0392b',P:'#2471a3'};
+const EXCL=new Set(['GG','PG','M','P']);
+function is3eCAP(cl){return/^(3e|CAP)/i.test(cl);}
+function lum(hex){const r=/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);if(!r)return.5;return(0.299*parseInt(r[1],16)+0.587*parseInt(r[2],16)+0.114*parseInt(r[3],16))/255;}
+function txc(hex){return lum(hex)>.55?'rgba(0,0,0,.82)':'rgba(255,255,255,.95)';}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+const APSA_ICON={
+  'demi-fond':'🏃','relais vitesse':'⚡','natation':'🏊','golf':'⛳','biathlon':'🎯','co':'🧭','sauvetage':'🛟',
+  'danse':'💃','acrosport':'🤸','step':'🎵','step ca5':'🎵','badminton':'🏸','tennis table':'🏓','hand int':'🤾','hand ext':'🤾',
+  'volley':'🏐','foot':'⚽','futsal':'⚽','basket':'🏀','basket 3c3':'🏀','ultimate':'🥏','judo':'🥋',
+  'spike-ball':'🔵','autre':'✨','musculation':'💪','ced':'❤️'
+};
+function apsaIcon(a){
+  const key=String(a?.n||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+  if(APSA_ICON[key])return APSA_ICON[key];
+  if(key.includes('basket'))return '🏀';
+  if(key.includes('hand'))return '🤾';
+  if(key.includes('foot')||key.includes('futsal'))return '⚽';
+  if(key.includes('tennis'))return '🏓';
+  if(key.includes('bad'))return '🏸';
+  if(key.includes('nat')||key.includes('sauvetage'))return '🏊';
+  if(key.includes('danse')||key.includes('step'))return '🎵';
+  if(key.includes('muscu'))return '💪';
+  return ({CA1:'🏃',CA2:'🧭',CA3:'🤸',CA4:'🎮',CA5:'💪'}[a?.ca]||'✨');
+}
+const LESSON_ROLES=[
+  {v:'',icon:'',html:'',label:'Leçon classique',short:'',cls:''},
+  {v:'diag',icon:'🧭',html:'🧭',label:'Évaluation diagnostique',short:'Diag',cls:''},
+  {v:'coeval',icon:'🤝',html:'🤝',label:'Co-évaluation',short:'Co-éval',cls:''},
+  {v:'rattrapage',icon:'🔁',html:'🔁',label:'Rattrapage Bac',short:'Rattr.',cls:''},
+  {v:'eval',icon:'✅',html:'✅',label:'Évaluation',short:'Éval',cls:''},
+  {v:'vidange',icon:'P̸',html:'P',label:'Vidange piscine',short:'Vidange',cls:'role-vidange'},
+  {v:'pro',icon:'PRO',html:'PRO',label:'Présence PRO',short:'PRO',cls:'role-pro'}
+];
+function roleInfo(v){return LESSON_ROLES.find(r=>r.v===(v||''))||LESSON_ROLES[0];}
+function roleOptions(selected){return LESSON_ROLES.map(r=>`<option value="${r.v}" ${r.v===(selected||'')?'selected':''}>${r.icon?`${r.icon} `:''}${r.label}</option>`).join('');}
+function roleMiniHtml(r,no){return `<span class="role-mini ${r.cls||''}" title="Leçon ${no} : ${esc(r.label)}">${r.html||esc(r.icon||'')}</span>`;}
+function isTerminale(cl){return /^(Term\b|Term gr|T\s)/i.test(cl||'');}
+function makeCycleObj(a,prev){return{n:a.n,ca:a.ca,loc:a.loc,c:a.c,role:(prev&&prev.n===a.n)?(prev.role||''):''};}
+function apsaKey(n){return String(n||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+function sameApsaName(a,b){return apsaKey(a)===apsaKey(b);}
+function ensureDefaultApsa(){
+  const add=(obj)=>{if(!APSA.some(a=>sameApsaName(a.n,obj.n)))APSA.push(obj);};
+  add({n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'});
+}
+function apsaNamesForFilter(){
+  const m=new Map();
+  APSA.forEach(a=>{const k=apsaKey(a.n);if(k&&!m.has(k))m.set(k,a.n);});
+  Object.values(cycles||{}).forEach(rc=>Object.values(rc||{}).forEach(c=>{const k=apsaKey(c?.n);if(k&&!m.has(k))m.set(k,c.n);}));
+  return [...m.values()].sort((a,b)=>a.localeCompare(b,'fr'));
+}
+
+
+// ══ CRÉNEAUX ══
+const PC={EH:'#0C447C',PP:'#27500A',QD:'#3C3489',YC:'#633806',MT:'#712B13',ST:'#72243E'};
+const PB={EH:'#E6F1FB',PP:'#EAF3DE',QD:'#EEEDFE',YC:'#FAEEDA',MT:'#FAECE7',ST:'#FBEAF0'};
+function normClass(cl){return String(cl||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
+function classKey(cl){
+  let s=normClass(cl).toUpperCase();
+  s=s.replace(/^3E\s+(PM|DP)\s+GR\s+([AB])$/,'3E DP GR $2');
+  return s;
+}
+function inferVoie(cl){
+  const s=normClass(cl);
+  return /^(2de\b|1ere GT\b|Term gr\d+)/i.test(s)?'GT':'PRO';
+}
+function ensureClassMeta(){
+  const add=(cl,voieHint)=>{const n=normClass(cl);if(!n)return;const k=classKey(n);if(!CLASS_META[k])CLASS_META[k]={name:n,voie:voieHint||inferVoie(n)};else{CLASS_META[k].name=CLASS_META[k].name||n;CLASS_META[k].voie=CLASS_META[k].voie||voieHint||inferVoie(n);}};
+  DAYS.forEach(d=>(d.rows||[]).forEach(r=>add(r.cl)));
+  Object.keys(PF_FULL||{}).forEach(cl=>add(cl));Object.keys(PF_PART||{}).forEach(cl=>add(cl));
+  Object.keys(ADMIN_GROUPS||{}).forEach(k=>{const g=ADMIN_GROUPS[k]||[];add(CLASS_META[k]?.name||k);g.forEach(x=>add(x));});
+}
+function voie(cl){
+  const k=classKey(cl);const meta=CLASS_META[k];
+  return meta&&meta.voie?meta.voie:inferVoie(cl);
+}
+function classDisplayName(cl){const meta=CLASS_META[classKey(cl)];return meta?.name||normClass(cl);}
+function classIcon(cl){
+  const s=normClass(cl).toUpperCase();
+  if(/3E\s+(DP|PM)/.test(s))return '🏫';
+  if(/TNE/.test(s))return '⚡❄️💻';
+  if(/CIEL/.test(s))return '💻';
+  if(/ETE/.test(s))return '❄️🔥';
+  if(/MELEC|CAP1 EL|CAP2 EL/.test(s))return '⚡';
+  if(/CAR|MV|MVCR|MVCC|CAV|CPA|CAP1 MA|CAP2 MA|CAP2 MB/.test(s))return '🚗';
+  return voie(cl)==='GT'?'🎓':'🛠️';
+}
+function voieLabel(cl){return voie(cl)==='GT'?'GT':'PRO';}
+
+const DAYS=[
+  {name:'Lundi',di:0,rows:[
+    {id:'L01',prof:'QD',cl:'3e DP gr A',h:'8h30–10h'},{id:'L02',prof:'MT',cl:'3e DP gr B',h:'8h30–10h'},
+    {id:'L03',prof:'PP',cl:'1 CIEL',h:'9h–10h'},
+    {id:'L04',prof:'EH',cl:'1ère GT gr1',h:'10h–12h'},{id:'L05',prof:'MT',cl:'1ère GT gr2',h:'10h–12h'},
+    {id:'L06',prof:'PP',cl:'1ère GT gr3',h:'10h–12h'},{id:'L07',prof:'QD',cl:'1ère GT gr4',h:'10h–12h'},
+    {id:'L08',prof:'EH',cl:'CAP1 MA g1',h:'12h–13h'},{id:'L09',prof:'ST',cl:'CAP1 MA g2',h:'12h–13h'},
+    {id:'L10',prof:'EH',cl:'2de 4',h:'14h–16h'},{id:'L11',prof:'MT',cl:'2de 1',h:'14h–16h'},
+    {id:'L12',prof:'PP',cl:'2de 3',h:'14h–16h'},{id:'L13',prof:'QD',cl:'2de 2',h:'14h–16h'},
+    {id:'L14',prof:'ST',cl:'2de gr1234',h:'14h–16h'},
+    {id:'L15',prof:'EH',cl:'CAP2 MA g2',h:'16h–17h30'},{id:'L16',prof:'ST',cl:'CAP2 MA g1',h:'16h–17h30'},
+  ]},
+  {name:'Mardi',di:1,rows:[
+    {id:'Ma01',prof:'MT',cl:'1 CPA-MV1',h:'8h30–10h'},{id:'Ma02',prof:'QD',cl:'1 ETE',h:'8h30–10h'},
+    {id:'Ma03',prof:'ST',cl:'CAP1 EL',h:'8h30–10h'},{id:'Ma04',prof:'YC',cl:'1 CAV-MV2',h:'9h–10h'},
+    {id:'Ma05',prof:'EH',cl:'Term gr1',h:'10h–12h'},{id:'Ma06',prof:'MT',cl:'Term gr2',h:'10h–12h'},
+    {id:'Ma07',prof:'QD',cl:'Term gr3',h:'10h–12h'},{id:'Ma08',prof:'YC',cl:'Term gr4',h:'10h–12h'},
+    {id:'Ma09',prof:'EH',cl:'T MVCR',h:'12h–13h'},{id:'Ma10',prof:'MT',cl:'1 MELEC',h:'12h–13h'},
+    {id:'Ma11',prof:'MT',cl:'2de 7',h:'14h–16h'},{id:'Ma12',prof:'PP',cl:'2de 5',h:'14h–16h'},
+    {id:'Ma13',prof:'QD',cl:'2de gr5678',h:'14h–16h'},{id:'Ma14',prof:'ST',cl:'2de 8',h:'14h–16h'},
+    {id:'Ma15',prof:'YC',cl:'2de 6',h:'14h–16h'},
+    {id:'Ma16',prof:'ST',cl:'2 CAV-MV1',h:'16h–17h'},
+    {id:'Ma17',prof:'PP',cl:'T CIEL',h:'16h–17h30'},{id:'Ma18',prof:'YC',cl:'T MELEC',h:'16h–17h30'},
+  ]},
+  {name:'Mercredi',di:2,rows:[
+    {id:'Me01',prof:'QD',cl:'CAP2 EL',h:'8h30–10h'},{id:'Me02',prof:'YC',cl:'1 MELEC',h:'8h30–10h'},
+    {id:'Me03',prof:'EH',cl:'T MVCC',h:'9h–11h'},
+    {id:'Me04',prof:'QD',cl:'2 TNE2',h:'10h–11h30'},{id:'Me05',prof:'ST',cl:'2 TNE3',h:'10h–11h30'},
+    {id:'Me06',prof:'YC',cl:'PIA',h:'10h–12h'},{id:'Me07',prof:'EH',cl:'2 TNE1',h:'11h–12h'},
+    {id:'Me08',prof:'EH',cl:'CAP1 EL',h:'12h–13h'},{id:'Me09',prof:'QD',cl:'1 ETE',h:'12h–13h'},
+    {id:'Me10',prof:'ST',cl:'2 CPA-MV2',h:'12h–13h'},
+  ]},
+  {name:'Jeudi',di:3,rows:[
+    {id:'J01',prof:'PP',cl:'2 TNE1',h:'8h30–10h'},
+    {id:'J02',prof:'MT',cl:'CAP2 MB g2',h:'9h–10h'},{id:'J03',prof:'YC',cl:'CAP2 MA g1',h:'9h–10h'},
+    {id:'J04',prof:'MT',cl:'2 TNE3',h:'10h–11h'},
+    {id:'J05',prof:'PP',cl:'1 CIEL',h:'10h–11h30'},{id:'J06',prof:'YC',cl:'1 CAV-MV2',h:'10h–11h30'},
+    {id:'J07',prof:'ST',cl:'CAP2 EL',h:'11h–12h'},
+    {id:'J08',prof:'PP',cl:'T ETE',h:'11h30–12h30'},{id:'J09',prof:'YC',cl:'1 CPA-MV1',h:'11h30–12h30'},
+    {id:'J10',prof:'ST',cl:'2 TNE2',h:'12h–13h'},
+    {id:'J11',prof:'EH',cl:'1ère GT gr1',h:'14h–16h'},{id:'J12',prof:'MT',cl:'1ère GT gr2',h:'14h–16h'},
+    {id:'J13',prof:'ST',cl:'1ère GT gr3',h:'14h–16h'},{id:'J14',prof:'YC',cl:'1ère GT gr4',h:'14h–16h'},
+    {id:'J15',prof:'EH',cl:'2 CPA-MV2',h:'16h–17h30'},{id:'J16',prof:'ST',cl:'2 CAV-MV1',h:'16h–17h30'},
+  ]},
+  {name:'Vendredi',di:4,rows:[
+    {id:'V01',prof:'MT',cl:'Term gr1',h:'8h–10h'},{id:'V02',prof:'PP',cl:'Term gr2',h:'8h–10h'},
+    {id:'V03',prof:'QD',cl:'Term gr3',h:'8h–10h'},{id:'V04',prof:'YC',cl:'Term gr4',h:'8h–10h'},
+    {id:'V07',prof:'QD',cl:'3e DP gr A',h:'10h–11h30'},{id:'V05',prof:'MT',cl:'3e DP gr B',h:'10h–11h30'},
+    {id:'V06',prof:'PP',cl:'T MELEC',h:'10h–11h30'},{id:'V08',prof:'YC',cl:'T MVCR',h:'10h–12h'},
+    {id:'V09',prof:'YC',cl:'T MVCC',h:'12h–13h'},
+    {id:'V10',prof:'EH',cl:'T CIEL',h:'13h30–15h'},{id:'V11',prof:'MT',cl:'CAP1 MA g1',h:'13h30–15h'},
+    {id:'V12',prof:'PP',cl:'CAP1 MA g2',h:'13h30–15h'},{id:'V13',prof:'EH',cl:'T ETE',h:'15h–17h'},
+  ]},
+];
+const DAY_SLOTS=DAYS.map(d=>buildSlots(d.di));
+let ADMIN_GROUPS={}; // Regroupements personnalisés : clé classe normalisée -> groupes élèves
+let CLASS_META={}; // Métadonnées liées des classes : clé normalisée -> {name, voie}
+
+// ══ STATE ══
+let cycles={};   // cycles[rowId][si] = {n,ca,loc,c,role}
+let selIdx=null; // index APSA sélectionnée, ou null
+let roleMode=false; // mode de modification rapide des rôles
+let currentApsaFilter=''; // filtre EDT complet par APSA
+let isDrag=false, dragRowId=null, dragDi=null, dragStartSi=null, dragStartEndSi=null, dragWarnedDup=false;
+const LSK='eps_v28';
+const OLD_LS_KEYS=['eps_v27','eps_v26','eps_v25','eps_v24','eps_v23','eps_v22','eps_v21','eps_v20','eps_v19','eps_v18','eps_v17','eps_v16','eps_v15','eps_v14','eps_v11'];
+
+function clonePlain(x){return JSON.parse(JSON.stringify(x));}
+function dateToInput(d){if(!d)return'';const x=d instanceof Date?d:new Date(d);if(Number.isNaN(x.getTime()))return'';return dKey(x);}
+function inputToDate(v){if(!v)return null;const [y,m,d]=String(v).split('-').map(Number);return new Date(y,m-1,d);}
+function hydratePFObj(obj){
+  const out={};
+  Object.entries(obj||{}).forEach(([cl,arr])=>{
+    out[cl]=(arr||[]).map(p=>({...p,f:new Date(p.f),t:new Date(p.t)})).filter(p=>!Number.isNaN(p.f.getTime())&&!Number.isNaN(p.t.getTime()));
+  });
+  return out;
+}
+function replaceObj(target,source){Object.keys(target).forEach(k=>delete target[k]);Object.assign(target,source||{});}
+function serializableState(){
+  return {version:'v28',c:cycles,a:APSA,days:DAYS,pfFull:PF_FULL,pfPart:PF_PART,locCol:LOC_COL,exclusiveLocs:[...EXCL],adminGroups:ADMIN_GROUPS,classMeta:CLASS_META,pc:PC,pb:PB};
+}
+function applyImportedState(d){
+  if(d.c||d.cycles)cycles=d.c||d.cycles;
+  if((d.a&&d.a.length)||(d.apsa&&d.apsa.length))APSA=d.a||d.apsa;
+  if(Array.isArray(d.days)){DAYS.splice(0,DAYS.length,...d.days);DAYS.forEach((day,di)=>{day.di=di;(day.rows||[]).forEach(r=>{if(!r.id)r.id='R'+Date.now()+Math.random().toString(36).slice(2,6);});});}
+  if(d.pfFull)replaceObj(PF_FULL,hydratePFObj(d.pfFull));
+  if(d.pfPart)replaceObj(PF_PART,hydratePFObj(d.pfPart));
+  if(d.locCol)replaceObj(LOC_COL,d.locCol);
+  if(Array.isArray(d.exclusiveLocs)){EXCL.clear();d.exclusiveLocs.forEach(x=>EXCL.add(x));}
+  if(d.adminGroups)ADMIN_GROUPS=d.adminGroups;
+  if(d.classMeta)CLASS_META=d.classMeta;
+  ensureClassMeta();
+  if(d.pc)Object.assign(PC,d.pc);
+  if(d.pb)Object.assign(PB,d.pb);
+}
+function loadLS(){
+  try{
+    let raw=localStorage.getItem(LSK);
+    if(!raw){for(const k of OLD_LS_KEYS){raw=localStorage.getItem(k);if(raw)break;}}
+    const d=JSON.parse(raw||'{}');
+    applyImportedState(d);
+  }catch(e){console.warn('Chargement local impossible',e);}
+  ensureClassMeta();ensureDefaultApsa();syncLocUI();
+}
+function saveLS(){localStorage.setItem(LSK,JSON.stringify(serializableState()));const ss=document.getElementById('ss');if(ss)ss.textContent='● Sauvegarde auto';}
+function exportJSON(){const b=new Blob([JSON.stringify(serializableState(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`edt_eps_sauvegarde_complete_${new Date().toISOString().slice(0,10)}.json`;a.click();}
+function importJSON(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);applyImportedState(d);ensureDefaultApsa();syncLocUI();buildPal();rebuildAll();saveLS();showWarning('✅ Sauvegarde importée');}catch(err){console.error(err);alert('JSON invalide');}};r.readAsText(f);};i.click();}
+function clearAll(){if(!confirm('Effacer tous les cycles ?'))return;cycles={};rebuildAll();saveLS();}
+
+// ══ CONFLICT ══
+// ══ CONFLICT — chevauchement horaire réel ══
+// Parse "8h30–10h" → {s:510, e:600} en minutes
+function parseH(str){
+  const toMin=s=>{s=s.trim();const m=s.match(/^(\d+)h(\d+)?$/);return m?+m[1]*60+(m[2]?+m[2]:0):0;};
+  const p=str.split('–');return{s:toMin(p[0]),e:toMin(p[1])};
+}
+function rowById(rowId){for(const d of DAYS)for(const r of d.rows)if(r.id===rowId)return r;return null;}
+function rowDayIndex(rowId){for(let di=0;di<DAYS.length;di++)if(DAYS[di].rows.some(r=>r.id===rowId))return di;return -1;}
+function overlaps(idA,idB){const ra=rowById(idA),rb=rowById(idB);const a=ra?parseH(ra.h):null,b=rb?parseH(rb.h):null;return a&&b&&a.s<b.e&&a.e>b.s;}
+
+function findConflict(di,si,loc,exceptRowId){
+  if(!EXCL.has(loc))return null;
+  const thisRow=DAYS[di].rows.find(r=>r.id===exceptRowId);
+  const thisCl=thisRow?thisRow.cl:'';
+  for(const row of DAYS[di].rows){
+    if(row.id===exceptRowId)continue;
+    const cyc=(cycles[row.id]||{})[si];
+    if(cyc&&cyc.loc===loc){
+      if(is3eCAP(thisCl)&&is3eCAP(row.cl))continue;
+      if(overlaps(exceptRowId,row.id))return row;
+    }
+  }
+  return null;
+}
+let toastT=null;
+function showToast(msg,type='error'){
+  const t=document.getElementById('conflict-toast');
+  t.textContent=msg;t.className='';
+  if(type)t.classList.add(type);
+  t.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),4200);
+}
+function showConflict(msg){showToast(msg,'error');}
+function showWarning(msg){showToast(msg,'warn');}
+
+// ══ PALETTE ══
+let palVisible=true;
+
+function buildPal(){
+  updateApsaFilterOptions();
+  const el=document.getElementById('pal');el.innerHTML='';
+  ['CA1','CA2','CA3','CA4','CA5'].forEach(ca=>{
+    const grp=APSA.filter(a=>a.ca===ca);if(!grp.length)return;
+    const g=document.createElement('div');g.className='cagrp';g.style.borderColor=CA_COL[ca];
+    const lbl=document.createElement('span');lbl.style.cssText=`font-size:8px;font-weight:700;color:${CA_COL[ca]};min-width:20px`;lbl.textContent=ca;g.appendChild(lbl);
+    grp.forEach(a=>{
+      const i=APSA.indexOf(a);
+      const chip=document.createElement('div');
+      chip.className='chip'+(selIdx===i?' on':'');
+      chip.style.background=a.c;chip.style.color=txc(a.c);
+      chip.dataset.ai=i;
+      chip.title=`Sélectionner ${a.ca} — ${a.n} [${a.loc}]`;
+      chip.innerHTML=`<span class="chip-ico">${apsaIcon(a)}</span><span class="chip-ca" style="background:${CA_COL[a.ca]}">${a.ca}</span><span class="chip-name">${esc(a.n)}</span><span class="chip-loc" style="background:${LOC_COL[a.loc]||'#555'}">${a.loc}</span>`;
+      g.appendChild(chip);
+    });
+    el.appendChild(g);
+  });
+}
+
+function syncLocUI(){
+  const nloc=document.getElementById('nloc');
+  if(nloc){const old=nloc.value||'GG';nloc.innerHTML=Object.keys(LOC_COL).sort().map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('');nloc.value=LOC_COL[old]?old:(Object.keys(LOC_COL)[0]||'');}
+  const leg=document.querySelector('.legend-mini');
+  if(leg){leg.innerHTML='<span class="legend-title">Lieux</span>'+Object.entries(LOC_COL).map(([k,c])=>`<span class="legchip" style="background:${esc(c)}" title="${EXCL.has(k)?'Installation bloquante':'Installation partageable'}">${esc(k)}</span>`).join('');}
+}
+
+// Clic sur palette via délégation
+document.getElementById('palbody').addEventListener('mousedown',e=>{
+  const chip=e.target.closest('.chip');
+  if(!chip)return;
+  e.stopPropagation();
+  const i=+chip.dataset.ai;
+  if(roleMode)toggleRoleMode(false);
+  selIdx=(selIdx===i)?null:i;
+  updateSelectionUI();
+});
+
+function updateSelectionUI(){
+  const info=document.getElementById('selinfo');
+  if(info){
+    if(selIdx!==null){const a=APSA[selIdx];info.innerHTML=`<span class="selico">${apsaIcon(a)}</span><span>${a.ca} — ${esc(a.n)} [${a.loc}]</span>`;}
+    else info.textContent='— choisir';
+  }
+  document.body.classList.toggle('has-selection',selIdx!==null);
+  buildPal();
+}
+function clearSelection(){selIdx=null;updateSelectionUI();}
+function updateApsaFilterOptions(){
+  const sel=document.getElementById('apsa-filter');if(!sel)return;
+  const old=currentApsaFilter||sel.value||'';
+  const names=apsaNamesForFilter();
+  sel.innerHTML='<option value="">🔎 Toutes APSA</option>'+names.map(n=>`<option value="${esc(n)}">🔎 ${esc(n)}</option>`).join('');
+  const found=names.find(n=>sameApsaName(n,old));
+  currentApsaFilter=found||'';
+  sel.value=currentApsaFilter;
+}
+function setApsaFilter(v){
+  const names=apsaNamesForFilter();
+  currentApsaFilter=names.find(n=>sameApsaName(n,v))||(v||'');
+  updateApsaFilterOptions();
+  rebuildAll();
+  if(currentApsaFilter)swTab('apsa-filter');
+  else swTab('day0');
+}
+function rowHasApsa(rowId,name){
+  if(!name)return false;
+  return Object.values(cycles[rowId]||{}).some(c=>c&&sameApsaName(c.n,name));
+}
+function rowHasApsaForClassGroup(rowId,name){
+  const cl=findCl(rowId);
+  return allRowMetas().some(m=>classGroupsOverlap(cl,m.row.cl)&&rowHasApsa(m.row.id,name));
+}
+function toggleRoleMode(force){
+  roleMode=typeof force==='boolean'?force:!roleMode;
+  if(roleMode)selIdx=null;
+  document.body.classList.toggle('role-mode',roleMode);
+  const btn=document.getElementById('role-btn');
+  if(btn){btn.classList.toggle('on',roleMode);btn.textContent=roleMode?'✍️ Précision active':'✍️ Préciser Cycle';}
+  updateSelectionUI();
+  showConflict(roleMode?'✍️ Mode Préciser Cycle : clique sur un cycle pour préciser ses leçons':'Mode Préciser Cycle désactivé');
+}
+function syncFullScreenClass(){
+  document.body.classList.toggle('fullscreen-mode',!!document.fullscreenElement);
+}
+function toggleFullScreen(){
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen?.().then(syncFullScreenClass).catch(()=>syncFullScreenClass());
+  }else{
+    document.exitFullscreen?.().then(syncFullScreenClass).catch(()=>syncFullScreenClass());
+  }
+}
+document.addEventListener('fullscreenchange',syncFullScreenClass);
+function timeOptions(selected){
+  const opts=[];
+  for(let m=8*60;m<=18*60;m+=30){const v=minToHHMM(m);opts.push(`<option value="${v}" ${v===selected?'selected':''}>${v.replace(':','h').replace('h00','h')}</option>`);}return opts.join('');
+}
+function minToHHMM(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+function hmToInput(s){const x=String(s||'8h').trim().match(/^(\d+)h(\d+)?$/);if(!x)return'08:00';return String(+x[1]).padStart(2,'0')+':'+String(x[2]||0).padStart(2,'0');}
+function hRangeParts(h){const p=String(h||'8h–9h').split('–');return{start:hmToInput(p[0]),end:hmToInput(p[1]||p[0])};}
+function inputToH(v){const [h,m]=String(v).split(':');return `${+h}h${m==='00'?'':m}`;}
+function makeHRange(a,b){return `${inputToH(a)}–${inputToH(b)}`;}
+function adminCatalogEntries(){
+  const map=new Map();
+  Object.entries(CLASS_META||{}).forEach(([k,m])=>{if(m?.name)map.set(classKey(m.name),{name:m.name,voie:m.voie||inferVoie(m.name)});});
+  allRowMetas().forEach(m=>{const n=normClass(m.row.cl);if(n&&!map.has(classKey(n)))map.set(classKey(n),{name:n,voie:voie(n)});});
+  return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,'fr',{numeric:true}));
+}
+function adminClassNamesFromCatalog(){
+  const rows=[...document.querySelectorAll('.adm-class-row')];
+  if(rows.length){return rows.map(tr=>tr.querySelector('[data-field="clname"]')?.value.trim()).filter(Boolean).sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}));}
+  return adminCatalogEntries().map(x=>x.name);
+}
+function adminProfNamesFromPanel(){
+  const rows=[...document.querySelectorAll('.adm-prof-row')];
+  if(rows.length){return rows.map(tr=>tr.querySelector('[data-field="name"]')?.value.trim()).filter(Boolean).sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}));}
+  return uniqueProfs().sort((a,b)=>a.localeCompare(b,'fr'));
+}
+function optionList(names,sel,placeholder=''){
+  const opts=[];if(placeholder)opts.push(`<option value="">${esc(placeholder)}</option>`);
+  const list=[...new Set(names.filter(Boolean))].sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}));
+  if(sel&&sel.trim()&&!list.some(x=>x===sel))list.push(sel);
+  list.sort((a,b)=>a.localeCompare(b,'fr',{numeric:true}));
+  list.forEach(n=>opts.push(`<option value="${esc(n)}" ${n===sel?'selected':''}>${esc(n)}</option>`));
+  return opts.join('');
+}
+function adminClassOptions(sel){return optionList(adminClassNamesFromCatalog(),sel,'Choisir une classe');}
+function adminProfOptions(sel){return optionList(adminProfNamesFromPanel(),sel,'Choisir un prof');}
+function refreshSelectOptions(select,names,placeholder=''){
+  const old=select.value;select.innerHTML=optionList(names,old,placeholder);
+  if(old&&[...select.options].some(o=>o.value===old))select.value=old;
+}
+function adminRefreshLinkedSelects(){
+  const classNames=adminClassNamesFromCatalog();
+  document.querySelectorAll('select[data-class-select="1"]').forEach(sel=>refreshSelectOptions(sel,classNames,'Choisir une classe'));
+  const profNames=adminProfNamesFromPanel();
+  document.querySelectorAll('select[data-prof-select="1"]').forEach(sel=>refreshSelectOptions(sel,profNames,'Choisir un prof'));
+  document.querySelectorAll('.adm-row').forEach(tr=>adminUpdateRowBadges(tr));
+  document.querySelectorAll('.adm-class-row').forEach(tr=>adminUpdateClassIcon(tr));
+}
+function adminClassNameChanged(input){
+  const old=input.dataset.old||'';const neu=input.value.trim();
+  if(old&&neu&&old!==neu){
+    document.querySelectorAll('select[data-class-select="1"]').forEach(sel=>{if(sel.value===old)sel.value=neu;});
+    input.dataset.old=neu;
+  }
+  adminRefreshLinkedSelects();
+}
+function adminProfNameChanged(input){
+  const old=input.dataset.old||'';const neu=input.value.trim();
+  if(old&&neu&&old!==neu){
+    document.querySelectorAll('select[data-prof-select="1"]').forEach(sel=>{if(sel.value===old)sel.value=neu;});
+    input.dataset.old=neu;
+  }
+  adminRefreshLinkedSelects();
+}
+function adminUpdateClassIcon(tr){
+  if(!tr)return;const cl=tr.querySelector('[data-field="clname"]')?.value||'';const voieVal=tr.querySelector('[data-field="voie"]')?.value||inferVoie(cl);const cell=tr.querySelector('[data-role="class-preview"]');
+  if(cell)cell.innerHTML=`<span class="admin-badge">${classIconByVoie(cl,voieVal)} ${voieVal}</span>`;
+}
+function classIconByVoie(cl,voieVal){const old=CLASS_META[classKey(cl)]?.voie;CLASS_META[classKey(cl)]={...(CLASS_META[classKey(cl)]||{}),name:cl,voie:voieVal};const ico=classIcon(cl);if(old===undefined)delete CLASS_META[classKey(cl)];else CLASS_META[classKey(cl)].voie=old;return ico;}
+function adminUpdateRowBadges(tr){
+  if(!tr)return;const cl=tr.querySelector('[data-field="cl"]')?.value||'';const meta=adminClassMetaFor(cl);const cell=tr.querySelector('[data-role="row-voie"]');
+  if(cell)cell.innerHTML=`<span class="admin-badge">${classIconByVoie(cl,meta.voie)} ${meta.voie}</span>`;
+}
+function adminClassMetaFor(cl){
+  const row=[...document.querySelectorAll('.adm-class-row')].find(tr=>(tr.querySelector('[data-field="clname"]')?.value.trim()||'')===cl);
+  if(row)return{name:cl,voie:row.querySelector('[data-field="voie"]')?.value||inferVoie(cl)};
+  return CLASS_META[classKey(cl)]||{name:cl,voie:inferVoie(cl)};
+}
+function openAdmin(){
+  const mo=document.getElementById('mo');mo.className='mo admin-modal';
+  mo.innerHTML=`
+    <div class="admin-head"><div><h2>⚙️ Administration</h2><div class="admin-sub">Administration liée : professeurs, classes, créneaux, regroupements, PFMP, installations et sauvegardes.</div></div><button class="tbtn" onclick="closeMo()">Fermer</button></div>
+    <div class="admin-tabs">
+      <button class="admin-tab on" data-admin-tab="classes" onclick="swAdminTab('classes')">Classes & créneaux</button>
+      <button class="admin-tab" data-admin-tab="groups" onclick="swAdminTab('groups')">Regroupements</button>
+      <button class="admin-tab" data-admin-tab="pfmp" onclick="swAdminTab('pfmp')">PFMP</button>
+      <button class="admin-tab" data-admin-tab="locs" onclick="swAdminTab('locs')">Installations</button>
+      <button class="admin-tab" data-admin-tab="profs" onclick="swAdminTab('profs')">Profs</button>
+      <button class="admin-tab" data-admin-tab="save" onclick="swAdminTab('save')">Sauvegarde</button>
+    </div>
+    <div class="admin-body">
+      ${adminClassesPanel()}
+      ${adminGroupsPanel()}
+      ${adminPfmpPanel()}
+      ${adminLocsPanel()}
+      ${adminProfsPanel()}
+      ${adminSavePanel()}
+    </div>
+    <div class="admin-actions"><button class="bn" onclick="closeMo()">Annuler</button><button class="bc" onclick="saveAdmin()">Enregistrer l’administration</button></div>`;
+  document.getElementById('ov').classList.add('on');
+  setTimeout(adminRefreshLinkedSelects,0);
+}
+function swAdminTab(k){document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('on',b.dataset.adminTab===k));document.querySelectorAll('.admin-panel').forEach(p=>p.classList.toggle('on',p.dataset.adminPanel===k));}
+function adminClassesPanel(){
+  ensureClassMeta();
+  const catalog=adminCatalogEntries();
+  const catRows=catalog.map(c=>`<tr class="adm-class-row"><td><input type="text" data-field="clname" data-old="${esc(c.name)}" value="${esc(c.name)}" onblur="adminClassNameChanged(this)"></td><td><select data-field="voie" onchange="adminUpdateClassIcon(this.closest('tr'));adminRefreshLinkedSelects()"><option value="GT" ${c.voie==='GT'?'selected':''}>Voie GT</option><option value="PRO" ${c.voie!=='GT'?'selected':''}>Voie PRO</option></select></td><td data-role="class-preview"><span class="admin-badge">${classIconByVoie(c.name,c.voie)} ${c.voie}</span></td><td class="admin-small">${allRowMetas().filter(m=>classKey(m.row.cl)===classKey(c.name)).length} créneau(x)</td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td></tr>`).join('');
+  const rows=allRowMetas().map(m=>{const hp=hRangeParts(m.row.h);return `<tr class="adm-row" data-row-id="${esc(m.row.id)}">
+    <td><select data-field="di">${DAYS.map((d,i)=>`<option value="${i}" ${i===m.di?'selected':''}>${esc(d.name)}</option>`).join('')}</select></td>
+    <td><select data-field="prof" data-prof-select="1">${adminProfOptions(m.row.prof)}</select></td>
+    <td><select data-field="cl" data-class-select="1" onchange="adminUpdateRowBadges(this.closest('tr'))">${adminClassOptions(m.row.cl)}</select></td>
+    <td><select data-field="start">${timeOptions(hp.start)}</select></td>
+    <td><select data-field="end">${timeOptions(hp.end)}</select></td>
+    <td data-role="row-voie"><span class="admin-badge">${classIcon(m.row.cl)} ${voieLabel(m.row.cl)}</span></td>
+    <td><button class="admin-mini-btn danger" onclick="adminMarkDeleteRow(this)">Supprimer</button></td>
+  </tr>`;}).join('');
+  return `<section class="admin-panel on" data-admin-panel="classes">
+    <div class="admin-note"><b>Administration liée.</b> Commence par ajouter ou renommer les professeurs/classes. Ils deviennent ensuite disponibles dans les répartitions, regroupements et PFMP sans ressaisie.</div>
+    <div class="admin-flow"><span><b>1</b> Profs</span><span><b>2</b> Classes</span><span><b>3</b> Créneaux</span><span><b>4</b> Regroupements / PFMP</span></div>
+    <div class="admin-linked">
+      <div>
+        <div class="admin-section-title">Catalogue des classes</div>
+        <div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddCatalogClassRow()">＋ Ajouter une classe</button><span class="admin-small">Une classe créée ici devient sélectionnable partout dans l’administration.</span></div>
+        <table class="admin-grid" id="admin-class-catalog"><colgroup><col style="width:35%"><col style="width:18%"><col style="width:15%"><col style="width:17%"><col style="width:15%"></colgroup><thead><tr><th>Classe</th><th>Voie</th><th>Repère</th><th>Utilisation</th><th>Action</th></tr></thead><tbody>${catRows}</tbody></table>
+      </div>
+      <div>
+        <div class="admin-section-title">Répartitions / créneaux</div>
+        <div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddClassRow()">＋ Ajouter un créneau</button><span class="admin-small">Choix du jour, du prof, de la classe et de l’horaire à la demi-heure.</span></div>
+        <table class="admin-grid" id="admin-classes"><colgroup><col style="width:11%"><col style="width:12%"><col style="width:28%"><col style="width:10%"><col style="width:10%"><col style="width:14%"><col style="width:10%"></colgroup><thead><tr><th>Jour</th><th>Prof</th><th>Classe / groupe</th><th>Début</th><th>Fin</th><th>Voie</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table>
+      </div>
+    </div>
+  </section>`;
+}
+function adminAddCatalogClassRow(){
+  const tb=document.querySelector('#admin-class-catalog tbody');if(!tb)return;
+  let base='Nouvelle classe',n=base,i=1;const existing=adminClassNamesFromCatalog();while(existing.includes(n))n=base+' '+(++i);
+  const tr=document.createElement('tr');tr.className='adm-class-row';tr.innerHTML=`<td><input type="text" data-field="clname" data-old="${esc(n)}" value="${esc(n)}" onblur="adminClassNameChanged(this)"></td><td><select data-field="voie" onchange="adminUpdateClassIcon(this.closest('tr'));adminRefreshLinkedSelects()"><option value="GT">Voie GT</option><option value="PRO" selected>Voie PRO</option></select></td><td data-role="class-preview"><span class="admin-badge">🛠️ PRO</span></td><td class="admin-small">0 créneau</td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();
+}
+function adminMarkDeleteRow(btn){btn.closest('tr').dataset.delete='1';btn.closest('tr').style.opacity=.35;}
+function adminAddClassRow(){
+  const tb=document.querySelector('#admin-classes tbody');if(!tb)return;
+  const id='R'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
+  const cls=adminClassNamesFromCatalog();const profs=adminProfNamesFromPanel();
+  const tr=document.createElement('tr');tr.className='adm-row';tr.dataset.rowId=id;tr.dataset.new='1';
+  tr.innerHTML=`<td><select data-field="di">${DAYS.map((d,i)=>`<option value="${i}">${esc(d.name)}</option>`).join('')}</select></td><td><select data-field="prof" data-prof-select="1">${adminProfOptions(profs[0]||'')}</select></td><td><select data-field="cl" data-class-select="1" onchange="adminUpdateRowBadges(this.closest('tr'))">${adminClassOptions(cls[0]||'')}</select></td><td><select data-field="start">${timeOptions('08:00')}</select></td><td><select data-field="end">${timeOptions('09:00')}</select></td><td data-role="row-voie"><span class="admin-badge">${cls[0]?classIcon(cls[0]):'🛠️'} ${cls[0]?voieLabel(cls[0]):'PRO'}</span></td><td><button class="admin-mini-btn danger" onclick="adminMarkDeleteRow(this)">Supprimer</button></td>`;
+  tb.appendChild(tr);adminRefreshLinkedSelects();
+}
+function defaultGroupText(cl){const s=classKey(cl);const custom=ADMIN_GROUPS[s];if(custom&&custom.length)return custom.join(', ');const keys=groupKeysForClass(cl).filter(k=>k!==s);return keys.join(', ');}
+function adminGroupsPanel(){
+  const names=adminClassNamesFromCatalog();
+  const rows=names.map(cl=>`<tr class="adm-group-row"><td><select data-field="class" data-class-select="1">${adminClassOptions(cl)}</select></td><td><input type="text" data-field="groups" value="${esc(defaultGroupText(cl))}" placeholder="ex : 1CPA, 1MV1"></td></tr>`).join('');
+  return `<section class="admin-panel" data-admin-panel="groups"><div class="admin-note"><b>Regroupements de classes.</b> La classe affichée se choisit dans le catalogue. Les sous-groupes restent saisis librement, car ils peuvent correspondre à des demi-classes ou à des intitulés non présents comme créneaux.</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddGroupRow()">＋ Ajouter un regroupement</button></div><table class="admin-grid" id="admin-groups"><colgroup><col style="width:34%"><col style="width:66%"></colgroup><thead><tr><th>Classe affichée</th><th>Groupes constitutifs</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
+function adminAddGroupRow(){const tb=document.querySelector('#admin-groups tbody');const tr=document.createElement('tr');tr.className='adm-group-row';tr.innerHTML=`<td><select data-field="class" data-class-select="1">${adminClassOptions('')}</select></td><td><input type="text" data-field="groups" value="" placeholder="ex : 2CPA, 2MV1"></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();}
+function pfRowsForAdmin(){const out=[];Object.entries(PF_FULL).forEach(([cl,arr])=>(arr||[]).forEach(p=>out.push({kind:'full',cl,...p})));Object.entries(PF_PART).forEach(([cl,arr])=>(arr||[]).forEach(p=>out.push({kind:'part',cl,...p})));return out.sort((a,b)=>a.cl.localeCompare(b.cl,'fr')||dateToInput(a.f).localeCompare(dateToInput(b.f)));}
+function adminPfmpPanel(){
+  const rows=pfRowsForAdmin().map(r=>`<tr class="adm-pf-row"><td><select data-field="cl" data-class-select="1">${adminClassOptions(r.cl)}</select></td><td><select data-field="kind"><option value="full" ${r.kind==='full'?'selected':''}>PFMP complète</option><option value="part" ${r.kind==='part'?'selected':''}>PFMP partielle</option></select></td><td><input type="date" data-field="f" value="${dateToInput(r.f)}"></td><td><input type="date" data-field="t" value="${dateToInput(r.t)}"></td><td><input type="text" data-field="who" value="${esc(r.who||'')}" placeholder="Groupe en PFMP"></td><td><input type="text" data-field="course" value="${esc(r.course||'')}" placeholder="Groupe en cours"></td><td><label class="admin-small"><input type="checkbox" data-field="full" ${r.full?'checked':''}> tous absents</label></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove()">Supprimer</button></td></tr>`).join('');
+  return `<section class="admin-panel" data-admin-panel="pfmp"><div class="admin-note"><b>Dates de PFMP.</b> La classe concernée se choisit dans le catalogue. Une PFMP complète bloque la case ; une PFMP partielle laisse le cours possible pour le groupe indiqué.</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddPfRow()">＋ Ajouter une période PFMP</button></div><table class="admin-grid" id="admin-pfmp"><colgroup><col style="width:16%"><col style="width:13%"><col style="width:12%"><col style="width:12%"><col style="width:17%"><col style="width:17%"><col style="width:8%"><col style="width:8%"></colgroup><thead><tr><th>Classe</th><th>Type</th><th>Début</th><th>Fin</th><th>En PFMP</th><th>En cours</th><th>Option</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
+function adminAddPfRow(){const tb=document.querySelector('#admin-pfmp tbody');const tr=document.createElement('tr');tr.className='adm-pf-row';tr.innerHTML=`<td><select data-field="cl" data-class-select="1">${adminClassOptions('')}</select></td><td><select data-field="kind"><option value="full">PFMP complète</option><option value="part">PFMP partielle</option></select></td><td><input type="date" data-field="f"></td><td><input type="date" data-field="t"></td><td><input type="text" data-field="who" placeholder="Groupe en PFMP"></td><td><input type="text" data-field="course" placeholder="Groupe en cours"></td><td><label class="admin-small"><input type="checkbox" data-field="full"> tous absents</label></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove()">Supprimer</button></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();}
+function adminLocsPanel(){
+  const rows=Object.entries(LOC_COL).sort().map(([k,c])=>`<tr class="adm-loc-row"><td><input type="text" data-field="code" value="${esc(k)}"></td><td><input type="color" data-field="color" value="${esc(c)}"></td><td><label><input type="checkbox" data-field="exclusive" ${EXCL.has(k)?'checked':''}> bloquante si chevauchement</label></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove()">Supprimer</button></td></tr>`).join('');
+  return `<section class="admin-panel" data-admin-panel="locs"><div class="admin-note"><b>Installations.</b> Si l’installation est bloquante, une alerte apparaît lorsque deux profs la programment sur des créneaux qui se chevauchent. Si elle est partageable, pas d’alerte de lieu.</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddLocRow()">＋ Ajouter une installation</button></div><table class="admin-grid" id="admin-locs"><colgroup><col style="width:20%"><col style="width:15%"><col style="width:45%"><col style="width:20%"></colgroup><thead><tr><th>Code</th><th>Couleur</th><th>Blocage</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
+function adminAddLocRow(){const tb=document.querySelector('#admin-locs tbody');const tr=document.createElement('tr');tr.className='adm-loc-row';tr.innerHTML='<td><input type="text" data-field="code" value="NOUV"></td><td><input type="color" data-field="color" value="#64748b"></td><td><label><input type="checkbox" data-field="exclusive" checked> bloquante si chevauchement</label></td><td><button class="admin-mini-btn danger" onclick="this.closest(\'tr\').remove()">Supprimer</button></td>';tb.appendChild(tr);}
+function adminProfsPanel(){
+  const rows=uniqueProfs().map(p=>`<tr class="adm-prof-row" data-old="${esc(p)}"><td><input type="text" data-field="name" data-old="${esc(p)}" value="${esc(p)}" onblur="adminProfNameChanged(this)"></td><td><input type="color" data-field="pc" value="${esc(PC[p]||'#334155')}"></td><td><input type="color" data-field="pb" value="${esc(PB[p]||'#e2e8f0')}"></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td></tr>`).join('');
+  return `<section class="admin-panel" data-admin-panel="profs"><div class="admin-note"><b>Professeurs.</b> Ajoute ou renomme un prof ici : il devient immédiatement disponible dans les répartitions / créneaux.</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddProfRow()">＋ Ajouter un prof</button></div><table class="admin-grid" id="admin-profs"><colgroup><col style="width:35%"><col style="width:18%"><col style="width:18%"><col style="width:14%"></colgroup><thead><tr><th>Nom / initiales</th><th>Couleur texte</th><th>Couleur fond</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+}
+function adminAddProfRow(){const tb=document.querySelector('#admin-profs tbody');if(!tb)return;let base='Nouveau',n=base,i=1;const existing=adminProfNamesFromPanel();while(existing.includes(n))n=base+' '+(++i);const tr=document.createElement('tr');tr.className='adm-prof-row';tr.dataset.old='';tr.innerHTML=`<td><input type="text" data-field="name" data-old="" value="${esc(n)}" onblur="adminProfNameChanged(this)"></td><td><input type="color" data-field="pc" value="#334155"></td><td><input type="color" data-field="pb" value="#e2e8f0"></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();}
+function adminSavePanel(){return `<section class="admin-panel" data-admin-panel="save"><div class="admin-note"><b>Sauvegarde.</b> Les modifications sont sauvegardées automatiquement dans le navigateur. Pour sécuriser le travail ou changer d’ordinateur, utilise l’export complet JSON.</div><div class="admin-backup"><div class="admin-card"><h3>Sauvegarde complète</h3><p>Exporte ou importe le planning, les APSA, les classes, les horaires, les regroupements, les PFMP et les installations.</p><button class="bc" onclick="exportJSON()">💾 Exporter JSON complet</button> <button class="bn" onclick="importJSON()">📂 Importer JSON</button></div><div class="admin-card"><h3>Copie locale manuelle</h3><p>Crée une copie de secours dans ce navigateur.</p><button class="bc" onclick="makeLocalBackup()">Créer une copie locale</button> <button class="bn" onclick="restoreLocalBackup()">Restaurer la copie locale</button></div><div class="admin-card"><h3>Réinitialisation</h3><p>Supprime la sauvegarde locale de cette version. À utiliser seulement si tu veux repartir du fichier de base.</p><button class="bd" onclick="resetAdminLocal()">Réinitialiser la version locale</button></div></div></section>`;}
+function makeLocalBackup(){localStorage.setItem(LSK+'_manual_backup',JSON.stringify(serializableState()));showWarning('✅ Copie locale créée');}
+function restoreLocalBackup(){const raw=localStorage.getItem(LSK+'_manual_backup');if(!raw)return alert('Aucune copie locale trouvée.');try{applyImportedState(JSON.parse(raw));ensureDefaultApsa();syncLocUI();buildPal();rebuildAll();saveLS();showWarning('✅ Copie locale restaurée');closeMo();}catch(e){alert('Copie locale illisible');}}
+function resetAdminLocal(){if(!confirm('Supprimer la sauvegarde locale de cette version et recharger le fichier de base ?'))return;localStorage.removeItem(LSK);location.reload();}
+function saveAdmin(){
+  const profMap={};const newPC={},newPB={};
+  document.querySelectorAll('.adm-prof-row').forEach(tr=>{const old=tr.dataset.old||tr.querySelector('[data-field="name"]')?.dataset.old||'';const name=tr.querySelector('[data-field="name"]').value.trim();if(!name)return;if(old&&old!==name)profMap[old]=name;newPC[name]=tr.querySelector('[data-field="pc"]').value||'#334155';newPB[name]=tr.querySelector('[data-field="pb"]').value||'#e2e8f0';});
+  replaceObj(PC,newPC);replaceObj(PB,newPB);
+
+  const classMap={};const newClassMeta={};
+  document.querySelectorAll('.adm-class-row').forEach(tr=>{const inp=tr.querySelector('[data-field="clname"]');const old=inp?.dataset.old||'';const name=inp?.value.trim()||'';if(!name)return;if(old&&old!==name)classMap[classKey(old)]=name;newClassMeta[classKey(name)]={name,voie:tr.querySelector('[data-field="voie"]')?.value||inferVoie(name)};});
+  replaceObj(CLASS_META,newClassMeta);
+
+  const nextDays=DAYS.map(d=>({...d,rows:[]}));
+  document.querySelectorAll('.adm-row').forEach(tr=>{if(tr.dataset.delete==='1')return;const id=tr.dataset.rowId;let prof=tr.querySelector('[data-field="prof"]').value.trim();prof=profMap[prof]||prof;let cl=tr.querySelector('[data-field="cl"]').value.trim()||'Sans nom';cl=classMap[classKey(cl)]||cl;const di=+tr.querySelector('[data-field="di"]').value;let start=tr.querySelector('[data-field="start"]').value,end=tr.querySelector('[data-field="end"]').value;if(start>=end){const [h,m]=start.split(':').map(Number);end=minToHHMM(Math.min(18*60,h*60+m+30));}nextDays[di].rows.push({id,prof,cl,h:makeHRange(start,end)});});
+  nextDays.forEach(d=>d.rows.sort((a,b)=>parseH(a.h).s-parseH(b.h).s||a.cl.localeCompare(b.cl,'fr')));
+  DAYS.splice(0,DAYS.length,...nextDays);
+
+  const groups={};document.querySelectorAll('.adm-group-row').forEach(tr=>{let cl=tr.querySelector('[data-field="class"]').value.trim();cl=classMap[classKey(cl)]||cl;const g=tr.querySelector('[data-field="groups"]').value.split(',').map(x=>x.trim()).filter(Boolean).map(x=>classMap[classKey(x)]||x);if(cl&&g.length)groups[classKey(cl)]=g;});ADMIN_GROUPS=groups;
+
+  const pfF={},pfP={};document.querySelectorAll('.adm-pf-row').forEach(tr=>{let cl=tr.querySelector('[data-field="cl"]').value.trim();cl=classMap[classKey(cl)]||cl;const f=inputToDate(tr.querySelector('[data-field="f"]').value);const t=inputToDate(tr.querySelector('[data-field="t"]').value);if(!cl||!f||!t)return;const kind=tr.querySelector('[data-field="kind"]').value;const obj={f,t};const who=tr.querySelector('[data-field="who"]').value.trim();const course=tr.querySelector('[data-field="course"]').value.trim();const full=tr.querySelector('[data-field="full"]').checked;if(kind==='full'){(pfF[cl]||(pfF[cl]=[])).push(obj);}else{if(who)obj.who=classMap[classKey(who)]||who;if(course)obj.course=classMap[classKey(course)]||course;if(full)obj.full=true;(pfP[cl]||(pfP[cl]=[])).push(obj);}});
+  replaceObj(PF_FULL,pfF);replaceObj(PF_PART,pfP);
+
+  const newLoc={};const newExcl=[];document.querySelectorAll('.adm-loc-row').forEach(tr=>{const code=tr.querySelector('[data-field="code"]').value.trim().toUpperCase();if(!code)return;newLoc[code]=tr.querySelector('[data-field="color"]').value||'#64748b';if(tr.querySelector('[data-field="exclusive"]').checked)newExcl.push(code);});replaceObj(LOC_COL,newLoc);EXCL.clear();newExcl.forEach(k=>EXCL.add(k));
+  ensureClassMeta();syncLocUI();ensureDefaultApsa();buildPal();rebuildAll();saveLS();showWarning('✅ Administration enregistrée');closeMo();
+}
+function toggleHelp(){}
+function getDensity(){return 'comfort';}
+function initDensity(){document.body.classList.add('comfort');document.body.classList.remove('compact');}
+function hideTip(){document.getElementById('tip').style.display='none';}
+
+function addApsa(){
+  const n=document.getElementById('nn').value.trim();if(!n)return;
+  APSA.push({n,ca:document.getElementById('nca').value,loc:document.getElementById('nloc').value,c:document.getElementById('nc').value});
+  document.getElementById('nn').value='';buildPal();saveLS();
+}
+
+// ══ CYCLES CONTINUS ET RÔLES ══
+function slotIsTeaching(rowId,di,si){
+  const sl=DAY_SLOTS[di]?.[si];if(!sl||sl.vac||sl.ferie)return false;
+  if(stageInfo(findCl(rowId),sl.date).type==='full')return false;
+  return true;
+}
+function sameApsaAt(rowId,si,n){return !!((cycles[rowId]||{})[si]&&((cycles[rowId]||{})[si]).n===n);}
+function cycleInfo(rowId,di,si){
+  const rc=cycles[rowId]||{};const base=rc[si];if(!base)return null;
+  const n=base.n;let left=si,right=si,j=si-1;
+  while(j>=0){if(sameApsaAt(rowId,j,n)){left=j;j--;continue;}if(!slotIsTeaching(rowId,di,j)){left=j;j--;continue;}break;}
+  j=si+1;
+  while(j<DAY_SLOTS[di].length){if(sameApsaAt(rowId,j,n)){right=j;j++;continue;}if(!slotIsTeaching(rowId,di,j)){right=j;j++;continue;}break;}
+  const lessons=[];for(let k=left;k<=right;k++)if(sameApsaAt(rowId,k,n))lessons.push(k);
+  const pos=lessons.indexOf(si);
+  return{rowId,di,n,left,right,lessons,total:lessons.length,pos:pos+1,base};
+}
+function segmentMeta(rowId,di,si,span){
+  const info=cycleInfo(rowId,di,si);if(!info)return null;
+  const seg=[];for(let k=si;k<si+span;k++)if(sameApsaAt(rowId,k,info.n))seg.push(k);
+  const a=info.lessons.indexOf(seg[0])+1,b=info.lessons.indexOf(seg[seg.length-1])+1;
+  return{...info,seg,startNo:a,endNo:b};
+}
+function lessonLabel(meta){if(!meta)return'';return meta.startNo===meta.endNo?`L${meta.startNo}/${meta.total}`:`L${meta.startNo}-${meta.endNo}/${meta.total}`;}
+function roleBadges(meta){
+  if(!meta)return'';const rc=cycles[meta.rowId]||{};
+  let hasRole=false;
+  const slots=meta.seg.map(si=>{
+    const r=roleInfo(rc[si]?.role);const no=meta.lessons.indexOf(si)+1;
+    if(!r.v)return `<span class="role-slot"></span>`;
+    hasRole=true;
+    return `<span class="role-slot">${roleMiniHtml(r,no)}</span>`;
+  });
+  return hasRole?`<div class="role-strip" style="--role-cols:${Math.max(1,meta.seg.length)}">${slots.join('')}</div>`:'';
+}
+function displayCycleDates(info){
+  const slots=DAY_SLOTS[info.di];const a=slots[info.lessons[0]]?.date,b=slots[info.lessons[info.lessons.length-1]]?.date;
+  return a&&b?`${fmtDM(a)} → ${fmtDM(b)}`:'';
+}
+function groupKeysForClass(cl){
+  let s=classKey(cl);
+  const keys=new Set([s]);
+  let m;
+  if((m=s.match(/^2DE\s+(\d)$/))){
+    const n=+m[1];keys.add('2DE '+n);if(n>=1&&n<=4)keys.add('2DE GR1234');if(n>=5&&n<=8)keys.add('2DE GR5678');
+  }
+  if(/^2DE\s+GR1234$/.test(s)){['1','2','3','4'].forEach(n=>keys.add('2DE '+n));}
+  if(/^2DE\s+GR5678$/.test(s)){['5','6','7','8'].forEach(n=>keys.add('2DE '+n));}
+  if((m=s.match(/^TERM\s+GR(\d)$/)))keys.add('TERM GR '+m[1]);
+  if((m=s.match(/^1ERE\s+GT\s+GR(\d)$/)))keys.add('1ERE GT GR '+m[1]);
+  if((m=s.match(/^3E\s+DP\s+GR\s+([AB])$/)))keys.add('3E DP GR '+m[1]);
+  // Groupes composites : on ajoute les sous-groupes qui peuvent être vus par un autre enseignant.
+  if(/^CAP1\s+MA\s+G1$/.test(s)){keys.add('CAP1MA');keys.add('CAP1C');}
+  if(/^CAP1\s+MA\s+G2$/.test(s)){keys.add('CAP1MB');keys.add('CAP1C');}
+  if(/^CAP2\s+MA\s+G1$/.test(s)){keys.add('CAP2MA');keys.add('CAP2C');}
+  if(/^CAP2\s+MA\s+G2$/.test(s)||/^CAP2\s+MB\s+G2$/.test(s)){keys.add('CAP2MB');keys.add('CAP2C');}
+  if(/^1\s+CPA-MV1$/.test(s)){keys.add('1CPA');keys.add('1MV1');}
+  if(/^1\s+CAV-MV2$/.test(s)){keys.add('1CAV');keys.add('1MV2');}
+  if(/^2\s+CPA-MV1$/.test(s)){keys.add('2CPA');keys.add('2MV1');}
+  if(/^2\s+CPA-MV2$/.test(s)){keys.add('2CPA');keys.add('2MV2');}
+  if(/^2\s+CAV-MV1$/.test(s)){keys.add('2CAV');keys.add('2MV1');}
+  (ADMIN_GROUPS[s]||[]).forEach(k=>keys.add(classKey(k)));
+  // Si deux classes appartiennent au même regroupement personnalisé, elles se reconnaissent aussi entre elles.
+  Object.entries(ADMIN_GROUPS||{}).forEach(([k,arr])=>{if(k===s||(arr||[]).map(classKey).includes(s)){keys.add(k);(arr||[]).forEach(x=>keys.add(classKey(x)));}});
+  return [...keys];
+}
+function classGroupsOverlap(a,b){
+  const A=new Set(groupKeysForClass(a));
+  return groupKeysForClass(b).some(k=>A.has(k));
+}
+function firstSameApsaForClass(rowId,apsaName,exclude={}){
+  const currentCl=findCl(rowId);
+  for(const day of DAYS){
+    for(const row of day.rows){
+      if(!classGroupsOverlap(currentCl,row.cl))continue;
+      const rc=cycles[row.id]||{};
+      const hit=Object.keys(rc).map(Number).sort((a,b)=>a-b).find(si=>{
+        if(rc[si]?.n!==apsaName)return false;
+        if(exclude.rowId===row.id&&si>=exclude.start&&si<=exclude.end)return false;
+        return true;
+      });
+      if(hit!==undefined){
+        const slot=DAY_SLOTS[day.di]?.[hit];
+        return {row,day,si:hit,slot};
+      }
+    }
+  }
+  return null;
+}
+function warnDuplicateApsa(rowId,apsaName,exclude={}){
+  const hit=firstSameApsaForClass(rowId,apsaName,exclude);
+  if(hit){
+    const wk=hit.slot?.wk?.w?`semaine ${hit.slot.wk.w}`:'';
+    showWarning(`⚠️ ${apsaName} est déjà programmée avec ${hit.row.cl} (${hit.day.name} ${wk}), même groupe classe possible. Alerte non bloquante.`);
+    return true;
+  }
+  return false;
+}
+
+// ══ BUILD ══
+function countCyc(di){return DAYS[di].rows.reduce((a,r)=>a+Object.keys(cycles[r.id]||{}).length,0);}
+function allRowMetas(){
+  return DAYS.flatMap((day,di)=>day.rows.map(row=>({row,di,day})));
+}
+function uniqueProfs(){
+  return [...new Set(allRowMetas().map(m=>m.row.prof))].sort((a,b)=>a.localeCompare(b,'fr'));
+}
+function levelKey(cl){
+  const s=normClass(cl);
+  if(/^CAP\d?/i.test(s))return 'CAP';
+  if(/^2de\b/i.test(s))return '2GT';
+  if(/^1ere GT\b/i.test(s))return '1GT';
+  if(/^Term gr\d+/i.test(s))return 'TGT';
+  if(/^1\b/i.test(s)&&voie(cl)==='PRO')return '1PRO';
+  if(/^2\b/i.test(s)&&voie(cl)==='PRO')return '2PRO';
+  if(/^T\b/i.test(s)&&voie(cl)==='PRO')return 'TPRO';
+  return null;
+}
+const LEVEL_TABS=[
+  {k:'1PRO',l:'1ères Pro'},
+  {k:'2PRO',l:'2des Pro'},
+  {k:'TPRO',l:'Terms Pro'},
+  {k:'CAP',l:'CAP'},
+  {k:'2GT',l:'2des GT'},
+  {k:'1GT',l:'1ères GT'},
+  {k:'TGT',l:'Terms GT'},
+];
+function buildTabs(){
+  const tb=document.getElementById('tabbar'),pn=document.getElementById('panels');
+  tb.innerHTML='';pn.innerHTML='';
+  let first=true;
+  const addLabel=txt=>{const s=document.createElement('span');s.className='tab-label';s.textContent=txt;tb.appendChild(s);};
+  const addTab=(key,label,contentFn,cls='')=>{
+    const t=document.createElement('div');t.className='tab '+cls+(first?' on':'');t.dataset.key=key;t.textContent=label;
+    t.addEventListener('click',()=>swTab(key));tb.appendChild(t);
+    const p=document.createElement('div');p.className='panel'+(first?' on':'');p.dataset.key=key;p.id='pan-'+key;
+    p.appendChild(contentFn());pn.appendChild(p);
+    first=false;
+  };
+  addLabel('Jours');
+  DAYS.forEach((day,di)=>addTab('day'+di,day.name,()=>buildSinglePanel(day,di)));
+  addLabel('Profs');
+  uniqueProfs().forEach(prof=>addTab('prof-'+prof,prof,()=>buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===prof),`Programmation annuelle — ${prof}`),'prof-tab'));
+  addLabel('Niveaux');
+  LEVEL_TABS.forEach(g=>addTab('lvl-'+g.k,g.l,()=>buildGroupedPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===g.k),`Vue annuelle — ${g.l}`),'level-tab'));
+  addLabel('Filtres');
+  addTab('apsa-filter',currentApsaFilter?`APSA · ${currentApsaFilter}`:'APSA',()=>buildApsaPanel(),'level-tab');
+  addTab('pfmp-cal','PFMP',()=>buildPfmpPanel(),'level-tab');
+}
+function buildSinglePanel(day,di){
+  const o=document.createElement('div');o.className='scroll-outer';o.appendChild(buildTable(day,di));return o;
+}
+function buildGroupedPanel(metas,title){
+  const o=document.createElement('div');o.className='scroll-outer multi-view';
+  const ttl=document.createElement('div');ttl.className='view-title';ttl.textContent=title;o.appendChild(ttl);
+  const sections=[];
+  DAYS.forEach((day,di)=>{
+    const rows=metas.filter(m=>m.di===di).map(m=>m.row);
+    if(rows.length)sections.push({day,di,rows});
+  });
+  if(!sections.length){const e=document.createElement('div');e.className='empty-view';e.textContent='Aucun créneau correspondant.';o.appendChild(e);return o;}
+  sections.forEach((secData,idx)=>{
+    const {day,di,rows}=secData;
+    const sec=document.createElement('section');sec.className='view-section';
+    const h=document.createElement('h3');h.textContent=day.name;sec.appendChild(h);
+    sec.appendChild(buildTable({name:day.name,di,rows},di,{showFooter:idx===sections.length-1}));
+    o.appendChild(sec);
+  });
+  return o;
+}
+function buildApsaPanel(){
+  const o=document.createElement('div');o.className='scroll-outer multi-view apsa-view';
+  const head=document.createElement('div');head.className='apsa-filter-head';
+  if(!currentApsaFilter){
+    head.innerHTML='<strong>Filtre APSA</strong><span>Choisis une APSA dans le menu du bandeau pour afficher l’EDT complet filtré.</span>';
+    o.appendChild(head);return o;
+  }
+  const a=APSA.find(x=>sameApsaName(x.n,currentApsaFilter));
+  head.innerHTML=`<strong>EDT complet filtré</strong><span class="pill">${a?apsaIcon(a):'🔎'} ${esc(currentApsaFilter)}</span><span>Seules les lignes où cette APSA est programmée sont affichées.</span>`;
+  o.appendChild(head);
+  const metas=allRowMetas().filter(m=>rowHasApsa(m.row.id,currentApsaFilter));
+  if(!metas.length){const e=document.createElement('div');e.className='empty-view';e.textContent='Aucun cycle correspondant pour le moment.';o.appendChild(e);return o;}
+  const sections=[];
+  DAYS.forEach((day,di)=>{const rows=metas.filter(m=>m.di===di).map(m=>m.row);if(rows.length)sections.push({day,di,rows});});
+  sections.forEach((secData,idx)=>{
+    const {day,di,rows}=secData;
+    const sec=document.createElement('section');sec.className='view-section';
+    const h=document.createElement('h3');h.textContent=day.name;sec.appendChild(h);
+    sec.appendChild(buildTable({name:day.name,di,rows},di,{showFooter:idx===sections.length-1,apsaFilter:currentApsaFilter}));
+    o.appendChild(sec);
+  });
+  return o;
+}
+function buildPfmpPanel(){
+  const wrap=document.createElement('div');wrap.className='scroll-outer pfmp-panel';
+  const ttl=document.createElement('div');ttl.className='pfmp-title';ttl.textContent='Calendrier PFMP 2026-2027';wrap.appendChild(ttl);
+  const note=document.createElement('div');note.className='admin-note';note.innerHTML='Ce tableau reprend les <b>PFMP actuellement utilisées par l’application</b>. Les changements effectués dans Administration → PFMP se répercutent ici.';wrap.appendChild(note);
+  const table=document.createElement('table');table.className='pfmp-table';
+  table.innerHTML='<colgroup><col style="width:22%"><col style="width:14%"><col style="width:18%"><col style="width:18%"><col style="width:14%"><col style="width:14%"></colgroup><thead><tr><th>Classe</th><th>Type</th><th>Début</th><th>Fin</th><th>En PFMP</th><th>En cours</th></tr></thead><tbody></tbody>';
+  const tb=table.querySelector('tbody');
+  const rows=pfRowsForAdmin();
+  if(!rows.length){const tr=document.createElement('tr');tr.innerHTML='<td colspan="6">Aucune période PFMP paramétrée.</td>';tb.appendChild(tr);} 
+  rows.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td class="pfmp-cl">${esc(r.cl)}</td><td>${r.kind==='full'?'Complète':'Partielle'}</td><td class="pfmp-date">${fmtDM(r.f)}</td><td class="pfmp-date">${fmtDM(r.t)}</td><td>${esc(r.who|| (r.kind==='full'?'Tous':''))}</td><td>${esc(r.course||'')}</td>`;tb.appendChild(tr);});
+  wrap.appendChild(table);return wrap;
+}
+function swTab(key){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.key===key));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.dataset.key===key));
+  hideTip();
+}
+
+function buildTable(day,di,opts={}){
+  const slots=DAY_SLOTS[di];
+  const table=document.createElement('table');table.className='grid';table.dataset.di=di;if(opts.apsaFilter)table.dataset.apsaFilter=opts.apsaFilter;
+  const cg=document.createElement('colgroup');
+  const cl=document.createElement('col');cl.className='col-lbl';cg.appendChild(cl);
+  slots.forEach(()=>{const c=document.createElement('col');c.className='col-day';cg.appendChild(c);});
+  table.appendChild(cg);
+
+  // THEAD
+  const thead=document.createElement('thead');
+  const r1=document.createElement('tr');
+  const corner=document.createElement('th');corner.className='th-lbl';corner.rowSpan=2;
+  corner.style.cssText='vertical-align:bottom;padding-bottom:1px;font-size:8px;opacity:.45';
+  corner.textContent='Prof · Classe';r1.appendChild(corner);
+  mthSpans(slots).forEach(m=>{const th=document.createElement('th');const se=seasonOf(m.d);th.className='th-mon season-'+se;th.colSpan=m.n;th.textContent=`${seasonIcon(se)} ${m.l}`;r1.appendChild(th);});
+  thead.appendChild(r1);
+  const r2=document.createElement('tr');
+  slots.forEach(s=>{
+    const th=document.createElement('th');
+    th.className='th-date season-'+seasonOf(s.date)+(s.vac?' is-vac':s.ferie?' is-ferie':'');
+    th.title=s.ferie||'';
+    th.innerHTML=`<span class="date-num">${fmtD(s.date)}</span>`;
+    r2.appendChild(th);
+  });
+  thead.appendChild(r2);table.appendChild(thead);
+
+  // TBODY avec délégation mousedown + mouseover
+  const tbody=document.createElement('tbody');tbody.dataset.di=di;
+
+  tbody.addEventListener('mousedown',onTbodyDown);
+  tbody.addEventListener('mouseover',onTbodyOver);
+  tbody.addEventListener('mouseleave',hideTip);
+  tbody.addEventListener('contextmenu',onTbodyContext);
+  tbody.addEventListener('dblclick',onTbodyDblClick);
+
+  day.rows.forEach(row=>tbody.appendChild(buildRow(row,di,slots,opts)));
+  table.appendChild(tbody);
+
+  // TFOOT
+  const tfoot=document.createElement('tfoot');
+  if(opts.showFooter===false)tfoot.className='hidden-weeks';
+  const fr=document.createElement('tr');
+  const fl=document.createElement('th');fl.className='th-lbl-foot';fl.textContent='Sem.';fr.appendChild(fl);
+  slots.forEach(s=>{const th=document.createElement('th');th.className=s.vac?'is-vac':s.ferie?'is-ferie':'';th.textContent=String(s.wk.w);fr.appendChild(th);});
+  tfoot.appendChild(fr);table.appendChild(tfoot);
+  return table;
+}
+
+function buildRow(row,di,slots,opts={}){
+  const tr=document.createElement('tr');tr.dataset.rowId=row.id;tr.dataset.di=di;
+  const pc=PC[row.prof]||'#333',pb=PB[row.prof]||'#eee';
+  const v=voie(row.cl);
+  tr.classList.add(v==='GT'?'voie-gt':'voie-pro');
+  const lbl=document.createElement('td');lbl.className='td-lbl';
+  lbl.innerHTML=`<span class="row-main"><span class="lbl-prof" style="color:${pc}">${row.prof}</span> <span style="color:#bbb">·</span> <span class="class-ico" title="${esc(voieLabel(row.cl))}">${classIcon(row.cl)}</span><span class="lbl-cl">${esc(row.cl)}</span><span class="voie-tag">${voieLabel(row.cl)}</span></span><span class="row-meta"><span class="lbl-h row-hour">${row.h}</span></span>`;
+  tr.appendChild(lbl);
+
+  let si=0;
+  while(si<slots.length){
+    const s=slots[si];
+    const rc=cycles[row.id]||{};
+    const cyc=rc[si];
+
+    const info=stageInfo(row.cl,s.date);
+    if(s.vac){
+      let span=1;while(si+span<slots.length&&slots[si+span].vac)span++;
+      tr.appendChild(mkTd(row.id,di,si,'is-vac',span));si+=span;continue;
+    }
+    if(info.type==='full'){
+      let span=1;
+      while(si+span<slots.length){
+        const ns=slots[si+span];
+        if(ns.vac)break;
+        if(stageInfo(row.cl,ns.date).type!=='full')break;
+        span++;
+      }
+      const td=mkTd(row.id,di,si,'is-sf',span);td.title='PFMP — '+row.cl;td.innerHTML='<span class="pfmp-label">PFMP</span>';tr.appendChild(td);si+=span;continue;
+    }
+    if(info.type==='part'&&!cyc){
+      const who=info.who;
+      const stageCourse=info.course||partialCourseLabel(row.cl,who);
+      let span=1;
+      while(si+span<slots.length){
+        const ns=slots[si+span];
+        if(ns.vac)break;
+        if((cycles[row.id]||{})[si+span])break;
+        if(!samePartialStage(row.cl,ns.date,who,stageCourse))break;
+        span++;
+      }
+      const cours=partialCourseLabel(row.cl,who,stageCourse);
+      const td=mkTd(row.id,di,si,'is-sp editable',span);
+      td.innerHTML=`<span class="partial-block-label"><span>PFMP partielle</span><small>Cours : ${esc(cours)}</small></span>`;
+      td.title=`Stage partiel — ${esc(who)} en PFMP · En cours : ${esc(cours)}`;
+      tr.appendChild(td);si+=span;continue;
+    }
+    if(s.ferie){
+      const td=mkTd(row.id,di,si,'is-ferie',1);
+      td.title=s.ferie;
+      td.innerHTML='';
+      tr.appendChild(td);si++;continue;
+    }
+    if(cyc){
+      let span=1;
+      const startStageKey=stageDisplayKey(row.cl,s.date);
+      while(si+span<slots.length){
+        const ns=slots[si+span];if(ns.vac||ns.ferie||stageInfo(row.cl,ns.date).type==='full')break;
+        if(stageDisplayKey(row.cl,ns.date)!==startStageKey)break;
+        const nc=rc[si+span];if(!nc||nc.n!==cyc.n)break;span++;
+      }
+      if(opts.apsaFilter&&!sameApsaName(cyc.n,opts.apsaFilter)){
+        const td=mkTd(row.id,di,si,'is-othercyc',span);
+        td.title=`Autre cycle masqué par le filtre : ${cyc.n}`;
+        tr.appendChild(td);si+=span;continue;
+      }
+      const td=mkTd(row.id,di,si,'editable',span);
+      td.dataset.hasCyc='1';
+      td.style.background=cyc.c;td.style.borderColor='rgba(0,0,0,.1)';
+      const t=txc(cyc.c);
+      const meta=segmentMeta(row.id,di,si,span);
+      const pnote=info.type==='part'?`<span class="sp-label" title="${esc(info.who)} en PFMP · En cours : ${esc(partialCourseLabel(row.cl,info.who,info.course))}">Cours : ${esc(partialCourseLabel(row.cl,info.who,info.course))}</span>`:'';
+      td.innerHTML=`<div class="cyc-card" style="color:${t}"><span class="cyc-icon">${apsaIcon(cyc)}</span><span class="cyc-info"><span class="cyc-label">${esc(cyc.n)}</span><span class="cyc-meta"><span class="meta-pill">${lessonLabel(meta)}</span></span></span></div>`+
+        roleBadges(meta)+pnote;
+      td.title=`${cyc.ca} — ${cyc.n} [${cyc.loc}] · ${meta?meta.total:span} leçon(s) · ${lessonLabel(meta)} · clic sans APSA ou mode Préciser Cycle pour modifier`;
+      tr.appendChild(td);si+=span;continue;
+    }
+    if(info.type==='part'){
+      const cours=partialCourseLabel(row.cl,info.who,info.course);
+      const td=mkTd(row.id,di,si,'is-sp editable',1);
+      td.innerHTML=`<span class="partial-block-label"><span>PFMP partielle</span><small>Cours : ${esc(cours)}</small></span>`;
+      td.title=`Stage partiel — ${esc(info.who)} en PFMP · En cours : ${esc(cours)}`;
+      tr.appendChild(td);si++;continue;
+    }
+    const td=mkTd(row.id,di,si,'is-empty editable',1);
+    tr.appendChild(td);si++;
+  }
+  return tr;
+}
+
+function mkTd(rowId,di,si,cls,span){
+  const td=document.createElement('td');
+  td.className='td-w'+(cls?' '+cls:'');
+  td.dataset.rowId=rowId;td.dataset.di=di;td.dataset.si=si;
+  if(span>1)td.colSpan=span;
+  return td;
+}
+
+// ══ INTERACTIONS ══
+// Règle absolue : on récupère la cellule via closest, on vérifie editable, puis on agit.
+// Pas de listener document qui interfère avec selIdx.
+
+function isEditable(td){
+  return td&&td.classList.contains('editable');
+}
+
+function getCell(e){
+  // e.target peut être un span enfant (cyc-label etc.) → on remonte au td
+  return e.target.closest('td.td-w');
+}
+
+function onTbodyDown(e){
+  const td=getCell(e);
+  if(!td||!isEditable(td))return;
+  e.preventDefault();
+
+  const rowId=td.dataset.rowId;
+  const si=+td.dataset.si;
+  const di=+td.closest('table').dataset.di;
+  const existing=(cycles[rowId]||{})[si];
+
+  if(roleMode){
+    if(existing)openModal(rowId,di,si);
+    else showConflict('✍️ Mode Préciser Cycle : clique sur un cycle déjà créé');
+    return;
+  }
+
+  // Pas d'APSA sélectionnée
+  if(selIdx===null){
+    if(existing){
+      // Clic sur un cycle → modal modification/suppression, avec cycle continu malgré vacances/fériés
+      openModal(rowId,di,si);
+    } else {
+      showConflict('👆 Sélectionnez d\'abord une APSA dans le bandeau');
+    }
+    return;
+  }
+
+  // APSA sélectionnée + clic sur même APSA → supprimer tout le cycle continu
+  if(existing && existing.n===APSA[selIdx].n){
+    const info=cycleInfo(rowId,di,si);
+    if(info&&cycles[rowId])info.lessons.forEach(k=>delete cycles[rowId][k]);
+    showConflict(`🗑 Cycle ${APSA[selIdx].n} supprimé`);
+    refreshRow(rowId,di);updateBadge(di);saveLS();
+    return;
+  }
+
+  // Poser le cycle (début d'un éventuel drag). Si la cellule fusionnée représente une PFMP partielle,
+  // on prend toute sa largeur pour éviter de ne programmer que le premier lundi du bloc.
+  const tdEnd=si+((td.colSpan||1)-1);
+  isDrag=true;dragRowId=rowId;dragDi=di;dragStartSi=si;dragStartEndSi=tdEnd;dragWarnedDup=false;
+  setCycleRange(rowId,di,si,tdEnd);
+}
+
+function onTbodyOver(e){
+  const td=getCell(e);
+  if(td&&td.title){showTip(e,td.title);}
+  if(!isDrag||selIdx===null)return;
+  if(!td||!isEditable(td))return;
+  if(td.dataset.rowId!==dragRowId)return;
+
+  const si=+td.dataset.si;
+  const tdEnd=si+((td.colSpan||1)-1);
+  const s=Math.min(dragStartSi,si),en=Math.max(dragStartEndSi||dragStartSi,tdEnd);
+  const slots=DAY_SLOTS[dragDi];
+  if(!dragWarnedDup&&warnDuplicateApsa(dragRowId,APSA[selIdx].n,{rowId:dragRowId,start:s,end:en}))dragWarnedDup=true;
+  for(let i=s;i<=en;i++){
+    const sl=slots[i];if(!sl||sl.vac||sl.ferie)continue;
+    if(stageInfo(findCl(dragRowId),sl.date).type==='full')continue;
+    const cf=findConflict(dragDi,i,APSA[selIdx].loc,dragRowId);
+    if(cf)showConflict(`⚠️ Chevauchement ${APSA[selIdx].loc} avec ${cf.prof}·${cf.cl} S${sl.wk.w}`);
+    if(!cycles[dragRowId])cycles[dragRowId]={};
+    cycles[dragRowId][i]=makeCycleObj(APSA[selIdx],cycles[dragRowId][i]);
+  }
+  refreshRow(dragRowId,dragDi);updateBadge(dragDi);saveLS();
+}
+
+function onTbodyContext(e){
+  const td=getCell(e);if(!td)return;
+  const rowId=td.dataset.rowId,si=+td.dataset.si,di=+td.closest('table').dataset.di;
+  if((cycles[rowId]||{})[si]){e.preventDefault();openModal(rowId,di,si);}
+}
+function onTbodyDblClick(e){
+  const td=getCell(e);if(!td)return;
+  const rowId=td.dataset.rowId,si=+td.dataset.si,di=+td.closest('table').dataset.di;
+  if((cycles[rowId]||{})[si]){e.preventDefault();openModal(rowId,di,si);}
+}
+
+document.addEventListener('mouseup',()=>{isDrag=false;});
+
+function setCycle(rowId,di,si,excludeRange){
+  const slot=DAY_SLOTS[di][si];
+  if(!slot||slot.vac||slot.ferie)return;
+  if(stageInfo(findCl(rowId),slot.date).type==='full')return;
+  if(!dragWarnedDup&&warnDuplicateApsa(rowId,APSA[selIdx].n,excludeRange||{rowId,start:si,end:si}))dragWarnedDup=true;
+  const cf=findConflict(di,si,APSA[selIdx].loc,rowId);
+  if(cf)showConflict(`⚠️ Chevauchement ${APSA[selIdx].loc} avec ${cf.prof}·${cf.cl} S${slot.wk.w}`);
+  if(!cycles[rowId])cycles[rowId]={};
+  cycles[rowId][si]=makeCycleObj(APSA[selIdx],cycles[rowId][si]);
+}
+function setCycleRange(rowId,di,start,end){
+  const s=Math.min(start,end),en=Math.max(start,end);
+  const exclude={rowId,start:s,end:en};
+  for(let i=s;i<=en;i++)setCycle(rowId,di,i,exclude);
+  refreshRow(rowId,di);updateBadge(di);saveLS();
+}
+
+function findCl(rowId){for(const d of DAYS)for(const r of d.rows)if(r.id===rowId)return r.cl;return'';}
+
+function refreshRow(rowId,di){
+  const day=DAYS[di];const row=day.rows.find(r=>r.id===rowId);if(!row)return;
+  const matches=Array.from(document.querySelectorAll(`tr[data-row-id="${rowId}"]`));
+  if(!matches.length)return;
+  matches.forEach(old=>{
+    const table=old.closest('table');
+    const opts={};
+    if(table?.dataset.apsaFilter)opts.apsaFilter=table.dataset.apsaFilter;
+    old.parentNode.replaceChild(buildRow(row,di,DAY_SLOTS[di],opts),old);
+  });
+}
+
+function updateBadge(di){
+  // Les onglets restent sobres : aucun compteur quotidien de leçons affiché.
+}
+function rebuildAll(){buildTabs();}
+
+// ══ MODAL edit cycle ══
+let modalCtx=null;
+function openModal(rowId,di,si){
+  const info=cycleInfo(rowId,di,si);if(!info)return;
+  const cyc=info.base;
+  const slots=DAY_SLOTS[di];
+  const row=DAYS[di].rows.find(r=>r.id===rowId);
+  modalCtx={rowId,di,lessons:[...info.lessons]};
+  const opts=APSA.map((a,i)=>`<option value="${i}" ${a.n===cyc.n?'selected':''}>${apsaIcon(a)} ${a.ca} [${a.loc}] — ${esc(a.n)}</option>`).join('');
+  const roleRows=info.lessons.map((lessonSi,idx)=>{
+    const d=slots[lessonSi].date;const saved=(cycles[rowId]||{})[lessonSi]?.role||'';
+    return `<div class="role-row"><span class="role-no">L${idx+1}</span><span class="role-date">${fmtDM(d)}</span><select class="lesson-role" data-si="${lessonSi}">${roleOptions(saved)}</select></div>`;
+  }).join('');
+  document.getElementById('mo').innerHTML=`
+    <h2>Préciser le Cycle</h2>
+    <div class="mrow"><label>Prof · Classe</label><div class="mval">${esc(row?.prof)} · ${esc(row?.cl)}</div></div>
+    <div class="mrow"><label>Période</label><div class="mval">${displayCycleDates(info)} · ${info.total} leçon(s) programmée(s)</div></div>
+    <div class="mrow"><label>APSA</label><select id="msel">${opts}</select></div>
+    <div class="mrow"><label>Rôle des leçons</label><div class="role-help">Chaque ligne correspond à une leçon réelle du cycle. La précision choisie s’affiche directement sous la bonne leçon dans le planning.</div><div class="role-list">${roleRows}</div>${isTerminale(row?.cl)?'<div class="term-note">Terminale : tu peux marquer une co-évaluation ou un rattrapage Bac sur la leçon concernée.</div>':''}</div>
+    <div class="mbtns">
+      <button class="bd" onclick="delCyc()">Supprimer le cycle</button>
+      <button class="bn" onclick="closeMo()">Annuler</button>
+      <button class="bc" onclick="saveMo()">Enregistrer</button>
+    </div>`;
+  document.getElementById('ov').classList.add('on');
+}
+function closeMo(){document.getElementById('ov').classList.remove('on');const mo=document.getElementById('mo');if(mo)mo.className='mo';modalCtx=null;}
+function saveMo(){
+  if(!modalCtx)return closeMo();
+  const {rowId,di,lessons}=modalCtx;
+  const i=+document.getElementById('msel').value;const a=APSA[i];
+  const roleBySi={};document.querySelectorAll('.lesson-role').forEach(sel=>{roleBySi[sel.dataset.si]=sel.value||'';});
+  if(!cycles[rowId])cycles[rowId]={};
+  lessons.forEach(s=>{cycles[rowId][s]={n:a.n,ca:a.ca,loc:a.loc,c:a.c,role:roleBySi[s]||''};});
+  refreshRow(rowId,di);closeMo();updateBadge(di);saveLS();
+}
+function delCyc(){
+  if(!modalCtx)return closeMo();
+  const {rowId,di,lessons}=modalCtx;
+  if(cycles[rowId])lessons.forEach(s=>delete cycles[rowId][s]);
+  refreshRow(rowId,di);closeMo();updateBadge(di);saveLS();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('ov').classList.contains('on'))closeMo();else clearSelection();hideTip();}});
+
+// ══ TOOLTIP ══
+function showTip(e,txt){
+  const t=document.getElementById('tip');
+  if(!txt){t.style.display='none';return;}
+  t.textContent=txt;t.style.display='block';
+  t.style.left=(e.clientX+12)+'px';t.style.top=(e.clientY-18)+'px';
+}
+document.addEventListener('mousemove',e=>{
+  const t=document.getElementById('tip');
+  t.style.left=(e.clientX+12)+'px';t.style.top=(e.clientY-18)+'px';
+});
+document.addEventListener('mouseout',e=>{
+  if(!e.relatedTarget||e.relatedTarget.nodeName==='HTML')
+    document.getElementById('tip').style.display='none';
+});
+
+
+// ══ PWA / INSTALLATION ══
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+  });
+}
+let deferredPwaPrompt=null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPwaPrompt=e;
+  const btn=document.getElementById('installPwaBtn');
+  if(btn) btn.style.display='inline-flex';
+});
+window.addEventListener('appinstalled', () => {
+  deferredPwaPrompt=null;
+  const btn=document.getElementById('installPwaBtn');
+  if(btn) btn.style.display='none';
+});
+document.addEventListener('click', async (e) => {
+  if(e.target && e.target.id==='installPwaBtn'){
+    if(!deferredPwaPrompt){alert('Installation disponible depuis le menu du navigateur lorsque la page est publiée en HTTPS.');return;}
+    deferredPwaPrompt.prompt();
+    await deferredPwaPrompt.userChoice.catch(()=>{});
+    deferredPwaPrompt=null;
+    e.target.style.display='none';
+  }
+});
+
+// ══ INIT ══
+loadLS();initDensity();syncLocUI();buildPal();buildTabs();updateSelectionUI();
+setInterval(saveLS,30000);
+</script>
+</body>
+</html>
