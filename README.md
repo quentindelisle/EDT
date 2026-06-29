@@ -36,4 +36,4 @@ Les données de l’application restent stockées localement dans le navigateur.
 
 ## Version mise à jour
 
-Cette version ajoute le masquage rapide du bandeau APSA, les vues par professeur/niveau via sélecteurs, le bouton PFMP dans le bandeau principal, les couleurs natives des professeurs et le tri naturel des classes.
+Cette version améliore la mise en page du bandeau : sélection APSA et légende des lieux dans le bandeau haut, palette APSA condensée, bouton Masquer/Afficher les APSA, suppression des APSA Danse, Basket et Spike-Ball, et retrait de la ligne de titre des vues annuelles.

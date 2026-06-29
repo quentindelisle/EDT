@@ -20,7 +20,7 @@ body.has-selection td.td-w.editable{cursor:crosshair}
 body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(252,211,77,.8);outline-offset:-2px;box-shadow:inset 0 0 0 999px rgba(252,211,77,.08)}
 
 /* TOPBAR */
-#topbar{background:var(--hdr);color:var(--htxt);padding:3px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:400;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+#topbar{background:var(--hdr);color:var(--htxt);padding:3px 10px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;position:sticky;top:0;z-index:400;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 #topbar h1{font-size:13px;font-weight:800;white-space:nowrap;letter-spacing:.02em}
 #topbar .app-logo{width:28px;height:28px;border-radius:8px;object-fit:cover;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.22);flex-shrink:0}
 #topbar h1{display:flex;align-items:center;gap:7px}
@@ -42,30 +42,36 @@ body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(2
 .helpitem{white-space:nowrap}
 
 /* PALETTE */
-#palbar{background:var(--hdr2);border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:27px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:120px}
+#palbar{background:var(--hdr2);border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:31px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:74px}
 #palbar.closed{max-height:0;border-bottom:none}
-#palbody{padding:4px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.selbox{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 7px}
-.selbox-label{font-size:9px;color:rgba(255,255,255,.45)}
+#palbody{padding:3px 10px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.selbox{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:3px 6px}
+.selbox-label{font-size:8px;color:rgba(255,255,255,.48);text-transform:uppercase;letter-spacing:.04em}
 .cagrp{display:flex;align-items:center;gap:2px;border-left:2px solid;padding-left:5px;margin-right:2px}
-.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 6px 2px 3px;border-radius:8px;font-size:9px;font-weight:600;cursor:pointer;border:2px solid transparent;line-height:1.25;white-space:nowrap;min-height:22px}
+.chip{display:inline-flex;align-items:center;gap:2px;padding:1px 4px 1px 2px;border-radius:7px;font-size:8px;font-weight:650;cursor:pointer;border:2px solid transparent;line-height:1.15;white-space:nowrap;min-height:18px}
 .chip:hover{filter:brightness(1.1)}
 .chip.on{border-color:#fff;box-shadow:0 0 0 2px rgba(252,211,77,.65),0 0 14px rgba(252,211,77,.35);transform:translateY(-1px)}
-.chip-ico{width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.28);font-size:11px;line-height:1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
-.chip-name{max-width:90px;overflow:hidden;text-overflow:ellipsis}
-.chip-ca{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px;background:rgba(0,0,0,.25);color:#fff}
-.chip-loc{font-size:7px;font-weight:700;padding:1px 3px;border-radius:2px;background:rgba(255,255,255,.22);color:#fff;margin-left:1px}
-.addform{display:flex;gap:3px;align-items:center;margin-left:4px}
-.addform input[type=text]{padding:2px 5px;border-radius:3px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:10px;width:90px}
+.chip-ico{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.28);font-size:9px;line-height:1;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.chip-name{max-width:72px;overflow:hidden;text-overflow:ellipsis}
+.chip-ca{font-size:6px;font-weight:800;padding:1px 2px;border-radius:2px;background:rgba(0,0,0,.25);color:#fff}
+.chip-loc{font-size:6px;font-weight:800;padding:1px 2px;border-radius:2px;background:rgba(255,255,255,.22);color:#fff;margin-left:1px}
+.addform{display:flex;gap:3px;align-items:center;margin-left:auto;flex:0 0 auto}
+.addform input[type=text]{padding:2px 5px;border-radius:3px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:9px;width:78px}
 .addform input[type=text]::placeholder{color:rgba(255,255,255,.35)}
 .addform select{padding:2px 3px;border-radius:3px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.08);color:#fff;font-size:10px}
 .addform select option{background:#2e2d29}
 .addform input[type=color]{width:20px;height:20px;border-radius:2px;border:none;cursor:pointer;background:transparent;padding:1px}
-#selinfo{font-size:11px;font-weight:700;color:var(--accent);min-width:140px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}.selico{width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(252,211,77,.16);border:1px solid rgba(252,211,77,.35);font-size:13px}
-.legend-mini{display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:rgba(0,0,0,.12);border-radius:6px;padding:3px 6px}
+#selinfo{font-size:10px;font-weight:800;color:var(--accent);min-width:118px;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}.selico{width:17px;height:17px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(252,211,77,.16);border:1px solid rgba(252,211,77,.35);font-size:11px}
+.legend-mini{display:flex;align-items:center;gap:3px;flex-wrap:wrap;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:6px;padding:3px 5px}
 .legend-title{font-size:8px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.05em}
-.legchip{font-size:8px;font-weight:800;color:#fff;border-radius:4px;padding:2px 5px;line-height:1}
+.legchip{font-size:7px;font-weight:900;color:#fff;border-radius:4px;padding:2px 4px;line-height:1}
 .clear-sel{font-size:9px;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-radius:4px;padding:2px 6px;cursor:pointer}.clear-sel:hover{background:rgba(255,255,255,.2);color:#fff}
+#pal{display:flex;gap:2px 3px;flex-wrap:wrap;align-items:center;flex:1 1 780px;max-height:42px;overflow:hidden}
+#palbar.band-hidden{max-height:0;border-bottom:none}
+#topbar .top-selbox{margin-left:2px}
+#topbar .top-legend{margin-left:0}
+#topbar .clear-sel{padding:1px 5px}
+
 
 /* TABS */
 #tabbar{display:flex;padding:4px 10px 0;gap:4px;background:var(--bg);border-bottom:2px solid var(--brd2);flex-wrap:wrap;align-items:flex-end}
@@ -265,30 +271,29 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
   <button class="tbtn r" onclick="clearAll()">🗑 Effacer</button>
   <div class="sep"></div>
   <button class="tbtn v" id="role-btn" onclick="toggleRoleMode()">✍️ Préciser Cycle</button>
-  <button class="tbtn" id="band-btn" onclick="togglePaletteBand()" title="Afficher / masquer le bandeau APSA">🎨 APSA</button>
-  <select id="apsa-filter" class="topselect" onchange="setApsaFilter(this.value)" title="Filtrer l’EDT complet par APSA"><option value="">🔎 Toutes APSA</option></select>
+  <button class="tbtn" id="band-btn" onclick="togglePaletteBand()" title="Afficher / masquer le bandeau APSA">🎨 Masquer APSA</button>
   <button class="tbtn" onclick="openPfmpView()">📅 PFMP</button>
   <button class="tbtn" onclick="toggleFullScreen()">⛶ Plein écran</button>
   <button class="tbtn" onclick="openAdmin()">⚙️ Administration</button>
+  <div class="sep"></div>
+  <div class="selbox top-selbox">
+    <span class="selbox-label">APSA</span>
+    <span id="selinfo">— choisir</span>
+    <button class="clear-sel" onclick="clearSelection()" title="Désélectionner l’APSA">×</button>
+  </div>
+  <div class="legend-mini top-legend" title="Légende rapide des installations">
+    <span class="legend-title">Lieux</span>
+    <span class="legchip" style="background:#16a085">DH</span>
+    <span class="legchip" style="background:#8e44ad">GG</span>
+    <span class="legchip" style="background:#d35400">PG</span>
+    <span class="legchip" style="background:#c0392b">M</span>
+    <span class="legchip" style="background:#2471a3">P</span>
+  </div>
 </div>
 
 <div id="palbar">
   <div id="palbody">
-    <div class="selbox">
-      <span class="selbox-label">APSA sélectionnée</span>
-      <span id="selinfo">— choisir</span>
-      <button class="clear-sel" onclick="clearSelection()" title="Désélectionner l’APSA">×</button>
-    </div>
-    <div class="legend-mini" title="Légende rapide des installations">
-      <span class="legend-title">Lieux</span>
-      <span class="legchip" style="background:#16a085">DH</span>
-      <span class="legchip" style="background:#8e44ad">GG</span>
-      <span class="legchip" style="background:#d35400">PG</span>
-      <span class="legchip" style="background:#c0392b">M</span>
-      <span class="legchip" style="background:#2471a3">P</span>
-    </div>
-    <div class="sep"></div>
-    <div id="pal" style="display:flex;gap:3px;flex-wrap:wrap;align-items:center"></div>
+    <div id="pal"></div>
     <div class="sep"></div>
     <div class="addform">
       <input type="text" id="nn" placeholder="Nom APSA…" maxlength="20">
@@ -466,7 +471,6 @@ let APSA=[
   {n:'Biathlon',ca:'CA1',loc:'DH',c:'#16a34a'},
   {n:'CO',ca:'CA2',loc:'DH',c:'#14532d'},
   {n:'Sauvetage',ca:'CA2',loc:'P',c:'#2563eb'},
-  {n:'Danse',ca:'CA3',loc:'PG',c:'#ea580c'},
   {n:'Acrosport',ca:'CA3',loc:'PG',c:'#ea580c'},
   {n:'Step',ca:'CA3',loc:'PG',c:'#ea580c'},
   {n:'Badminton',ca:'CA4',loc:'GG',c:'#dc2626'},
@@ -476,11 +480,9 @@ let APSA=[
   {n:'Volley',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Foot',ca:'CA4',loc:'DH',c:'#16a34a'},
   {n:'Futsal',ca:'CA4',loc:'GG',c:'#dc2626'},
-  {n:'Basket',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Basket 3c3',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Ultimate',ca:'CA4',loc:'DH',c:'#16a34a'},
   {n:'Judo',ca:'CA4',loc:'PG',c:'#ea580c'},
-  {n:'Spike-Ball',ca:'CA4',loc:'PG',c:'#ea580c'},
   {n:'Autre',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Musculation',ca:'CA5',loc:'M',c:'#db2777'},
   {n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'},
@@ -497,7 +499,7 @@ const APSA_ICON={
   'demi-fond':'🏃','relais vitesse':'⚡','natation':'🏊','golf':'⛳','biathlon':'🎯','co':'🧭','sauvetage':'🛟',
   'danse':'💃','acrosport':'🤸','step':'🎵','step ca5':'🎵','badminton':'🏸','tennis table':'🏓','hand int':'🤾','hand ext':'🤾',
   'volley':'🏐','foot':'⚽','futsal':'⚽','basket':'🏀','basket 3c3':'🏀','ultimate':'🥏','judo':'🥋',
-  'spike-ball':'🔵','autre':'✨','musculation':'💪','ced':'❤️'
+  'autre':'✨','musculation':'💪','ced':'❤️'
 };
 function apsaIcon(a){
   const key=String(a?.n||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
@@ -528,9 +530,16 @@ function isTerminale(cl){return /^(Term\b|Term gr|T\s)/i.test(cl||'');}
 function makeCycleObj(a,prev){return{n:a.n,ca:a.ca,loc:a.loc,c:a.c,role:(prev&&prev.n===a.n)?(prev.role||''):''};}
 function apsaKey(n){return String(n||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
 function sameApsaName(a,b){return apsaKey(a)===apsaKey(b);}
+const REMOVED_APSA=['Danse','Basket','Spike-Ball'];
+function sanitizeApsaList(){
+  APSA=APSA.filter(a=>!REMOVED_APSA.some(n=>sameApsaName(a.n,n)));
+  if(selIdx!==null && (!APSA[selIdx]))selIdx=null;
+}
 function ensureDefaultApsa(){
+  sanitizeApsaList();
   const add=(obj)=>{if(!APSA.some(a=>sameApsaName(a.n,obj.n)))APSA.push(obj);};
   add({n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'});
+  sanitizeApsaList();
 }
 function apsaNamesForFilter(){
   const m=new Map();
@@ -656,8 +665,8 @@ let selIdx=null; // index APSA sélectionnée, ou null
 let roleMode=false; // mode de modification rapide des rôles
 let currentApsaFilter=''; // filtre EDT complet par APSA
 let isDrag=false, dragRowId=null, dragDi=null, dragStartSi=null, dragStartEndSi=null, dragWarnedDup=false;
-const LSK='eps_v28';
-const OLD_LS_KEYS=['eps_v27','eps_v26','eps_v25','eps_v24','eps_v23','eps_v22','eps_v21','eps_v20','eps_v19','eps_v18','eps_v17','eps_v16','eps_v15','eps_v14','eps_v11'];
+const LSK='eps_v30';
+const OLD_LS_KEYS=['eps_v29','eps_v28','eps_v27','eps_v26','eps_v25','eps_v24','eps_v23','eps_v22','eps_v21','eps_v20','eps_v19','eps_v18','eps_v17','eps_v16','eps_v15','eps_v14','eps_v11'];
 
 function clonePlain(x){return JSON.parse(JSON.stringify(x));}
 function dateToInput(d){if(!d)return'';const x=d instanceof Date?d:new Date(d);if(Number.isNaN(x.getTime()))return'';return dKey(x);}
@@ -671,7 +680,7 @@ function hydratePFObj(obj){
 }
 function replaceObj(target,source){Object.keys(target).forEach(k=>delete target[k]);Object.assign(target,source||{});}
 function serializableState(){
-  return {version:'v28',c:cycles,a:APSA,days:DAYS,pfFull:PF_FULL,pfPart:PF_PART,locCol:LOC_COL,exclusiveLocs:[...EXCL],adminGroups:ADMIN_GROUPS,classMeta:CLASS_META,pc:PC,pb:PB};
+  return {version:'v30',c:cycles,a:APSA,days:DAYS,pfFull:PF_FULL,pfPart:PF_PART,locCol:LOC_COL,exclusiveLocs:[...EXCL],adminGroups:ADMIN_GROUPS,classMeta:CLASS_META,pc:PC,pb:PB};
 }
 function applyImportedState(d){
   if(d.c||d.cycles)cycles=d.c||d.cycles;
@@ -794,7 +803,7 @@ function togglePaletteBand(){
   const btn=document.getElementById('band-btn');
   if(!pal)return;
   const hidden=pal.classList.toggle('band-hidden');
-  if(btn){btn.classList.toggle('on',!hidden);btn.textContent=hidden?'🎨 APSA':'⬆️ APSA';}
+  if(btn){btn.classList.toggle('on',!hidden);btn.textContent=hidden?'🎨 Afficher APSA':'🎨 Masquer APSA';}
 }
 function openPfmpView(){
   rebuildAll();
@@ -1226,7 +1235,7 @@ function buildTabs(){
   ls.innerHTML='<option value="">🎓 Niveau…</option>'+LEVEL_TABS.map(g=>`<option value="${g.k}" ${g.k===currentLevelView?'selected':''}>${esc(g.l)}</option>`).join('');
   ls.addEventListener('change',e=>setLevelView(e.target.value));tb.appendChild(ls);
 
-  addPanel('prof-view',()=>currentProfView?buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===currentProfView),`Programmation annuelle — ${profDisplayName(currentProfView)}`):emptyPanel('Choisis un professeur dans le sélecteur.'),false);
+  addPanel('prof-view',()=>currentProfView?buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===currentProfView),profDisplayName(currentProfView)):emptyPanel('Choisis un professeur dans le sélecteur.'),false);
   addPanel('level-view',()=>currentLevelView?buildGroupedPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===currentLevelView),`Vue annuelle — ${(LEVEL_TABS.find(g=>g.k===currentLevelView)||{}).l||currentLevelView}`):emptyPanel('Choisis un niveau dans le sélecteur.'),false);
   addPanel('apsa-filter',()=>buildApsaPanel(),false);
   addPanel('pfmp-cal',()=>buildPfmpPanel(),false);
@@ -1237,7 +1246,6 @@ function buildSinglePanel(day,di){
 }
 function buildGroupedPanel(metas,title){
   const o=document.createElement('div');o.className='scroll-outer multi-view';
-  const ttl=document.createElement('div');ttl.className='view-title';ttl.textContent=title;o.appendChild(ttl);
   const sections=[];
   DAYS.forEach((day,di)=>{
     const rows=metas.filter(m=>m.di===di).map(m=>m.row).sort(rowDisplaySort);
