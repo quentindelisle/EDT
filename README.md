@@ -32,3 +32,8 @@ Une fois publiée en HTTPS avec GitHub Pages :
 ## Sauvegarde des données
 
 Les données de l’application restent stockées localement dans le navigateur. Utiliser les fonctions **Exporter / Importer** et **Administration > Sauvegarde** pour transférer ou sécuriser les données.
+
+
+## Version mise à jour
+
+Cette version ajoute le masquage rapide du bandeau APSA, les vues par professeur/niveau via sélecteurs, le bouton PFMP dans le bandeau principal, les couleurs natives des professeurs et le tri naturel des classes.

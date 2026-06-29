@@ -1,4 +1,4 @@
-const CACHE_NAME = 'edt-eps-pwa-v1';
+const CACHE_NAME = 'edt-eps-pwa-v29';
 const APP_SHELL = [
   './',
   './index.html',

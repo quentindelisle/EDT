@@ -206,6 +206,10 @@ body.fullscreen-mode .view-section h3{padding:2px 0 1px}
 
 .topselect{height:24px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:var(--htxt);border-radius:4px;font-size:10px;font-weight:650;padding:0 7px;max-width:170px}
 .topselect option{background:#2e2d29;color:#fff}
+#palbar.band-hidden{max-height:0!important;border-bottom:none!important}
+#band-btn.on{background:rgba(252,211,77,.18);border-color:rgba(252,211,77,.55);color:#fde68a}
+.view-select{height:23px;border:1px solid var(--brd2);background:var(--surf);color:var(--txt);border-radius:4px;font-size:10px;font-weight:700;padding:0 7px;margin:0 3px 3px 0;max-width:170px}
+.view-select option{background:#fff;color:#111}
 td.td-w.is-othercyc{background:rgba(255,255,255,.34);border-color:rgba(0,0,0,.035)}
 .apsa-filter-head{display:flex;align-items:center;gap:8px;margin:5px 0 7px;font-size:11px;color:var(--mut)}
 .apsa-filter-head strong{color:var(--txt);font-size:12px}.apsa-filter-head .pill{display:inline-flex;align-items:center;gap:4px;padding:2px 7px;border-radius:999px;background:#fff;border:1px solid var(--brd)}
@@ -261,11 +265,11 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
   <button class="tbtn r" onclick="clearAll()">🗑 Effacer</button>
   <div class="sep"></div>
   <button class="tbtn v" id="role-btn" onclick="toggleRoleMode()">✍️ Préciser Cycle</button>
+  <button class="tbtn" id="band-btn" onclick="togglePaletteBand()" title="Afficher / masquer le bandeau APSA">🎨 APSA</button>
   <select id="apsa-filter" class="topselect" onchange="setApsaFilter(this.value)" title="Filtrer l’EDT complet par APSA"><option value="">🔎 Toutes APSA</option></select>
+  <button class="tbtn" onclick="openPfmpView()">📅 PFMP</button>
   <button class="tbtn" onclick="toggleFullScreen()">⛶ Plein écran</button>
   <button class="tbtn" onclick="openAdmin()">⚙️ Administration</button>
-  <div class="sep"></div>
-  <span id="ss">● Sauvegarde auto</span>
 </div>
 
 <div id="palbar">
@@ -537,8 +541,24 @@ function apsaNamesForFilter(){
 
 
 // ══ CRÉNEAUX ══
-const PC={EH:'#0C447C',PP:'#27500A',QD:'#3C3489',YC:'#633806',MT:'#712B13',ST:'#72243E'};
-const PB={EH:'#E6F1FB',PP:'#EAF3DE',QD:'#EEEDFE',YC:'#FAEEDA',MT:'#FAECE7',ST:'#FBEAF0'};
+const PROF_ALIASES={
+  QD:{name:'Quentin',pc:'#1D4ED8',pb:'#DBEAFE'},
+  EH:{name:'Eric',pc:'#DB2777',pb:'#FCE7F3'},
+  MT:{name:'Mathilde',pc:'#16A34A',pb:'#DCFCE7'},
+  YC:{name:'Yvan',pc:'#EA580C',pb:'#FFEDD5'},
+  PP:{name:'Philippe',pc:'#7C3AED',pb:'#F3E8FF'},
+  ST:{name:'Stagiaire',pc:'#CA8A04',pb:'#FEF3C7'}
+};
+const PC={
+  QD:'#1D4ED8',Quentin:'#1D4ED8',EH:'#DB2777',Eric:'#DB2777',MT:'#16A34A',Mathilde:'#16A34A',
+  YC:'#EA580C',Yvan:'#EA580C',PP:'#7C3AED',Philippe:'#7C3AED',ST:'#CA8A04',Stagiaire:'#CA8A04'
+};
+const PB={
+  QD:'#DBEAFE',Quentin:'#DBEAFE',EH:'#FCE7F3',Eric:'#FCE7F3',MT:'#DCFCE7',Mathilde:'#DCFCE7',
+  YC:'#FFEDD5',Yvan:'#FFEDD5',PP:'#F3E8FF',Philippe:'#F3E8FF',ST:'#FEF3C7',Stagiaire:'#FEF3C7'
+};
+function profDisplayName(p){return PROF_ALIASES[p]?.name||p;}
+function profDisplaySort(a,b){return profDisplayName(a).localeCompare(profDisplayName(b),'fr',{numeric:true});}
 function normClass(cl){return String(cl||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ').trim();}
 function classKey(cl){
   let s=normClass(cl).toUpperCase();
@@ -676,7 +696,7 @@ function loadLS(){
   }catch(e){console.warn('Chargement local impossible',e);}
   ensureClassMeta();ensureDefaultApsa();syncLocUI();
 }
-function saveLS(){localStorage.setItem(LSK,JSON.stringify(serializableState()));const ss=document.getElementById('ss');if(ss)ss.textContent='● Sauvegarde auto';}
+function saveLS(){localStorage.setItem(LSK,JSON.stringify(serializableState()));}
 function exportJSON(){const b=new Blob([JSON.stringify(serializableState(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`edt_eps_sauvegarde_complete_${new Date().toISOString().slice(0,10)}.json`;a.click();}
 function importJSON(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);applyImportedState(d);ensureDefaultApsa();syncLocUI();buildPal();rebuildAll();saveLS();showWarning('✅ Sauvegarde importée');}catch(err){console.error(err);alert('JSON invalide');}};r.readAsText(f);};i.click();}
 function clearAll(){if(!confirm('Effacer tous les cycles ?'))return;cycles={};rebuildAll();saveLS();}
@@ -769,6 +789,17 @@ function updateSelectionUI(){
   buildPal();
 }
 function clearSelection(){selIdx=null;updateSelectionUI();}
+function togglePaletteBand(){
+  const pal=document.getElementById('palbar');
+  const btn=document.getElementById('band-btn');
+  if(!pal)return;
+  const hidden=pal.classList.toggle('band-hidden');
+  if(btn){btn.classList.toggle('on',!hidden);btn.textContent=hidden?'🎨 APSA':'⬆️ APSA';}
+}
+function openPfmpView(){
+  rebuildAll();
+  swTab('pfmp-cal');
+}
 function updateApsaFilterOptions(){
   const sel=document.getElementById('apsa-filter');if(!sel)return;
   const old=currentApsaFilter||sel.value||'';
@@ -848,7 +879,7 @@ function optionList(names,sel,placeholder=''){
   return opts.join('');
 }
 function adminClassOptions(sel){return optionList(adminClassNamesFromCatalog(),sel,'Choisir une classe');}
-function adminProfOptions(sel){return optionList(adminProfNamesFromPanel(),sel,'Choisir un prof');}
+function adminProfOptions(sel){const names=adminProfNamesFromPanel();return `<option value="">Choisir un prof</option>`+names.map(n=>`<option value="${esc(n)}" ${n===sel?'selected':''}>${esc(profDisplayName(n))}</option>`).join('');}
 function refreshSelectOptions(select,names,placeholder=''){
   const old=select.value;select.innerHTML=optionList(names,old,placeholder);
   if(old&&[...select.options].some(o=>o.value===old))select.value=old;
@@ -1125,7 +1156,7 @@ function allRowMetas(){
   return DAYS.flatMap((day,di)=>day.rows.map(row=>({row,di,day})));
 }
 function uniqueProfs(){
-  return [...new Set(allRowMetas().map(m=>m.row.prof))].sort((a,b)=>a.localeCompare(b,'fr'));
+  return [...new Set(allRowMetas().map(m=>m.row.prof))].sort(profDisplaySort);
 }
 function levelKey(cl){
   const s=normClass(cl);
@@ -1147,6 +1178,26 @@ const LEVEL_TABS=[
   {k:'1GT',l:'1ères GT'},
   {k:'TGT',l:'Terms GT'},
 ];
+let currentProfView='';
+let currentLevelView='';
+function setProfView(v){currentProfView=v||'';currentLevelView='';rebuildAll();if(currentProfView)swTab('prof-view');}
+function setLevelView(v){currentLevelView=v||'';currentProfView='';rebuildAll();if(currentLevelView)swTab('level-view');}
+function classBaseForSort(cl){
+  const s=normClass(cl);
+  const m2=s.match(/^(2de)\s*(?:gr)?\s*(\d+)/i);if(m2)return '2de '+m2[2].padStart(2,'0');
+  const m1=s.match(/^(1ere GT)\s*gr\s*(\d+)/i);if(m1)return '1GT '+m1[2].padStart(2,'0');
+  const mt=s.match(/^(Term)\s*gr\s*(\d+)/i);if(mt)return 'TGT '+mt[2].padStart(2,'0');
+  const m3=s.match(/^(3e DP)\s*gr\s*([AB])/i);if(m3)return '3DP '+m3[2];
+  return s;
+}
+function rowDisplaySort(a,b){
+  const ah=parseH(a.h),bh=parseH(b.h);
+  if(ah.s!==bh.s)return ah.s-bh.s;
+  const ca=classBaseForSort(a.cl),cb=classBaseForSort(b.cl);
+  const c=ca.localeCompare(cb,'fr',{numeric:true});
+  if(c)return c;
+  return profDisplayName(a.prof).localeCompare(profDisplayName(b.prof),'fr',{numeric:true});
+}
 function buildTabs(){
   const tb=document.getElementById('tabbar'),pn=document.getElementById('panels');
   tb.innerHTML='';pn.innerHTML='';
@@ -1155,20 +1206,32 @@ function buildTabs(){
   const addTab=(key,label,contentFn,cls='')=>{
     const t=document.createElement('div');t.className='tab '+cls+(first?' on':'');t.dataset.key=key;t.textContent=label;
     t.addEventListener('click',()=>swTab(key));tb.appendChild(t);
-    const p=document.createElement('div');p.className='panel'+(first?' on':'');p.dataset.key=key;p.id='pan-'+key;
-    p.appendChild(contentFn());pn.appendChild(p);
+    addPanel(key,contentFn,first);
     first=false;
+  };
+  const addPanel=(key,contentFn,on=false)=>{
+    const p=document.createElement('div');p.className='panel'+(on?' on':'');p.dataset.key=key;p.id='pan-'+key;
+    p.appendChild(contentFn());pn.appendChild(p);
   };
   addLabel('Jours');
   DAYS.forEach((day,di)=>addTab('day'+di,day.name,()=>buildSinglePanel(day,di)));
-  addLabel('Profs');
-  uniqueProfs().forEach(prof=>addTab('prof-'+prof,prof,()=>buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===prof),`Programmation annuelle — ${prof}`),'prof-tab'));
-  addLabel('Niveaux');
-  LEVEL_TABS.forEach(g=>addTab('lvl-'+g.k,g.l,()=>buildGroupedPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===g.k),`Vue annuelle — ${g.l}`),'level-tab'));
-  addLabel('Filtres');
-  addTab('apsa-filter',currentApsaFilter?`APSA · ${currentApsaFilter}`:'APSA',()=>buildApsaPanel(),'level-tab');
-  addTab('pfmp-cal','PFMP',()=>buildPfmpPanel(),'level-tab');
+
+  addLabel('Vues');
+  const ps=document.createElement('select');ps.className='view-select';ps.id='prof-view-select';
+  ps.title='Afficher la programmation annuelle d’un professeur';
+  ps.innerHTML='<option value="">👤 Professeur…</option>'+uniqueProfs().map(p=>`<option value="${esc(p)}" ${p===currentProfView?'selected':''}>${esc(profDisplayName(p))}</option>`).join('');
+  ps.addEventListener('change',e=>setProfView(e.target.value));tb.appendChild(ps);
+  const ls=document.createElement('select');ls.className='view-select';ls.id='level-view-select';
+  ls.title='Afficher la programmation annuelle d’un niveau';
+  ls.innerHTML='<option value="">🎓 Niveau…</option>'+LEVEL_TABS.map(g=>`<option value="${g.k}" ${g.k===currentLevelView?'selected':''}>${esc(g.l)}</option>`).join('');
+  ls.addEventListener('change',e=>setLevelView(e.target.value));tb.appendChild(ls);
+
+  addPanel('prof-view',()=>currentProfView?buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===currentProfView),`Programmation annuelle — ${profDisplayName(currentProfView)}`):emptyPanel('Choisis un professeur dans le sélecteur.'),false);
+  addPanel('level-view',()=>currentLevelView?buildGroupedPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===currentLevelView),`Vue annuelle — ${(LEVEL_TABS.find(g=>g.k===currentLevelView)||{}).l||currentLevelView}`):emptyPanel('Choisis un niveau dans le sélecteur.'),false);
+  addPanel('apsa-filter',()=>buildApsaPanel(),false);
+  addPanel('pfmp-cal',()=>buildPfmpPanel(),false);
 }
+function emptyPanel(msg){const o=document.createElement('div');o.className='scroll-outer';const e=document.createElement('div');e.className='empty-view';e.textContent=msg;o.appendChild(e);return o;}
 function buildSinglePanel(day,di){
   const o=document.createElement('div');o.className='scroll-outer';o.appendChild(buildTable(day,di));return o;
 }
@@ -1177,7 +1240,7 @@ function buildGroupedPanel(metas,title){
   const ttl=document.createElement('div');ttl.className='view-title';ttl.textContent=title;o.appendChild(ttl);
   const sections=[];
   DAYS.forEach((day,di)=>{
-    const rows=metas.filter(m=>m.di===di).map(m=>m.row);
+    const rows=metas.filter(m=>m.di===di).map(m=>m.row).sort(rowDisplaySort);
     if(rows.length)sections.push({day,di,rows});
   });
   if(!sections.length){const e=document.createElement('div');e.className='empty-view';e.textContent='Aucun créneau correspondant.';o.appendChild(e);return o;}
@@ -1203,7 +1266,7 @@ function buildApsaPanel(){
   const metas=allRowMetas().filter(m=>rowHasApsa(m.row.id,currentApsaFilter));
   if(!metas.length){const e=document.createElement('div');e.className='empty-view';e.textContent='Aucun cycle correspondant pour le moment.';o.appendChild(e);return o;}
   const sections=[];
-  DAYS.forEach((day,di)=>{const rows=metas.filter(m=>m.di===di).map(m=>m.row);if(rows.length)sections.push({day,di,rows});});
+  DAYS.forEach((day,di)=>{const rows=metas.filter(m=>m.di===di).map(m=>m.row).sort(rowDisplaySort);if(rows.length)sections.push({day,di,rows});});
   sections.forEach((secData,idx)=>{
     const {day,di,rows}=secData;
     const sec=document.createElement('section');sec.className='view-section';
@@ -1266,7 +1329,7 @@ function buildTable(day,di,opts={}){
   tbody.addEventListener('contextmenu',onTbodyContext);
   tbody.addEventListener('dblclick',onTbodyDblClick);
 
-  day.rows.forEach(row=>tbody.appendChild(buildRow(row,di,slots,opts)));
+  [...day.rows].sort(rowDisplaySort).forEach(row=>tbody.appendChild(buildRow(row,di,slots,opts)));
   table.appendChild(tbody);
 
   // TFOOT
@@ -1281,11 +1344,11 @@ function buildTable(day,di,opts={}){
 
 function buildRow(row,di,slots,opts={}){
   const tr=document.createElement('tr');tr.dataset.rowId=row.id;tr.dataset.di=di;
-  const pc=PC[row.prof]||'#333',pb=PB[row.prof]||'#eee';
+  const pc=PC[row.prof]||PC[profDisplayName(row.prof)]||'#333',pb=PB[row.prof]||PB[profDisplayName(row.prof)]||'#eee';
   const v=voie(row.cl);
   tr.classList.add(v==='GT'?'voie-gt':'voie-pro');
   const lbl=document.createElement('td');lbl.className='td-lbl';
-  lbl.innerHTML=`<span class="row-main"><span class="lbl-prof" style="color:${pc}">${row.prof}</span> <span style="color:#bbb">·</span> <span class="class-ico" title="${esc(voieLabel(row.cl))}">${classIcon(row.cl)}</span><span class="lbl-cl">${esc(row.cl)}</span><span class="voie-tag">${voieLabel(row.cl)}</span></span><span class="row-meta"><span class="lbl-h row-hour">${row.h}</span></span>`;
+  lbl.innerHTML=`<span class="row-main"><span class="lbl-prof" style="color:${pc};background:${pb};border-radius:7px;padding:1px 4px">${esc(profDisplayName(row.prof))}</span> <span style="color:#bbb">·</span> <span class="class-ico" title="${esc(voieLabel(row.cl))}">${classIcon(row.cl)}</span><span class="lbl-cl">${esc(row.cl)}</span><span class="voie-tag">${voieLabel(row.cl)}</span></span><span class="row-meta"><span class="lbl-h row-hour">${row.h}</span></span>`;
   tr.appendChild(lbl);
 
   let si=0;
