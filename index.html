@@ -8,14 +8,14 @@
   --bg:#f4f3f0;--surf:#fff;--brd:#e0ddd5;--brd2:#c4c0b5;
   --txt:#1a1917;--mut:#6b6860;--fnt:#aaa;
   --vac:#d0cec7;--hdr:#23221f;--hdr2:#2e2d29;--htxt:#f0ede8;
-  --RH:24px;--WW:29px;--LW:148px;--GRIDW:1424px;
+  --RH:48px;--WW:29px;--LW:185px;--GRIDW:1470px;
   --accent:#fcd34d;
   --gt-row:#e0f2fe;--gt-cell:#f0f9ff;--gt-brd:#38bdf8;
   --pro-row:#ffedd5;--pro-cell:#fff7ed;--pro-brd:#fb923c;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:12px}
-body.compact,body.comfort{--RH:24px;--WW:29px;--LW:148px;--GRIDW:1424px;font-size:12px}
+body.compact,body.comfort{--RH:48px;--WW:29px;--LW:185px;--GRIDW:1470px;font-size:12px}
 body.has-selection td.td-w.editable{cursor:crosshair}
 body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(252,211,77,.8);outline-offset:-2px;box-shadow:inset 0 0 0 999px rgba(252,211,77,.08)}
 
@@ -42,7 +42,7 @@ body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(2
 .helpitem{white-space:nowrap}
 
 /* PALETTE */
-#palbar{background:var(--hdr2);border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:31px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:74px}
+#palbar{background:var(--hdr2);border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:31px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:200px}
 #palbar.closed{max-height:0;border-bottom:none}
 #palbody{padding:3px 10px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
 .selbox{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:3px 6px}
@@ -66,7 +66,13 @@ body.role-mode td.td-w[data-has-cyc="1"]{cursor:pointer;outline:2px solid rgba(2
 .legend-title{font-size:8px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.05em}
 .legchip{font-size:7px;font-weight:900;color:#fff;border-radius:4px;padding:2px 4px;line-height:1}
 .clear-sel{font-size:9px;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-radius:4px;padding:2px 6px;cursor:pointer}.clear-sel:hover{background:rgba(255,255,255,.2);color:#fff}
-#pal{display:flex;gap:2px 3px;flex-wrap:wrap;align-items:center;flex:1 1 780px;max-height:42px;overflow:hidden}
+#pal{display:flex;gap:2px 3px;flex-wrap:wrap;align-items:center;flex:1 1 auto}
+#pal-installs{display:flex;gap:2px 3px;flex-wrap:wrap;align-items:center}
+.install-chip{display:inline-flex;align-items:center;gap:2px;padding:1px 6px;border-radius:7px;font-size:8px;font-weight:800;cursor:pointer;border:2px solid transparent;line-height:1.3;white-space:nowrap;min-height:18px}
+.install-chip:hover{filter:brightness(1.12)}
+.install-chip.on{border-color:#fff;box-shadow:0 0 0 2px rgba(252,211,77,.65);transform:translateY(-1px)}
+.chip-del{margin-left:3px;font-size:10px;font-weight:900;opacity:.5;cursor:pointer;padding:0 2px;line-height:1;border-radius:2px;flex-shrink:0;pointer-events:all}
+.chip-del:hover{opacity:1;background:rgba(0,0,0,.2)}
 #palbar.band-hidden{max-height:0;border-bottom:none}
 #topbar .top-selbox{margin-left:2px}
 #topbar .top-legend{margin-left:0}
@@ -112,12 +118,12 @@ tfoot th.is-vac{background:#2f2e2a!important;color:#f8fafc!important}
 tfoot th.is-ferie{background:#4a241d!important;color:#f8fafc!important}
 
 /* CELLS */
-td.td-lbl{position:sticky;left:0;z-index:20;background:var(--surf);border-right:2px solid var(--brd2);border-bottom:1px solid var(--brd);width:var(--LW);min-width:var(--LW);padding:1px 4px;vertical-align:middle;height:var(--RH)}
-.lbl-prof{font-weight:800;font-size:10px}
-.lbl-cl{font-size:9px;color:var(--mut)}
+td.td-lbl{position:sticky;left:0;z-index:20;background:var(--surf);border-right:2px solid var(--brd2);border-bottom:1px solid var(--brd);width:var(--LW);min-width:var(--LW);padding:3px 6px;vertical-align:middle;height:var(--RH);display:flex;flex-direction:column;justify-content:center;gap:1px}
+.lbl-prof{font-weight:800;font-size:11px}
+.lbl-cl{font-size:10px;color:var(--mut)}
 .lbl-day{font-size:8px;font-weight:600;padding:1px 4px;border-radius:2px;margin-left:4px}
-.lbl-h{font-size:7px;color:var(--fnt);font-style:italic}
-.row-meta{display:flex;align-items:center;gap:4px;margin-top:0}.row-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.05}.row-hour{display:inline-block;margin-top:0;border-top:0;padding-top:0}
+.lbl-h{font-size:10px;font-weight:600;color:#555;font-style:normal}
+.row-meta{display:flex;align-items:center;gap:4px;margin-top:2px}.row-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}.row-hour{display:inline-block}
 
 td.td-w{height:var(--RH);width:var(--WW);min-width:var(--WW);max-width:var(--WW);border:1px solid var(--brd);padding:0;position:relative;vertical-align:middle;text-align:center;overflow:hidden;cursor:default}
 td.td-w[colspan]{max-width:none}
@@ -178,7 +184,7 @@ tfoot.hidden-weeks{display:none}
 
 
 /* PLEIN ÉCRAN : la grille utilise toute la largeur et presque toute la hauteur */
-body.fullscreen-mode{--LW:148px;--WW:calc((100vw - 168px)/44);--GRIDW:calc(100vw - 20px)}
+body.fullscreen-mode{--LW:185px;--WW:calc((100vw - 168px)/44);--GRIDW:calc(100vw - 20px)}
 body.fullscreen-mode #topbar{padding:2px 8px;gap:6px}
 body.fullscreen-mode #palbody{padding:3px 8px;gap:4px}
 body.fullscreen-mode #tabbar{padding:3px 8px 0;gap:3px}
@@ -251,6 +257,30 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
 .admin-badge{display:inline-flex;align-items:center;gap:3px;border-radius:999px;padding:2px 6px;background:#f1f5f9;border:1px solid #cbd5e1;font-weight:700;font-size:9px;color:#334155}
 .admin-backup{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.admin-card{border:1px solid var(--brd2);border-radius:8px;background:#fff;padding:10px}.admin-card h3{font-size:12px;margin:0 0 6px;color:#111827}.admin-card p{font-size:10px;color:#64748b;line-height:1.35;margin-bottom:8px}
 
+
+/* ══ STATS ══ */
+#stats-panel{display:none;padding:14px 18px;background:var(--bg);overflow-y:auto;max-height:calc(100vh - 80px)}
+.stat-title{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:8px;margin-top:4px}
+.stat-scroll{overflow-x:auto;margin-bottom:4px}
+table.stat-table{border-collapse:collapse;font-size:11px;white-space:nowrap}
+table.stat-table th{background:var(--hdr);color:var(--htxt);padding:4px 8px;text-align:center;border:1px solid rgba(255,255,255,.1);font-weight:600;position:sticky;top:0;z-index:10}
+table.stat-table th:first-child{text-align:left;position:sticky;left:0;z-index:11}
+table.stat-table td{padding:3px 8px;border:1px solid var(--brd);text-align:center;background:var(--surf)}
+table.stat-table td.period-lbl{text-align:left;font-weight:500;color:var(--mut);position:sticky;left:0;background:var(--surf);border-right:2px solid var(--brd2)}
+table.stat-table td.stat-cell{color:var(--fnt)}
+table.stat-table td.stat-cell.has-val{color:var(--txt);font-weight:700}
+table.stat-table td.total-col{background:#f0f4ff;font-weight:700;color:#1e3a8a}
+table.stat-table tr.total-row td{background:#e8f0fe;font-weight:800;color:#1e3a8a;border-top:2px solid #93c5fd}
+td.grand{background:#dbeafe!important;color:#1d4ed8!important}
+.ratio-cell{color:#6b7280;font-size:10px;min-width:32px}
+.ratio-cell.bold{font-weight:700;color:#1d4ed8}
+.ratio-cell.bold.grand{color:#1e3a8a}
+.sub-th{font-size:8px;font-weight:500;color:rgba(255,255,255,.6);padding:2px 4px!important}
+tr.dh-row td{background:#f0fdf4}
+tr.dh-row td.period-lbl{background:#dcfce7}
+.apsa-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle;flex-shrink:0}
+#stats-wrap{max-width:100%}
+.loc-pill{font-size:7px;font-weight:800;padding:1px 4px;border-radius:4px;white-space:nowrap;margin-left:2px}
 </style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -271,7 +301,7 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
   <button class="tbtn r" onclick="clearAll()">🗑 Effacer</button>
   <div class="sep"></div>
   <button class="tbtn v" id="role-btn" onclick="toggleRoleMode()">✍️ Préciser Cycle</button>
-  <button class="tbtn" id="band-btn" onclick="togglePaletteBand()" title="Afficher / masquer le bandeau APSA">🎨 Masquer APSA</button>
+  <button class="tbtn" id="stats-btn" onclick="toggleStats()" style="border-color:rgba(147,197,253,.4);color:#93c5fd">📊 Stats</button><button class="tbtn" id="band-btn" onclick="togglePaletteBand()" title="Afficher / masquer le bandeau APSA">🎨 Masquer APSA</button>
   <button class="tbtn" onclick="openPfmpView()">📅 PFMP</button>
   <button class="tbtn" onclick="toggleFullScreen()">⛶ Plein écran</button>
   <button class="tbtn" onclick="openAdmin()">⚙️ Administration</button>
@@ -471,10 +501,10 @@ let APSA=[
   {n:'Biathlon',ca:'CA1',loc:'DH',c:'#16a34a'},
   {n:'CO',ca:'CA2',loc:'DH',c:'#14532d'},
   {n:'Sauvetage',ca:'CA2',loc:'P',c:'#2563eb'},
-  {n:'Acrosport',ca:'CA3',loc:'PG',c:'#ea580c'},
-  {n:'Step',ca:'CA3',loc:'PG',c:'#ea580c'},
+  {n:'Acrosport',ca:'CA3',loc:'PG',c:'#facc15'},
+  {n:'Step',ca:'CA3',loc:'PG',c:'#facc15'},
   {n:'Badminton',ca:'CA4',loc:'GG',c:'#dc2626'},
-  {n:'Tennis table',ca:'CA4',loc:'PG',c:'#ea580c'},
+  {n:'Tennis table',ca:'CA4',loc:'PG',c:'#facc15'},
   {n:'Hand INT',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Hand EXT',ca:'CA4',loc:'DH',c:'#16a34a'},
   {n:'Volley',ca:'CA4',loc:'GG',c:'#dc2626'},
@@ -482,14 +512,14 @@ let APSA=[
   {n:'Futsal',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Basket 3c3',ca:'CA4',loc:'GG',c:'#dc2626'},
   {n:'Ultimate',ca:'CA4',loc:'DH',c:'#16a34a'},
-  {n:'Judo',ca:'CA4',loc:'PG',c:'#ea580c'},
+  {n:'Judo',ca:'CA4',loc:'PG',c:'#facc15'},
   {n:'Autre',ca:'CA4',loc:'GG',c:'#dc2626'},
-  {n:'Musculation',ca:'CA5',loc:'M',c:'#db2777'},
-  {n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'},
+  {n:'Musculation',ca:'CA5',loc:'M',c:'#ff0080'},
+  {n:'Step CA5',ca:'CA5',loc:'PG',c:'#facc15'},
   {n:'CED',ca:'CA5',loc:'DH',c:'#16a34a'},
 ];
-const CA_COL={CA1:'#c0392b',CA2:'#27ae60',CA3:'#8e44ad',CA4:'#2471a3',CA5:'#d35400'};
-const LOC_COL={DH:'#16a085',GG:'#8e44ad',PG:'#d35400',M:'#c0392b',P:'#2471a3'};
+const CA_COL={CA1:'#c0392b',CA2:'#27ae60',CA3:'#8e44ad',CA4:'#2471a3',CA5:'#d35400',LOC:'#334155'};
+const LOC_COL={DH:'#16a085',GG:'#8e44ad',PG:'#facc15',M:'#c0392b',P:'#2471a3'};
 const EXCL=new Set(['GG','PG','M','P']);
 function is3eCAP(cl){return/^(3e|CAP)/i.test(cl);}
 function lum(hex){const r=/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);if(!r)return.5;return(0.299*parseInt(r[1],16)+0.587*parseInt(r[2],16)+0.114*parseInt(r[3],16))/255;}
@@ -532,13 +562,18 @@ function apsaKey(n){return String(n||'').toLowerCase().normalize('NFD').replace(
 function sameApsaName(a,b){return apsaKey(a)===apsaKey(b);}
 const REMOVED_APSA=['Danse','Basket','Spike-Ball'];
 function sanitizeApsaList(){
-  APSA=APSA.filter(a=>!REMOVED_APSA.some(n=>sameApsaName(a.n,n)));
+  APSA=APSA.filter(a=>a.ca==='LOC'||!REMOVED_APSA.some(n=>sameApsaName(a.n,n)));
   if(selIdx!==null && (!APSA[selIdx]))selIdx=null;
 }
 function ensureDefaultApsa(){
   sanitizeApsaList();
   const add=(obj)=>{if(!APSA.some(a=>sameApsaName(a.n,obj.n)))APSA.push(obj);};
-  add({n:'Step CA5',ca:'CA5',loc:'PG',c:'#db2777'});
+  add({n:'Step CA5',ca:'CA5',loc:'PG',c:'#facc15'});
+  // Installations comme APSA spéciales (CA:'LOC')
+  Object.entries(LOC_COL).sort().forEach(([code,color])=>{
+    const locName='📍 '+code;
+    if(!APSA.some(a=>a.n===locName))APSA.push({n:locName,ca:'LOC',loc:code,c:color});
+  });
   sanitizeApsaList();
 }
 function apsaNamesForFilter(){
@@ -749,25 +784,51 @@ function showWarning(msg){showToast(msg,'warn');}
 // ══ PALETTE ══
 let palVisible=true;
 
+// ── selMode : 'apsa' | 'install' ──
+let selMode='apsa';
+let selInstIdx=null;
+
 function buildPal(){
   updateApsaFilterOptions();
-  const el=document.getElementById('pal');el.innerHTML='';
-  ['CA1','CA2','CA3','CA4','CA5'].forEach(ca=>{
+
+  // Section APSA triée par CA
+  const el=document.getElementById('pal');
+  if(!el)return;
+  el.innerHTML='';
+  ['CA1','CA2','CA3','CA4','CA5','LOC'].forEach(ca=>{
     const grp=APSA.filter(a=>a.ca===ca);if(!grp.length)return;
     const g=document.createElement('div');g.className='cagrp';g.style.borderColor=CA_COL[ca];
-    const lbl=document.createElement('span');lbl.style.cssText=`font-size:8px;font-weight:700;color:${CA_COL[ca]};min-width:20px`;lbl.textContent=ca;g.appendChild(lbl);
+    const lbl=document.createElement('span');
+    lbl.style.cssText=`font-size:8px;font-weight:700;color:${CA_COL[ca]};min-width:20px`;
+    lbl.textContent=ca;g.appendChild(lbl);
     grp.forEach(a=>{
       const i=APSA.indexOf(a);
+      const isOn=selMode==='apsa'&&selIdx===i;
       const chip=document.createElement('div');
-      chip.className='chip'+(selIdx===i?' on':'');
+      chip.className='chip'+(isOn?' on':'');
       chip.style.background=a.c;chip.style.color=txc(a.c);
       chip.dataset.ai=i;
-      chip.title=`Sélectionner ${a.ca} — ${a.n} [${a.loc}]`;
-      chip.innerHTML=`<span class="chip-ico">${apsaIcon(a)}</span><span class="chip-ca" style="background:${CA_COL[a.ca]}">${a.ca}</span><span class="chip-name">${esc(a.n)}</span><span class="chip-loc" style="background:${LOC_COL[a.loc]||'#555'}">${a.loc}</span>`;
+      chip.title=`${a.ca} — ${a.n} [${a.loc}]`;
+      const inner=document.createElement('span');
+      inner.style.cssText='display:inline-flex;align-items:center;gap:2px;pointer-events:none';
+      inner.innerHTML=`<span class="chip-ico">${apsaIcon(a)}</span><span class="chip-ca" style="background:${CA_COL[a.ca]}">${a.ca}</span><span class="chip-name">${esc(a.n)}</span><span class="chip-loc" style="background:${LOC_COL[a.loc]||'#555'}">${a.loc}</span>`;
+      chip.appendChild(inner);
+      const del=document.createElement('span');
+      del.className='chip-del';del.dataset.delai=i;del.title='Supprimer de la palette';del.textContent='×';
+      chip.appendChild(del);
       g.appendChild(chip);
     });
     el.appendChild(g);
   });
+
+}
+
+function deleteApsa(i){
+  if(!confirm(`Supprimer "${APSA[i].n}" ?`))return;
+  if(selMode==='apsa'&&selIdx===i){selIdx=null;selMode='apsa';}
+  else if(selMode==='apsa'&&selIdx!==null&&selIdx>i)selIdx--;
+  APSA.splice(i,1);
+  updateSelectionUI();saveLS();
 }
 
 function syncLocUI(){
@@ -779,7 +840,11 @@ function syncLocUI(){
 
 // Clic sur palette via délégation
 document.getElementById('palbody').addEventListener('mousedown',e=>{
-  const chip=e.target.closest('.chip');
+  // Bouton × suppression APSA
+  const del=e.target.closest('.chip-del[data-delai]');
+  if(del){e.stopPropagation();deleteApsa(+del.dataset.delai);return;}
+  // Chip APSA
+  const chip=e.target.closest('.chip[data-ai]');
   if(!chip)return;
   e.stopPropagation();
   const i=+chip.dataset.ai;
@@ -1056,8 +1121,12 @@ function hideTip(){document.getElementById('tip').style.display='none';}
 
 function addApsa(){
   const n=document.getElementById('nn').value.trim();if(!n)return;
-  APSA.push({n,ca:document.getElementById('nca').value,loc:document.getElementById('nloc').value,c:document.getElementById('nc').value});
-  document.getElementById('nn').value='';buildPal();saveLS();
+  const ca=document.getElementById('nca').value;
+  const loc=document.getElementById('nloc').value;
+  const c=document.getElementById('nc').value;
+  APSA.push({n,ca,loc,c});
+  document.getElementById('nn').value='';
+  updateSelectionUI();saveLS();
 }
 
 // ══ CYCLES CONTINUS ET RÔLES ══
@@ -1150,10 +1219,15 @@ function firstSameApsaForClass(rowId,apsaName,exclude={}){
   return null;
 }
 function warnDuplicateApsa(rowId,apsaName,exclude={}){
+  // Les classes voie GT ont 2h/sem = 1 seul créneau → pas d'alerte doublon inter-classes
+  const thisRow = rowById(rowId);
+  if(thisRow && voie(thisRow.cl)==='GT') return false;
   const hit=firstSameApsaForClass(rowId,apsaName,exclude);
   if(hit){
+    // Ne pas alerter si la classe cible est GT (elle ne peut pas avoir le même groupe)
+    if(voie(hit.row.cl)==='GT') return false;
     const wk=hit.slot?.wk?.w?`semaine ${hit.slot.wk.w}`:'';
-    showWarning(`⚠️ ${apsaName} est déjà programmée avec ${hit.row.cl} (${hit.day.name} ${wk}), même groupe classe possible. Alerte non bloquante.`);
+    showWarning(`⚠️ ${apsaName} déjà programmée avec ${hit.row.cl} (${hit.day.name} S${wk}). Alerte non bloquante.`);
     return true;
   }
   return false;
@@ -1202,9 +1276,13 @@ function classBaseForSort(cl){
 function rowDisplaySort(a,b){
   const ah=parseH(a.h),bh=parseH(b.h);
   if(ah.s!==bh.s)return ah.s-bh.s;
+  // Les 3e sont regroupées ensemble (priorité haute dans le tri)
+  const a3=/^3e/i.test(normClass(a.cl)), b3=/^3e/i.test(normClass(b.cl));
+  if(a3&&!b3)return -1;
+  if(!a3&&b3)return 1;
   const ca=classBaseForSort(a.cl),cb=classBaseForSort(b.cl);
-  const c=ca.localeCompare(cb,'fr',{numeric:true});
-  if(c)return c;
+  const cv=ca.localeCompare(cb,'fr',{numeric:true});
+  if(cv)return cv;
   return profDisplayName(a.prof).localeCompare(profDisplayName(b.prof),'fr',{numeric:true});
 }
 function buildTabs(){
@@ -1356,7 +1434,7 @@ function buildRow(row,di,slots,opts={}){
   const v=voie(row.cl);
   tr.classList.add(v==='GT'?'voie-gt':'voie-pro');
   const lbl=document.createElement('td');lbl.className='td-lbl';
-  lbl.innerHTML=`<span class="row-main"><span class="lbl-prof" style="color:${pc};background:${pb};border-radius:7px;padding:1px 4px">${esc(profDisplayName(row.prof))}</span> <span style="color:#bbb">·</span> <span class="class-ico" title="${esc(voieLabel(row.cl))}">${classIcon(row.cl)}</span><span class="lbl-cl">${esc(row.cl)}</span><span class="voie-tag">${voieLabel(row.cl)}</span></span><span class="row-meta"><span class="lbl-h row-hour">${row.h}</span></span>`;
+  lbl.innerHTML=`<div style="display:flex;align-items:center;gap:3px;overflow:hidden;white-space:nowrap;min-width:0"><span class="lbl-prof" style="color:${pc};background:${pb};border-radius:6px;padding:1px 5px;flex-shrink:0">${esc(profDisplayName(row.prof))}</span><span class="class-ico" title="${esc(voieLabel(row.cl))}" style="flex-shrink:0">${classIcon(row.cl)}</span><span class="lbl-cl" style="overflow:hidden;text-overflow:ellipsis;min-width:0">${esc(row.cl)}</span><span class="voie-tag" style="flex-shrink:0">${voieLabel(row.cl)}</span></div><div style="display:flex;align-items:center;margin-top:1px"><span class="lbl-h">⏱ ${row.h}</span></div>`;
   tr.appendChild(lbl);
 
   let si=0;
@@ -1422,7 +1500,7 @@ function buildRow(row,di,slots,opts={}){
       const t=txc(cyc.c);
       const meta=segmentMeta(row.id,di,si,span);
       const pnote=info.type==='part'?`<span class="sp-label" title="${esc(info.who)} en PFMP · En cours : ${esc(partialCourseLabel(row.cl,info.who,info.course))}">Cours : ${esc(partialCourseLabel(row.cl,info.who,info.course))}</span>`:'';
-      td.innerHTML=`<div class="cyc-card" style="color:${t}"><span class="cyc-icon">${apsaIcon(cyc)}</span><span class="cyc-info"><span class="cyc-label">${esc(cyc.n)}</span><span class="cyc-meta"><span class="meta-pill">${lessonLabel(meta)}</span></span></span></div>`+
+      td.innerHTML=`<div class="cyc-card" style="color:${t}"><span class="cyc-icon">${apsaIcon(cyc)}</span><span class="cyc-info"><span class="cyc-label">${esc(cyc.n)}</span><span class="cyc-meta"><span class="meta-pill">${lessonLabel(meta)}</span><span class="loc-pill" style="background:${LOC_COL[cyc.loc]||'#888'};color:#fff" title="${esc(cyc.loc)}">${esc(cyc.loc)}</span></span></span></div>`+
         roleBadges(meta)+pnote;
       td.title=`${cyc.ca} — ${cyc.n} [${cyc.loc}] · ${meta?meta.total:span} leçon(s) · ${lessonLabel(meta)} · clic sans APSA ou mode Préciser Cycle pour modifier`;
       tr.appendChild(td);si+=span;continue;
@@ -1668,6 +1746,177 @@ document.addEventListener('click', async (e) => {
 // ══ INIT ══
 loadLS();initDensity();syncLocUI();buildPal();buildTabs();updateSelectionUI();
 setInterval(saveLS,30000);
+
+// ══ STATISTIQUES ══
+const STAT_PERIODS=[
+  {label:'P1 rentrée→Toussaint', debut:new Date(2026,8,1),  fin:new Date(2026,9,16)},
+  {label:'P2 Toussaint→Noël',    debut:new Date(2026,10,2), fin:new Date(2026,11,18)},
+  {label:'P3 Noël→Hiver',        debut:new Date(2027,0,4),  fin:new Date(2027,1,19)},
+  {label:'P4 Hiver→Printemps',   debut:new Date(2027,2,8),  fin:new Date(2027,3,16)},
+  {label:'P5 Printemps→Ascension',debut:new Date(2027,4,3), fin:new Date(2027,4,4)},
+  {label:'P6 Ascension→Été',     debut:new Date(2027,4,10), fin:new Date(2027,6,2)},
+];
+
+const DH_APSA_NAMES=['Demi-fond','Relais vitesse','Foot','Biathlon','Hand EXT','CED','CO','Football','Handball EXT'];
+
+function isDH(cycName){
+  return DH_APSA_NAMES.some(n=>cycName&&cycName.toLowerCase().includes(n.toLowerCase()))||
+    (APSA.find(a=>a.n===cycName)?.loc==='DH')||false;
+}
+
+function getPeriodIdx(date){
+  for(let i=0;i<STAT_PERIODS.length;i++){
+    const p=STAT_PERIODS[i];
+    if(date>=p.debut&&date<=p.fin)return i;
+  }
+  return -1;
+}
+
+function buildStats(){
+  const profs=[...new Set(DAYS.flatMap(d=>d.rows.map(r=>r.prof)))].sort();
+  const classes=[...new Set(DAYS.flatMap(d=>d.rows.map(r=>r.cl)))].sort();
+
+  const dhByProf=profs.map(()=>STAT_PERIODS.map(()=>0));
+  const dhByClass=classes.map(()=>STAT_PERIODS.map(()=>0));
+  const totByProf=profs.map(()=>STAT_PERIODS.map(()=>0));   // total leçons effectuées
+  const totByClass=classes.map(()=>STAT_PERIODS.map(()=>0));
+  const apsaByProf={};
+  const apsaByClass={};
+
+  DAYS.forEach((day,di)=>{
+    const slots=DAY_SLOTS[di];
+    day.rows.forEach(row=>{
+      const rc=cycles[row.id]||{};
+      const pi=profs.indexOf(row.prof);
+      const ci=classes.indexOf(row.cl);
+      Object.entries(rc).forEach(([siStr,cyc])=>{
+        const si=+siStr;
+        const slot=slots[si];if(!slot||slot.vac||slot.ferie)return;
+        const sInfo=stageInfo(row.cl,slot.date);
+        if(sInfo.type==='full')return; // élèves absents → cours n'a pas lieu
+        const pIdx=getPeriodIdx(slot.date);if(pIdx<0)return;
+        // Compter dans le total leçons effectuées
+        if(pi>=0)totByProf[pi][pIdx]++;
+        if(ci>=0)totByClass[ci][pIdx]++;
+        // Dehors ?
+        const dh=isDH(cyc.n)||(cyc.loc==='DH');
+        if(dh){
+          if(pi>=0)dhByProf[pi][pIdx]++;
+          if(ci>=0)dhByClass[ci][pIdx]++;
+        }
+        // APSA
+        const an=cyc.n||'?';
+        if(!apsaByProf[an])apsaByProf[an]={};
+        if(!apsaByClass[an])apsaByClass[an]={};
+        apsaByProf[an][pi]=(apsaByProf[an][pi]||0)+1;
+        apsaByClass[an][ci]=(apsaByClass[an][ci]||0)+1;
+      });
+    });
+  });
+
+  // Fonction ratio DH/total
+  function ratio(dh,tot){
+    if(!tot)return'—';
+    return Math.round(dh/tot*100)+'%';
+  }
+
+  let html='<div id="stats-wrap">';
+
+  // ── Tableau 1 : leçons dehors par période × prof (avec ratio) ──
+  html+=`<h3 class="stat-title">🌿 Leçons dehors — par période × prof <span style="font-size:10px;font-weight:400;color:var(--mut)">(DH / total leçons effectuées)</span></h3>`;
+  html+=`<div class="stat-scroll"><table class="stat-table"><thead>
+    <tr><th rowspan="2">Période</th>`;
+  profs.forEach(p=>html+=`<th colspan="2">${esc(p)}</th>`);
+  html+=`<th colspan="2">Total</th></tr><tr>`;
+  profs.forEach(()=>html+=`<th class="sub-th">DH</th><th class="sub-th">%</th>`);
+  html+=`<th class="sub-th">DH</th><th class="sub-th">%</th></tr></thead><tbody>`;
+  STAT_PERIODS.forEach((per,pIdx)=>{
+    const rowDH=profs.reduce((s,_,pi)=>s+dhByProf[pi][pIdx],0);
+    const rowTot=profs.reduce((s,_,pi)=>s+totByProf[pi][pIdx],0);
+    html+=`<tr><td class="period-lbl">${esc(per.label)}</td>`;
+    profs.forEach((_,pi)=>{
+      const dh=dhByProf[pi][pIdx],tot=totByProf[pi][pIdx];
+      html+=`<td class="stat-cell${dh>0?' has-val':''}">${dh||'—'}</td>`;
+      html+=`<td class="ratio-cell">${ratio(dh,tot)}</td>`;
+    });
+    html+=`<td class="total-col">${rowDH||'—'}</td><td class="ratio-cell bold">${ratio(rowDH,rowTot)}</td></tr>`;
+  });
+  // Ligne totaux
+  html+=`<tr class="total-row"><td>Total année</td>`;
+  profs.forEach((_,pi)=>{
+    const dh=STAT_PERIODS.reduce((s,_,pIdx)=>s+dhByProf[pi][pIdx],0);
+    const tot=STAT_PERIODS.reduce((s,_,pIdx)=>s+totByProf[pi][pIdx],0);
+    html+=`<td class="total-col">${dh||'—'}</td><td class="ratio-cell bold">${ratio(dh,tot)}</td>`;
+  });
+  const gDH=profs.reduce((s,_,pi)=>s+STAT_PERIODS.reduce((s2,_,pIdx)=>s2+dhByProf[pi][pIdx],0),0);
+  const gTot=profs.reduce((s,_,pi)=>s+STAT_PERIODS.reduce((s2,_,pIdx)=>s2+totByProf[pi][pIdx],0),0);
+  html+=`<td class="total-col grand">${gDH}</td><td class="ratio-cell bold grand">${ratio(gDH,gTot)}</td></tr>`;
+  html+=`</tbody></table></div>`;
+
+  // ── Tableau 2 : APSA × prof (avec total et ratio DH) ──
+  const apsaNames=Object.keys(apsaByProf).sort();
+  html+=`<h3 class="stat-title" style="margin-top:18px">📊 Leçons par APSA × prof</h3>`;
+  html+=`<div class="stat-scroll"><table class="stat-table"><thead><tr><th>APSA</th>`;
+  profs.forEach(p=>html+=`<th>${esc(p)}</th>`);
+  html+=`<th class="total-col">Total</th></tr></thead><tbody>`;
+  apsaNames.forEach(an=>{
+    const tot=profs.reduce((s,_,pi)=>s+(apsaByProf[an][pi]||0),0);
+    if(tot===0)return;
+    const apsa=APSA.find(a=>a.n===an);
+    const col=apsa?.c||'#888';
+    const dh2=isDH(an)||(apsa?.loc==='DH');
+    html+=`<tr${dh2?' class="dh-row"':''}><td class="period-lbl"><span class="apsa-dot" style="background:${col}"></span>${esc(an)}</td>`;
+    profs.forEach((_,pi)=>{
+      const v=apsaByProf[an][pi]||0;
+      html+=`<td class="stat-cell${v>0?' has-val':''}">${v||'—'}</td>`;
+    });
+    html+=`<td class="total-col">${tot}</td></tr>`;
+  });
+  html+=`</tbody></table></div>`;
+
+  // ── Tableau 3 : APSA × classe ──
+  html+=`<h3 class="stat-title" style="margin-top:18px">📊 Leçons par APSA × classe</h3>`;
+  html+=`<div class="stat-scroll"><table class="stat-table"><thead><tr><th>APSA</th>`;
+  classes.forEach(cl=>html+=`<th style="font-size:8px">${esc(cl)}</th>`);
+  html+=`<th class="total-col">Total</th></tr></thead><tbody>`;
+  apsaNames.forEach(an=>{
+    const tot=classes.reduce((s,_,ci)=>s+(apsaByClass[an][ci]||0),0);
+    if(tot===0)return;
+    const apsa=APSA.find(a=>a.n===an);
+    const col=apsa?.c||'#888';
+    const dh2=isDH(an)||(apsa?.loc==='DH');
+    html+=`<tr${dh2?' class="dh-row"':''}><td class="period-lbl"><span class="apsa-dot" style="background:${col}"></span>${esc(an)}</td>`;
+    classes.forEach((_,ci)=>{
+      const v=apsaByClass[an][ci]||0;
+      html+=`<td class="stat-cell${v>0?' has-val':''}">${v||'—'}</td>`;
+    });
+    html+=`<td class="total-col">${tot}</td></tr>`;
+  });
+  html+=`</tbody></table></div></div>`;
+
+  const wrap=document.getElementById('stats-panel');
+  if(wrap)wrap.innerHTML=html;
+}
+
+function openStatsTab(){
+  buildStats();
+  const panel=document.getElementById('stats-panel');
+  if(panel){panel.style.display='block';document.getElementById('stats-btn').style.background='rgba(147,197,253,.15)';}
+}
+function closeStatsTab(){
+  const panel=document.getElementById('stats-panel');
+  if(panel)panel.style.display='none';
+  const btn=document.getElementById('stats-btn');
+  if(btn)btn.style.background='';
+}
+function toggleStats(){
+  const panel=document.getElementById('stats-panel');
+  if(!panel)return;
+  if(panel.style.display==='block'){closeStatsTab();}
+  else{openStatsTab();}
+}
+
 </script>
+<div id="stats-panel"></div>
 </body>
 </html>
