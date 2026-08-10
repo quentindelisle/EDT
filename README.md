@@ -32,8 +32,3 @@ Une fois publiée en HTTPS avec GitHub Pages :
 ## Sauvegarde des données
 
 Les données de l’application restent stockées localement dans le navigateur. Utiliser les fonctions **Exporter / Importer** et **Administration > Sauvegarde** pour transférer ou sécuriser les données.
-
-
-## Version mise à jour
-
-Cette version améliore la mise en page du bandeau : sélection APSA et légende des lieux dans le bandeau haut, palette APSA condensée, bouton Masquer/Afficher les APSA, suppression des APSA Danse, Basket et Spike-Ball, et retrait de la ligne de titre des vues annuelles.
