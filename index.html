@@ -768,7 +768,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v5';
+const APP_VERSION='v7';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -1205,6 +1205,7 @@ function applyImportedState(d){
   delete PC.EH;delete PC.PP;delete PC.YC;delete PC.QD;delete PC.MT;delete PC.ST;delete PC.Stagiaire;delete PC.stagiaire;
   delete PB.EH;delete PB.PP;delete PB.YC;delete PB.QD;delete PB.MT;delete PB.ST;delete PB.Stagiaire;delete PB.stagiaire;
   if(Array.isArray(d.merges))MERGES=d.merges;
+  pruneStaleMerges(); // auto-nettoyage d'éventuelles fusions devenues invalides (lignes non adjacentes) dans une sauvegarde existante
   if(Array.isArray(d.vacs))replaceArr(VACS,hydrateVacsArr(d.vacs));
   if(d.feries)replaceObj(FERIES,d.feries);
   if(d.profLastName)PROF_LASTNAME=Object.assign({},PROF_LASTNAME,migrateProfKeyedObj(d.profLastName));
@@ -1236,18 +1237,41 @@ function publishData(){
   setLocalPubVer(newVer);
   showWarning('✅ data.json généré (version '+newVer+') — remplace le fichier data.json à la racine du dépôt GitHub, puis commite/pousse.');
 }
+// Un data.json invalide (JSON cassé, ou contenu incomplet) arrive typiquement après une fusion Git mal
+// résolue sur GitHub (conflit résolu à la main, ou "merge" automatique sur un fichier JSON généré en un
+// bloc — le JSON ne se fusionne pas ligne à ligne comme du texte). Avant, une telle erreur était avalée en
+// silence (données jamais mises à jour, sans que personne ne le sache). Depuis le 28/08/2026 : on distingue
+// "rien à récupérer" (silencieux, normal) de "quelque chose de publié mais illisible/incomplet" (averti).
+function isValidPublishedState(state){
+  return !!state && typeof state==='object' && Array.isArray(state.days) && state.c && typeof state.c==='object';
+}
 function tryFetchPublished(){
-  fetch('./data.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(d=>{
-    if(!d||typeof d.publishedVersion!=='number'||!d.state)return;
+  fetch('./data.json',{cache:'no-store'}).then(r=>r.ok?r.text():null).then(txt=>{
+    if(txt===null)return; // pas encore de data.json déployé (404) : normal, silencieux
+    let d;
+    try{
+      d=JSON.parse(txt);
+    }catch(e){
+      console.error('data.json illisible (JSON invalide) :',e);
+      showWarning('⚠️ Le fichier data.json publié est corrompu (JSON invalide) — probablement une fusion Git mal résolue. Republie une version propre depuis Administration → Sauvegarde, en remplaçant totalement le fichier (jamais de fusion manuelle sur data.json).');
+      return;
+    }
+    if(!d||typeof d.publishedVersion!=='number')return; // format inattendu : on ignore silencieusement
+    if(d.publishedVersion===0)return; // placeholder initial, personne n'a encore publié : normal, silencieux
     const cur=getLocalPubVer();
-    if(d.publishedVersion<=cur)return;
+    if(d.publishedVersion<=cur)return; // rien de plus récent que ce qu'on a déjà : silencieux
+    if(!isValidPublishedState(d.state)){
+      console.error('data.json publié incomplet ou invalide (version '+d.publishedVersion+') :',d);
+      showWarning('⚠️ La version publiée ('+d.publishedVersion+') du planning est incomplète — probablement une fusion Git qui a coupé une partie du fichier data.json. Republie une version propre en remplaçant totalement le fichier.');
+      return;
+    }
     applyImportedState(d.state);
     ensureDefaultApsa();syncLocUI();buildPal();buildTabs();rebuildAll();updateSelectionUI();
     saveLS();
     setLocalPubVer(d.publishedVersion);
     const when=d.publishedAt?new Date(d.publishedAt).toLocaleString('fr-FR'):'';
     showWarning('✅ Planning mis à jour depuis la version publiée par l’équipe'+(when?' ('+when+')':''));
-  }).catch(()=>{/* pas de data.json publié, ou hors-ligne : on reste sur la donnée locale, silencieusement */});
+  }).catch(()=>{/* hors-ligne, ou requête impossible : on reste sur la donnée locale, silencieusement */});
 }
 function clearAll(){if(!confirm('Effacer tous les cycles ?'))return;cycles={};rebuildAll();saveLS();}
 
@@ -1607,7 +1631,7 @@ function adminProfsPanel(){
   return `<section class="admin-panel" data-admin-panel="profs"><div class="admin-note"><b>Professeurs.</b> Ajoute ou renomme un prof ici : il devient immédiatement disponible dans les répartitions / créneaux. Le nom de famille est optionnel : il sert uniquement aux affiches de l’onglet Vestiaires (à défaut, le prénom est affiché).</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddProfRow()">＋ Ajouter un prof</button></div><table class="admin-grid" id="admin-profs"><colgroup><col style="width:26%"><col style="width:24%"><col style="width:16%"><col style="width:16%"><col style="width:18%"></colgroup><thead><tr><th>Nom / initiales</th><th>Nom de famille</th><th>Couleur texte</th><th>Couleur fond</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
 }
 function adminAddProfRow(){const tb=document.querySelector('#admin-profs tbody');if(!tb)return;let base='Nouveau',n=base,i=1;const existing=adminProfNamesFromPanel();while(existing.includes(n))n=base+' '+(++i);const tr=document.createElement('tr');tr.className='adm-prof-row';tr.dataset.old='';tr.innerHTML=`<td><input type="text" data-field="name" data-old="" value="${esc(n)}" onblur="adminProfNameChanged(this)"></td><td><input type="text" data-field="lastname" value=""></td><td><input type="color" data-field="pc" value="#334155"></td><td><input type="color" data-field="pb" value="#e2e8f0"></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();}
-function adminSavePanel(){return `<section class="admin-panel" data-admin-panel="save"><div class="admin-note"><b>Sauvegarde.</b> Les modifications sont sauvegardées automatiquement dans le navigateur. Pour sécuriser le travail ou changer d’ordinateur, utilise l’export complet JSON.</div><div class="admin-backup"><div class="admin-card"><h3>Sauvegarde complète</h3><p>Exporte ou importe le planning, les APSA, les classes, les horaires, les regroupements, les PFMP et les installations.</p><button class="bc" onclick="exportJSON()">💾 Exporter JSON complet</button> <button class="bn" onclick="importJSON()">📂 Importer JSON</button></div><div class="admin-card"><h3>Publier pour les collègues</h3><p>L’appli est un simple site (pas de serveur) : tes modifications restent dans TON navigateur tant que tu ne publies pas. Pour qu’un changement soit visible par les autres : clique « Publier », puis remplace le fichier <code>data.json</code> à la racine du dépôt GitHub par celui téléchargé et pousse (commit + push). Chaque navigateur (le tien inclus) récupère automatiquement la dernière version publiée à son prochain chargement.</p><button class="bc" onclick="publishData()">📤 Publier (data.json)</button></div><div class="admin-card"><h3>Copie locale manuelle</h3><p>Crée une copie de secours dans ce navigateur.</p><button class="bc" onclick="makeLocalBackup()">Créer une copie locale</button> <button class="bn" onclick="restoreLocalBackup()">Restaurer la copie locale</button></div><div class="admin-card"><h3>Réinitialisation</h3><p>Supprime la sauvegarde locale de cette version. À utiliser seulement si tu veux repartir du fichier de base.</p><button class="bd" onclick="resetAdminLocal()">Réinitialiser la version locale</button></div></div></section>`;}
+function adminSavePanel(){return `<section class="admin-panel" data-admin-panel="save"><div class="admin-note"><b>Sauvegarde.</b> Les modifications sont sauvegardées automatiquement dans le navigateur. Pour sécuriser le travail ou changer d’ordinateur, utilise l’export complet JSON.</div><div class="admin-backup"><div class="admin-card"><h3>Sauvegarde complète</h3><p>Exporte ou importe le planning, les APSA, les classes, les horaires, les regroupements, les PFMP et les installations.</p><button class="bc" onclick="exportJSON()">💾 Exporter JSON complet</button> <button class="bn" onclick="importJSON()">📂 Importer JSON</button></div><div class="admin-card"><h3>Publier pour les collègues</h3><p>L’appli est un simple site (pas de serveur) : tes modifications restent dans TON navigateur tant que tu ne publies pas. Pour qu’un changement soit visible par les autres : clique « Publier », puis remplace le fichier <code>data.json</code> à la racine du dépôt GitHub par celui téléchargé et pousse (commit + push). Chaque navigateur (le tien inclus) récupère automatiquement la dernière version publiée à son prochain chargement.</p><p><b>⚠️ Important :</b> <code>data.json</code> est un bloc généré d’un coup — il ne se fusionne jamais correctement ligne à ligne. Avant de publier, récupère (pull) la dernière version du dépôt pour éviter tout écart. Si GitHub signale un conflit sur <code>data.json</code>, ne fais JAMAIS de fusion manuelle : remplace-le entièrement par le fichier fraîchement téléchargé ici (« garder la version mienne » / écraser). Depuis peu, si un fichier corrompu ou incomplet finit quand même par être publié, l’appli affiche un avertissement au chargement plutôt que d’ignorer le problème en silence.</p><button class="bc" onclick="publishData()">📤 Publier (data.json)</button></div><div class="admin-card"><h3>Copie locale manuelle</h3><p>Crée une copie de secours dans ce navigateur.</p><button class="bc" onclick="makeLocalBackup()">Créer une copie locale</button> <button class="bn" onclick="restoreLocalBackup()">Restaurer la copie locale</button></div><div class="admin-card"><h3>Réinitialisation</h3><p>Supprime la sauvegarde locale de cette version. À utiliser seulement si tu veux repartir du fichier de base.</p><button class="bd" onclick="resetAdminLocal()">Réinitialiser la version locale</button></div></div></section>`;}
 function makeLocalBackup(){localStorage.setItem(LSK+'_manual_backup',JSON.stringify(serializableState()));showWarning('✅ Copie locale créée');}
 function restoreLocalBackup(){const raw=localStorage.getItem(LSK+'_manual_backup');if(!raw)return alert('Aucune copie locale trouvée.');try{applyImportedState(JSON.parse(raw));ensureDefaultApsa();syncLocUI();buildPal();rebuildAll();saveLS();showWarning('✅ Copie locale restaurée');closeMo();}catch(e){alert('Copie locale illisible');}}
 function resetAdminLocal(){if(!confirm('Supprimer la sauvegarde locale de cette version et recharger le fichier de base ?'))return;localStorage.removeItem(LSK);location.reload();}
@@ -1625,6 +1649,7 @@ function saveAdmin(){
   nextDays.forEach(d=>d.rows.sort((a,b)=>parseH(a.h).s-parseH(b.h).s||a.cl.localeCompare(b.cl,'fr')));
   DAYS.splice(0,DAYS.length,...nextDays);
   {const liveIds=new Set();DAYS.forEach(d=>d.rows.forEach(r=>liveIds.add(r.id)));Object.keys(VEST_ASSIGN).forEach(k=>{if(!liveIds.has(k))delete VEST_ASSIGN[k];});}
+  pruneStaleMerges(); // le tri ci-dessus peut avoir changé l'ordre des lignes : supprime les fusions devenues non adjacentes
 
   const groups={};document.querySelectorAll('.adm-group-row').forEach(tr=>{let cl=tr.querySelector('[data-field="class"]').value.trim();cl=classMap[classKey(cl)]||cl;const g=tr.querySelector('[data-field="groups"]').value.split(',').map(x=>x.trim()).filter(Boolean).map(x=>classMap[classKey(x)]||x);if(cl&&g.length)groups[classKey(cl)]=g;});ADMIN_GROUPS=groups;
 
@@ -2488,6 +2513,21 @@ function buildRow(row,di,slots,opts={}){
 let MERGES=[]; // {di, topId, botId, start, span}
 let mergeMode=false;
 let mergeFirst=null; // {rowId,di,si,span}
+// Une fusion n'a de sens QUE si topId et botId sont deux lignes directement adjacentes ce jour-là
+// (voir le garde-fou dans applyMergesToTable — rowSpan déborde physiquement dans la ligne suivante
+// du DOM). Un tri des lignes (ex: saveAdmin(), qui retrie par horaire puis nom de classe) peut casser
+// cette adjacence sans toucher aux données de la fusion elle-même : on la supprime alors ici plutôt
+// que de la laisser trainer indéfiniment, invisible mais jamais nettoyée.
+function pruneStaleMerges(){
+  if(!MERGES.length)return;
+  MERGES=MERGES.filter(m=>{
+    const day=DAYS[m.di];if(!day)return false;
+    const idx=day.rows.findIndex(r=>r.id===m.topId);
+    if(idx<0)return false;
+    const next=day.rows[idx+1];
+    return !!next&&next.id===m.botId;
+  });
+}
 function toggleMergeMode(force){
   mergeMode=typeof force==='boolean'?force:!mergeMode;
   mergeFirst=null;
@@ -2542,6 +2582,16 @@ function applyMergesToTable(table,di){
     const topTr=tbody.querySelector(`tr[data-row-id="${m.topId}"]`);
     const botTr=tbody.querySelector(`tr[data-row-id="${m.botId}"]`);
     if(!topTr||!botTr)return;
+    // Garde-fou indispensable : rowSpan=2 (plus bas) étend physiquement la cellule dans la <tr>
+    // SUIVANTE du DOM, quelle qu'elle soit — pas forcément botTr. Si un tri (ex: saveAdmin() qui
+    // retrie les lignes par horaire puis nom de classe) a changé l'ordre des lignes depuis la
+    // création de cette fusion, topId et botId ne sont plus adjacents : appliquer quand même le
+    // rowSpan ferait déborder la cellule sur une ligne totalement différente (bug réel constaté :
+    // un changement de nom de classe sur un créneau a fait remonter/redescendre une ligne dans le
+    // tri, cassant une fusion existante et provoquant un chevauchement visuel + des cases "trouées"
+    // sur l'autre ligne de la fusion). Une fusion devenue non adjacente est simplement ignorée ici ;
+    // saveAdmin() la supprime aussi des données au prochain enregistrement (voir pruneStaleMerges()).
+    if(topTr.nextElementSibling!==botTr)return;
     const topTd=[...topTr.children].find(td=>td.dataset.si!==undefined&&+td.dataset.si<=m.start&&+td.dataset.si+(td.colSpan||1)>m.start);
     const botTd=[...botTr.children].find(td=>td.dataset.si!==undefined&&+td.dataset.si<=m.start&&+td.dataset.si+(td.colSpan||1)>m.start);
     if(!topTd||!botTd||topTd.dataset.hasCyc!=='1'||botTd.dataset.hasCyc!=='1')return;
