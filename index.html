@@ -101,6 +101,17 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 .vest-print-section{margin-top:6px}
 .vest-print-btns{display:flex;gap:6px;flex-wrap:wrap;padding:4px 0}
 .vest-cls-item{display:inline-flex;align-items:center;gap:3px;margin:0 8px 0 0;white-space:nowrap}
+.vest-view .vest-tt-section{max-width:none}
+.vest-tt-table{width:100%;table-layout:fixed;border-collapse:collapse}
+.vest-tt-table th,.vest-tt-table td{border:1px solid rgba(90,84,68,.14);font-size:10px;vertical-align:top;padding:3px 4px}
+.vest-tt-table th{background:#f4f2ec;font-weight:600;text-align:left}
+.vest-tt-table td.vest-tt-h{background:#f8f7f3;font-weight:600;white-space:nowrap;width:78px}
+.vest-tt-entry{display:flex;flex-direction:column;gap:0;padding:2px 3px;margin-bottom:2px;border-radius:4px;background:rgba(90,84,68,.06)}
+.vest-tt-entry:last-child{margin-bottom:0}
+.vest-tt-cl{font-weight:600;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.vest-tt-prof{color:#4b4942}
+.vest-tt-gender{font-size:9px;opacity:.6;text-transform:uppercase;letter-spacing:.02em}
+.vest-tt-h4{margin:14px 0 6px;font-size:12px;font-weight:700;color:#2e2d29}
 #print-target{display:none}
 .print-page-title{font-size:14px;font-weight:800;margin-bottom:6px;font-family:sans-serif;color:#1a1917}
 @media print{
@@ -768,7 +779,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v7';
+const APP_VERSION='v8';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -2067,7 +2078,49 @@ function buildVestiairesPanel(){
   daySec.appendChild(dayBtnRow);
   o.appendChild(daySec);
 
+  const ttSec=document.createElement('section');ttSec.className='view-section vest-tt-section';
+  const tth=document.createElement('h3');tth.textContent='Emploi du temps par vestiaire (aperçu)';ttSec.appendChild(tth);
+  const ttNote=document.createElement('div');ttNote.className='admin-note';ttNote.style.margin='0 0 10px 0';
+  ttNote.textContent='Vue type « salle de classe » : pour chaque vestiaire, qui l’occupe selon le jour et l’horaire — pratique pour repérer un double-emploi.';
+  ttSec.appendChild(ttNote);
+  VEST_OPTIONS.forEach(n=>{
+    const h4=document.createElement('h4');h4.className='vest-tt-h4';h4.textContent=`Vestiaire ${n}`;ttSec.appendChild(h4);
+    ttSec.appendChild(buildVestiaireTimetable(n));
+  });
+  o.appendChild(ttSec);
+
   return o;
+}
+// Liste des horaires distincts sur toute la semaine, triés par heure de début — sert d'axe des lignes
+// pour l'emploi du temps par vestiaire (les jours n'ont pas forcément tous les mêmes créneaux).
+function vestTimetableSlots(){
+  const seen=new Set();
+  DAYS.forEach(day=>day.rows.forEach(r=>{if(r.h)seen.add(r.h);}));
+  return [...seen].sort((a,b)=>parseH(a).s-parseH(b).s);
+}
+function vestTimetableCellHtml(n,di,horaire){
+  const day=DAYS[di];if(!day)return '';
+  const matches=[];
+  day.rows.forEach(r=>{
+    if(r.h!==horaire)return;
+    VEST_GENDERS.forEach(g=>{
+      if(String(vestGet(r.id,g.k))===String(n))matches.push({r,g});
+    });
+  });
+  if(!matches.length)return '';
+  return matches.map(({r,g})=>`<div class="vest-tt-entry"><span class="vest-tt-cl">${vestClassHtml(r.cl)}</span><span class="vest-tt-prof">${esc(vestProfLabel(r.prof))}</span><span class="vest-tt-gender">${esc(g.label)}</span></div>`).join('');
+}
+function buildVestiaireTimetable(n){
+  const slots=vestTimetableSlots();
+  const table=document.createElement('table');table.className='pfmp-table vest-tt-table';
+  if(!slots.length){
+    table.innerHTML='<tbody><tr><td class="empty-view">Aucun créneau défini pour le moment.</td></tr></tbody>';
+    return table;
+  }
+  const thead=`<thead><tr><th>Horaire</th>${DAYS.map(d=>`<th>${esc(d.name)}</th>`).join('')}</tr></thead>`;
+  const tbody=`<tbody>${slots.map(h=>`<tr><td class="vest-tt-h">${esc(h)}</td>${DAYS.map((day,di)=>`<td>${vestTimetableCellHtml(n,di,h)}</td>`).join('')}</tr>`).join('')}</tbody>`;
+  table.innerHTML=thead+tbody;
+  return table;
 }
 function vestHexToRgb(hex){
   const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex||'');
