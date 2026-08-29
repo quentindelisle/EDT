@@ -808,7 +808,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v12';
+const APP_VERSION='v13';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -2128,6 +2128,21 @@ async function captureElementCanvas(contentEl){
     if(getComputedStyle(el).position==='sticky')el.style.setProperty('position','static','important');
   });
   if(getComputedStyle(contentEl).position==='sticky')contentEl.style.setProperty('position','static','important');
+  // Idem pour tout conteneur scrollable (ex. `.scroll-outer`, limité à `calc(100vh - 96px)` à l'écran
+  // pour permettre le scroll de la page) : capturé hors-écran, ce plafond de hauteur reste actif et
+  // TRONQUE le contenu qui dépasse (jour manquant en bas de page, typiquement le Vendredi puisque les
+  // jours sont empilés Lundi→Vendredi) — même s'il n'y a plus de fenêtre visible pour justifier un
+  // scroll. On neutralise tout overflow/max-height juste avant la capture pour que l'élément prenne sa
+  // hauteur naturelle complète.
+  const unclip=el=>{
+    const cs=getComputedStyle(el);
+    if(cs.overflowY==='auto'||cs.overflowY==='scroll'||cs.overflowY==='hidden'||cs.maxHeight!=='none'){
+      el.style.setProperty('overflow','visible','important');
+      el.style.setProperty('max-height','none','important');
+    }
+  };
+  contentEl.querySelectorAll('*').forEach(unclip);
+  unclip(contentEl);
   await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   const canvas=await window.html2canvas(contentEl,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});
   host.innerHTML='';
