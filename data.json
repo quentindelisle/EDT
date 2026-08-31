@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 4,
-  "publishedAt": "2026-08-29T06:56:24.327Z",
+  "publishedVersion": 3,
+  "publishedAt": "2026-08-31T13:24:35.544Z",
   "state": {
     "version": "v28",
     "c": {
@@ -8907,94 +8907,107 @@
       },
       "Me05": {
         "0": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "13": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "20": {
@@ -9450,45 +9463,51 @@
           "role": ""
         },
         "26": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Futsal",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "38": {
@@ -11327,115 +11346,131 @@
           "role": ""
         },
         "17": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
@@ -11518,115 +11553,131 @@
           "role": ""
         },
         "17": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Volley",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Badminton",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
@@ -13194,129 +13245,147 @@
       },
       "L16": {
         "0": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "13": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "26": {
@@ -13360,152 +13429,173 @@
           "ovr": true
         },
         "37": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
       "L15": {
         "0": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Biathlon",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "13": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "PG",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ff8000",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Futsal",
+          "n": "Volley",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "26": {
@@ -13549,24 +13639,27 @@
           "ovr": true
         },
         "37": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "DH",
-          "ca": "CA1",
+          "n": "Foot",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#008000",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
@@ -14285,86 +14378,90 @@
           "role": ""
         },
         "9": {
-          "n": "GG",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "GG",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "GG",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "GG",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
           "ovr": false,
           "role": ""
         },
@@ -14475,52 +14572,59 @@
           "role": ""
         },
         "9": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "13": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "GG",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
-          "c": "#ff0000",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
@@ -15161,94 +15265,107 @@
           "role": ""
         },
         "17": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Cross Training",
+          "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
-          "c": "#ff00ff",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Boxe Française",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#7c3aed",
+          "ovr": false,
           "role": ""
         },
         "34": {
@@ -17600,15 +17717,15 @@
     },
     "vestAssign": {
       "L02": {
-        "g": "3",
-        "f": "4"
+        "g": "1",
+        "f": "2"
       },
       "L01": {
-        "g": "3",
-        "f": "4"
+        "g": "1",
+        "f": "2"
       },
       "L03": {
-        "g": "2",
+        "g": "4",
         "f": "5"
       },
       "L04": {
@@ -17629,7 +17746,7 @@
       },
       "L08": {
         "g": "1",
-        "f": "none"
+        "f": "3"
       },
       "L09": {
         "g": "2",
@@ -17740,155 +17857,22 @@
         "f": "none"
       },
       "Me02": {
-        "g": "1",
-        "f": "none"
+        "g": "3"
       },
       "Me03": {
-        "g": "3",
-        "f": "4"
+        "g": "2"
       },
       "Me05": {
         "g": "1",
-        "f": "5"
+        "f": "4"
       },
       "Me04": {
-        "g": "2",
+        "g": "3",
         "f": "5"
       },
       "Me07": {
         "g": "2",
         "f": "4"
-      },
-      "J05": {
-        "g": "2",
-        "f": "5"
-      },
-      "V07": {
-        "g": "3",
-        "f": "4"
-      },
-      "V05": {
-        "g": "3",
-        "f": "4"
-      },
-      "V06": {
-        "g": "1",
-        "f": "5"
-      },
-      "V08": {
-        "g": "2",
-        "f": "5"
-      },
-      "Me06": {
-        "g": "5"
-      },
-      "Me08": {
-        "g": "1",
-        "f": "4"
-      },
-      "Me09": {
-        "g": "3",
-        "f": "none"
-      },
-      "Me10": {
-        "g": "2",
-        "f": "4"
-      },
-      "J01": {
-        "g": "3",
-        "f": "5"
-      },
-      "J02": {
-        "g": "1",
-        "f": "none"
-      },
-      "J03": {
-        "g": "2",
-        "f": "none"
-      },
-      "J04": {
-        "g": "2",
-        "f": "4"
-      },
-      "J06": {
-        "g": "1",
-        "f": "5"
-      },
-      "J10": {
-        "g": "3",
-        "f": "4"
-      },
-      "J08": {
-        "g": "2",
-        "f": "5"
-      },
-      "J09": {
-        "g": "1",
-        "f": "5"
-      },
-      "J07": {
-        "g": "5",
-        "f": "none"
-      },
-      "J11": {
-        "g": "1",
-        "f": "2"
-      },
-      "J13": {
-        "f": "2",
-        "g": "1"
-      },
-      "J12": {
-        "g": "3",
-        "f": "4"
-      },
-      "J14": {
-        "g": "3",
-        "f": "5"
-      },
-      "J15": {
-        "g": "2",
-        "f": "4"
-      },
-      "J16": {
-        "g": "3",
-        "f": "5"
-      },
-      "V01": {
-        "g": "3",
-        "f": "4"
-      },
-      "V02": {
-        "g": "1",
-        "f": "2"
-      },
-      "V03": {
-        "g": "1",
-        "f": "2"
-      },
-      "V04": {
-        "g": "3",
-        "f": "5"
-      },
-      "V09": {
-        "g": "3",
-        "f": "4"
-      },
-      "V10": {
-        "g": "3",
-        "f": "4"
-      },
-      "V11": {
-        "g": "1",
-        "f": "5"
-      },
-      "V12": {
-        "g": "2",
-        "f": "5"
-      },
-      "V13": {
-        "g": "1",
-        "f": "2"
       }
     }
   }
