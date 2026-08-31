@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 3,
-  "publishedAt": "2026-08-31T13:24:35.544Z",
+  "publishedVersion": 4,
+  "publishedAt": "2026-08-31T15:48:36.310Z",
   "state": {
     "version": "v28",
     "c": {
@@ -671,38 +671,43 @@
           "role": ""
         },
         "26": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "34": {
@@ -1238,67 +1243,76 @@
           "mode": "apsa"
         },
         "14": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "15": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "17": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "18": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "19": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "20": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "21": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "22": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "23": {
-          "n": "Volley",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "29": {
           "n": "Relais vitesse",
@@ -1710,303 +1724,346 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "1": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "2": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "3": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "9": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "10": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "11": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "12": {
           "n": "Tennis de table",
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "13": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Futsal",
+          "n": "CA4 - Transversalité",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "Basket 3c3",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
       "V10": {
         "0": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "1": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "2": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "3": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "9": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "10": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "11": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "12": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "13": {
           "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
-          "mode": "apsa"
-        },
-        "13": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "14": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "15": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "17": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "18": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "19": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "20": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "21": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "22": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "23": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "26": {
           "n": "Demi-fond",
@@ -2060,52 +2117,59 @@
       },
       "V11": {
         "0": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "9": {
@@ -2113,6 +2177,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "10": {
@@ -2120,6 +2185,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "11": {
@@ -2127,6 +2193,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "12": {
@@ -2134,6 +2201,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "13": {
@@ -2141,6 +2209,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "14": {
@@ -2148,6 +2217,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "15": {
@@ -2155,183 +2225,209 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "26": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "27": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "28": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "29": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "30": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "31": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "35": {
           "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
-          "role": ""
-        },
-        "26": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "27": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "28": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "29": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "30": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "31": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "35": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         }
       },
       "V12": {
         "0": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Hand",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "9": {
@@ -2339,6 +2435,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "10": {
@@ -2346,6 +2443,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "11": {
@@ -2353,6 +2451,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "12": {
@@ -2360,6 +2459,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "13": {
@@ -2367,6 +2467,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "14": {
@@ -2374,6 +2475,7 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "15": {
@@ -2381,261 +2483,298 @@
           "ca": "CA4",
           "loc": "PG",
           "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "26": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "27": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "28": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "29": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "30": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "31": {
+          "n": "Hand",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "35": {
           "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
-          "role": ""
-        },
-        "26": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "27": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "28": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "29": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "30": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "31": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "role": ""
-        },
-        "35": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "Demi-fond",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         }
       },
       "V13": {
         "0": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "1": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "2": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "3": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "9": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "10": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "11": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "mode": "apsa"
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
         },
         "12": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "13": {
           "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
-          "mode": "apsa"
-        },
-        "13": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "ovr": false,
+          "role": ""
         },
         "14": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "15": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "17": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "18": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "19": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "20": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "26": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "27": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "28": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
-          "mode": "apsa"
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "29": {
           "n": "Demi-fond",
@@ -3625,222 +3764,253 @@
           "role": ""
         },
         "13": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "14": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "15": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "17": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Step",
+          "ca": "CA3",
+          "loc": "PG",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "34": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Step",
-          "ca": "CA3",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         }
       },
       "Ma07": {
         "0": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "12": {
-          "n": "Badminton",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "13": {
@@ -3914,158 +4084,176 @@
           "role": ""
         },
         "26": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "34": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Badminton",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         }
       },
       "Ma05": {
         "0": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
           "ovr": false,
           "role": ""
         },
         "12": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "13": {
           "n": "Musculation",
           "ca": "CA5",
           "loc": "M",
@@ -4073,85 +4261,77 @@
           "ovr": false,
           "role": ""
         },
-        "13": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
-        },
         "14": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "15": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "17": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "18": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "19": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "20": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "21": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "22": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "23": {
-          "n": "Golf",
-          "ca": "CA2",
-          "loc": "DH",
-          "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
         },
         "26": {
           "n": "Demi-fond",
@@ -4226,220 +4406,251 @@
       },
       "Ma08": {
         "0": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "10": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "11": {
-          "n": "Relais vitesse",
-          "ca": "CA1",
-          "loc": "DH",
-          "c": "#16a34a",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "12": {
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
+          "role": ""
+        },
+        "13": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "14": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "15": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "17": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "18": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "19": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "20": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "21": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "22": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "23": {
+          "n": "Volley",
+          "ca": "CA4",
+          "loc": "GG",
+          "c": "#dc2626",
+          "ovr": false,
+          "role": ""
+        },
+        "26": {
           "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
-          "role": ""
-        },
-        "13": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "14": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "15": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "17": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "18": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "19": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "20": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "21": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "22": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "23": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
-          "role": ""
-        },
-        "26": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "34": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Volley",
-          "ca": "CA4",
-          "loc": "GG",
-          "c": "#dc2626",
+          "n": "Relais vitesse",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         }
       },
@@ -10272,106 +10483,106 @@
           "role": ""
         },
         "17": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
@@ -10708,106 +10919,106 @@
           "role": ""
         },
         "17": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "26": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Tennis de table",
+          "n": "Boxe Française",
           "ca": "CA4",
           "loc": "PG",
-          "c": "#ea580c",
+          "c": "#7c3aed",
           "ovr": false,
           "role": ""
         },
@@ -11157,31 +11368,35 @@
           "role": ""
         },
         "20": {
-          "n": "PG",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ff8000",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "PG",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ff8000",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "PG",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ff8000",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "PG",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ff8000",
+          "n": "Musculation",
+          "ca": "CA5",
+          "loc": "M",
+          "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "26": {
@@ -11189,6 +11404,7 @@
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "27": {
@@ -11196,6 +11412,7 @@
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "28": {
@@ -11203,6 +11420,7 @@
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "29": {
@@ -11210,20 +11428,23 @@
           "ca": "CA5",
           "loc": "M",
           "c": "#db2777",
+          "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Musculation",
-          "ca": "CA5",
-          "loc": "M",
-          "c": "#db2777",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "35": {
@@ -12521,52 +12742,67 @@
           "role": ""
         },
         "26": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "27": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "31": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "34": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "35": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "36": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "37": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
+          "role": ""
+        },
+        "38": {
+          "n": "DH",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#008000",
+          "ovr": false,
           "role": ""
         }
       },
@@ -13393,62 +13629,62 @@
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "27": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "28": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "30": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "31": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "37": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "38": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "39": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "DH",
+          "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         }
@@ -13639,26 +13875,26 @@
           "ovr": true
         },
         "37": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "38": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "39": {
-          "n": "Foot",
-          "ca": "CA4",
+          "n": "DH",
+          "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         }
@@ -14097,7 +14333,7 @@
           "role": ""
         },
         "35": {
-          "n": "Demi-fond",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
@@ -14105,7 +14341,7 @@
           "role": ""
         },
         "36": {
-          "n": "Demi-fond",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
@@ -14113,7 +14349,7 @@
           "role": ""
         },
         "37": {
-          "n": "Demi-fond",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
@@ -14121,7 +14357,7 @@
           "role": ""
         },
         "38": {
-          "n": "Demi-fond",
+          "n": "Relais vitesse",
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
@@ -14131,129 +14367,139 @@
       },
       "J05": {
         "0": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Demi-fond",
-          "ca": "CA1",
+          "n": "Hand",
+          "ca": "CA4",
           "loc": "DH",
           "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "9": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "10": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "11": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Golf",
+          "ca": "CA2",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#eab308",
+          "ovr": true,
           "role": ""
         },
         "17": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "18": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "19": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "20": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "21": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "22": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "23": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "26": {
@@ -14261,6 +14507,7 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "27": {
@@ -14268,6 +14515,7 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "28": {
@@ -14275,6 +14523,7 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "29": {
@@ -14282,6 +14531,7 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "30": {
@@ -14289,6 +14539,7 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "31": {
@@ -14296,27 +14547,31 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         }
       },
@@ -16094,6 +16349,13 @@
         "ca": "CA4",
         "loc": "PG",
         "c": "#7c3aed"
+      },
+      {
+        "n": "CA4 - Transversalité",
+        "ca": "CA4",
+        "loc": "GG",
+        "c": "#dc2626",
+        "ovr": false
       }
     ],
     "days": [
