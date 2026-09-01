@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 4,
-  "publishedAt": "2026-08-31T15:48:36.310Z",
+  "publishedVersion": 5,
+  "publishedAt": "2026-09-01T07:26:29.219Z",
   "state": {
     "version": "v28",
     "c": {
@@ -16418,8 +16418,8 @@
             "h": "12h–13h"
           },
           {
-            "id": "L11",
-            "prof": "Mathilde",
+            "id": "L12",
+            "prof": "Philippe",
             "cl": "2de 1",
             "h": "14h–16h"
           },
@@ -16430,8 +16430,8 @@
             "h": "14h–16h"
           },
           {
-            "id": "L12",
-            "prof": "Philippe",
+            "id": "L11",
+            "prof": "Mathilde",
             "cl": "2de 3",
             "h": "14h–16h"
           },
@@ -17633,19 +17633,19 @@
     },
     "pc": {
       "Eric": "#db2777",
+      "Hugo": "#ca8a04",
+      "Mathilde": "#16a34a",
       "Philippe": "#7c3aed",
       "Quentin": "#1d4ed8",
-      "Yvan": "#ea580c",
-      "Mathilde": "#16a34a",
-      "Hugo": "#ca8a04"
+      "Yvan": "#ea580c"
     },
     "pb": {
       "Eric": "#fce7f3",
+      "Hugo": "#fef3c7",
+      "Mathilde": "#dcfce7",
       "Philippe": "#f3e8ff",
       "Quentin": "#dbeafe",
-      "Yvan": "#ffedd5",
-      "Mathilde": "#dcfce7",
-      "Hugo": "#fef3c7"
+      "Yvan": "#ffedd5"
     },
     "merges": [
       {
@@ -17970,11 +17970,11 @@
       "2027-05-17": "Pentecôte"
     },
     "profLastName": {
-      "Hugo": "M Aignan",
       "Eric": "M Heurtebize",
-      "Quentin": "M Delisle",
+      "Hugo": "M Aignan",
       "Mathilde": "Mme Thibault",
       "Philippe": "M Poulain",
+      "Quentin": "M Delisle",
       "Yvan": "M Coutellec"
     },
     "vestAssign": {
