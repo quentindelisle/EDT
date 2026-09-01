@@ -808,7 +808,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v14';
+const APP_VERSION='v15';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -2328,6 +2328,97 @@ function exportVestiairesTimetablePdf(){
   const contentW=pageW-2*M;
   const slots=vestTimetableSlots();
 
+  const hColW=2.9,dayColW=(contentW-hColW)/5;
+  const colX=[M,M+hColW,M+hColW+dayColW,M+hColW+dayColW*2,M+hColW+dayColW*3,M+hColW+dayColW*4];
+  const colW=[hColW,dayColW,dayColW,dayColW,dayColW,dayColW];
+  const headerH=0.78;
+  const BAND_Y=M+2.15+0.4; // doit rester cohérent avec bandH/gap de drawPdfHeaderBand
+  const availFirst=pageH-M-BAND_Y-headerH; // hauteur dispo pour les lignes sur une page AVEC bandeau logos
+  const contHeaderH=0.85; // hauteur du petit en-tête "(suite)" sur une page de continuation
+  const availCont=pageH-M-M-contHeaderH-headerH; // hauteur dispo sur une page de continuation
+
+  // Tailles de police nettement plus grandes et lisibles qu'avant (le tableau peut désormais se
+  // poursuivre sur une page supplémentaire "(suite)" plutôt que de réduire indéfiniment la police
+  // pour tout faire tenir sur une seule page — voir la pagination plus bas).
+  const FONT_STEPS=[{cl:12.5,pf:11},{cl:11.5,pf:10},{cl:10.5,pf:9.2},{cl:9.6,pf:8.4},{cl:8.8,pf:7.7}];
+  const CPAD=0.2,GAP=0.09,ROWMIN=0.85;
+  const LH=pt=>pt*0.05; // hauteur de ligne (cm) à la taille donnée, marge de sécurité incluse
+
+  // Dimensionnement à CONTENU CONNU (jamais approximatif) : pour chaque taille de police candidate
+  // (de la plus grande à la plus petite), on mesure le nombre RÉEL de lignes après retour à la ligne
+  // pour chaque texte affiché, dans CHAQUE vestiaire, et on en déduit la hauteur exacte requise par
+  // chaque ligne du tableau. Comme la hauteur de chaque ligne/cellule est calculée à partir du texte
+  // réellement affiché (et jamais rétrécie après coup indépendamment du texte), aucun texte ne peut
+  // déborder de sa case.
+  function layoutFor(n,step){
+    let rowH=ROWMIN;
+    return slots.map(h=>{
+      const cells=DAYS.map((day,di)=>vestTimetableMatches(n,di,h));
+      let thisRowH=ROWMIN;
+      const cellLayout=cells.map((entries,ci)=>{
+        if(!entries.length)return [];
+        const cw=colW[ci+1]-0.3;
+        let cellH=CPAD;
+        const laidOut=entries.map(({r,g},ei)=>{
+          doc.setFont('helvetica','bold');doc.setFontSize(step.cl);
+          const clLines=doc.splitTextToSize(vestClassSummary(r.cl),cw);
+          doc.setFont('helvetica','normal');doc.setFontSize(step.pf);
+          const pfLines=doc.splitTextToSize(`${vestProfLabel(r.prof)} · ${g.label}`,cw);
+          cellH+=clLines.length*LH(step.cl)+pfLines.length*LH(step.pf)+(ei>0?GAP:0);
+          return {clLines,pfLines};
+        });
+        thisRowH=Math.max(thisRowH,cellH);
+        return laidOut;
+      });
+      return {h,cellLayout,rowH:thisRowH};
+    });
+  }
+
+  // Choix d'UNE taille de police commune à tous les vestiaires (cohérence visuelle entre les pages) :
+  // on retient la plus grande taille qui permet à TOUS les vestiaires de tenir sur une seule page. Si
+  // aucune taille ne suffit (beaucoup de créneaux distincts), on garde la plus petite de la liste — qui
+  // reste nettement plus lisible que l'ancien palier minimal — et les vestiaires trop chargés se
+  // poursuivront sur une page "(suite)" plutôt que d'écraser encore la police.
+  let chosenStep=FONT_STEPS[FONT_STEPS.length-1],chosenLayouts=null;
+  for(const step of FONT_STEPS){
+    const layouts=VEST_OPTIONS.map(n=>layoutFor(n,step));
+    const allFit=layouts.every(rows=>rows.reduce((a,rd)=>a+rd.rowH,0)<=availFirst);
+    if(allFit){chosenStep=step;chosenLayouts=layouts;break;}
+  }
+  if(!chosenLayouts)chosenLayouts=VEST_OPTIONS.map(n=>layoutFor(n,chosenStep));
+
+  function drawColHeader(y0){
+    doc.setFillColor(...PDF_BRAND);
+    doc.rect(M,y0,contentW,headerH,'F');
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);
+    ['Horaire',...DAYS.map(d=>d.name)].forEach((l,i)=>doc.text(l,colX[i]+0.15,y0+headerH-0.27));
+    doc.setTextColor(0,0,0);
+    return y0+headerH;
+  }
+  function drawRow(rd,y,idx){
+    const rowH=rd.rowH;
+    if(idx%2===1){doc.setFillColor(247,246,242);doc.rect(M,y,contentW,rowH,'F');}
+    doc.setDrawColor(210,210,205);
+    doc.rect(M,y,contentW,rowH);
+    for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
+    doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(0,0,0);
+    doc.text(rd.h,colX[0]+0.15,y+rowH/2+0.14,{baseline:'middle'});
+    rd.cellLayout.forEach((entries,ci)=>{
+      if(!entries.length)return;
+      const cx=colX[ci+1]+0.15;
+      let cy=y+CPAD/2+LH(chosenStep.cl)*0.78;
+      entries.forEach(({clLines,pfLines})=>{
+        doc.setFont('helvetica','bold');doc.setFontSize(chosenStep.cl);doc.setTextColor(0,0,0);
+        clLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosenStep.cl);});
+        doc.setFont('helvetica','normal');doc.setFontSize(chosenStep.pf);doc.setTextColor(95,95,95);
+        pfLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosenStep.pf);});
+        doc.setTextColor(0,0,0);
+        cy+=GAP;
+      });
+    });
+    return y+rowH;
+  }
+
   VEST_OPTIONS.forEach((n,pageIdx)=>{
     if(pageIdx>0)doc.addPage('a4','landscape');
     let y=drawPdfHeaderBand(doc,M,`VESTIAIRE ${n}`,'Emploi du temps hebdomadaire');
@@ -2338,80 +2429,19 @@ function exportVestiairesTimetablePdf(){
       return;
     }
 
-    const hColW=2.6,dayColW=(contentW-hColW)/5;
-    const colX=[M,M+hColW,M+hColW+dayColW,M+hColW+dayColW*2,M+hColW+dayColW*3,M+hColW+dayColW*4];
-    const colW=[hColW,dayColW,dayColW,dayColW,dayColW,dayColW];
-    const headerH=0.7;
-    const availH=pageH-M-y-headerH;
-
-    // Dimensionnement du tableau à CONTENU CONNU (jamais approximatif) : pour chaque taille de police
-    // candidate (de la plus grande à la plus petite), on mesure le nombre RÉEL de lignes après retour
-    // à la ligne pour chaque texte à cette taille précise, et on en déduit la hauteur exacte requise
-    // par chaque ligne du tableau. On retient la plus grande taille dont le total tient sur une page.
-    // Comme la hauteur de chaque ligne/cellule est calculée à partir du texte réellement affiché (et
-    // jamais rétrécie après coup indépendamment du texte), aucun texte ne peut déborder de sa case.
-    const FONT_STEPS=[{cl:8,pf:7.2},{cl:7.4,pf:6.6},{cl:6.8,pf:6.1},{cl:6.2,pf:5.6},{cl:5.6,pf:5.1},{cl:5.2,pf:4.7}];
-    const CPAD=0.16,GAP=0.06,ROWMIN=0.55;
-    const LH=pt=>pt*0.0445; // hauteur de ligne (cm) à la taille donnée, marge de sécurité incluse
-
-    let chosen=null;
-    for(const step of FONT_STEPS){
-      const rows=slots.map(h=>{
-        const cells=DAYS.map((day,di)=>vestTimetableMatches(n,di,h));
-        let rowH=ROWMIN;
-        const cellLayout=cells.map((entries,ci)=>{
-          if(!entries.length)return [];
-          const cw=colW[ci+1]-0.26;
-          let cellH=CPAD;
-          const laidOut=entries.map(({r,g},ei)=>{
-            doc.setFont('helvetica','bold');doc.setFontSize(step.cl);
-            const clLines=doc.splitTextToSize(vestClassSummary(r.cl),cw);
-            doc.setFont('helvetica','normal');doc.setFontSize(step.pf);
-            const pfLines=doc.splitTextToSize(`${vestProfLabel(r.prof)} · ${g.label}`,cw);
-            cellH+=clLines.length*LH(step.cl)+pfLines.length*LH(step.pf)+(ei>0?GAP:0);
-            return {clLines,pfLines};
-          });
-          rowH=Math.max(rowH,cellH);
-          return laidOut;
-        });
-        return {h,cellLayout,rowH};
-      });
-      const total=rows.reduce((a,rd)=>a+rd.rowH,0);
-      if(total<=availH||step===FONT_STEPS[FONT_STEPS.length-1]){
-        chosen={rows,fontCl:step.cl,fontPf:step.pf};
-        break;
+    const rows=chosenLayouts[pageIdx];
+    y=drawColHeader(y);
+    rows.forEach((rd,idx)=>{
+      if(y+rd.rowH>pageH-M){
+        doc.addPage('a4','landscape');
+        let y2=M;
+        doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(...PDF_BRAND);
+        doc.text(`VESTIAIRE ${n} (suite)`,M,y2+0.55);
+        doc.setTextColor(0,0,0);
+        y2+=contHeaderH;
+        y=drawColHeader(y2);
       }
-    }
-
-    doc.setFillColor(...PDF_BRAND);
-    doc.rect(M,y,contentW,headerH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10);
-    ['Horaire',...DAYS.map(d=>d.name)].forEach((l,i)=>doc.text(l,colX[i]+0.15,y+headerH-0.24));
-    doc.setTextColor(0,0,0);
-    y+=headerH;
-
-    chosen.rows.forEach((rd,idx)=>{
-      const rowH=rd.rowH;
-      if(idx%2===1){doc.setFillColor(247,246,242);doc.rect(M,y,contentW,rowH,'F');}
-      doc.setDrawColor(210,210,205);
-      doc.rect(M,y,contentW,rowH);
-      for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
-      doc.setFont('helvetica','bold');doc.setFontSize(9.5);doc.setTextColor(0,0,0);
-      doc.text(rd.h,colX[0]+0.15,y+rowH/2+0.12,{baseline:'middle'});
-      rd.cellLayout.forEach((entries,ci)=>{
-        if(!entries.length)return;
-        const cx=colX[ci+1]+0.13;
-        let cy=y+CPAD/2+LH(chosen.fontCl)*0.78;
-        entries.forEach(({clLines,pfLines})=>{
-          doc.setFont('helvetica','bold');doc.setFontSize(chosen.fontCl);doc.setTextColor(0,0,0);
-          clLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosen.fontCl);});
-          doc.setFont('helvetica','normal');doc.setFontSize(chosen.fontPf);doc.setTextColor(95,95,95);
-          pfLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosen.fontPf);});
-          doc.setTextColor(0,0,0);
-          cy+=GAP;
-        });
-      });
-      y+=rowH;
+      y=drawRow(rd,y,idx);
     });
   });
 
@@ -2441,7 +2471,12 @@ function exportVestiairePdf(n){
 
   const colX=[M,M+3.0,M+6.8,M+contentW-4.6];
   const colW=[3.0,3.8,contentW-4.6-6.8,4.6];
-  const rowH=0.8,headerH=0.85,dayBarH=1.3;
+  const headerH=0.9,dayBarH=1.3;
+  // Police de cellule nettement agrandie (10→12.5) pour une lecture facile sur une porte de vestiaire ;
+  // la hauteur de ligne (et donc de chaque ligne du tableau) est calculée à partir du texte RÉELLEMENT
+  // affiché (retour à la ligne mesuré, jamais tronqué) — avant, une classe/prof trop long était coupé
+  // silencieusement (un seul wrapped[0] affiché) au lieu de passer sur une 2ᵉ ligne.
+  const CELL_FS=12.5,CELL_LH=0.52,ROWMIN=0.95;
 
   function ensureSpace(neededH){
     if(y+neededH>pageH-M){doc.addPage('a4','landscape');y=M;}
@@ -2460,21 +2495,25 @@ function exportVestiairePdf(n){
   function drawTableHeader(){
     doc.setFillColor(35,34,31);
     doc.rect(M,y,contentW,headerH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10);
-    ['Horaire','Prof','Classe(s)','Vestiaire pour'].forEach((l,i)=>doc.text(l,colX[i]+0.15,y+headerH-0.3));
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11.5);
+    ['Horaire','Prof','Classe(s)','Vestiaire pour'].forEach((l,i)=>doc.text(l,colX[i]+0.15,y+headerH-0.32));
     doc.setTextColor(0,0,0);
     y+=headerH;
   }
   function drawRow(cells,idx){
+    doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
+    const wrappedCells=cells.map((c,i)=>doc.splitTextToSize(String(c||''),colW[i]-0.3));
+    const maxLines=Math.max(1,...wrappedCells.map(w=>w.length));
+    const rowH=Math.max(ROWMIN,0.34+maxLines*CELL_LH);
     ensureSpace(rowH);
     if(idx%2===1){doc.setFillColor(250,250,248);doc.rect(M,y,contentW,rowH,'F');}
     doc.setDrawColor(210,210,205);
     doc.rect(M,y,contentW,rowH);
     for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
-    doc.setFont('helvetica','normal');doc.setFontSize(10);
-    cells.forEach((c,i)=>{
-      const wrapped=doc.splitTextToSize(String(c||''),colW[i]-0.3);
-      doc.text(wrapped[0]||'',colX[i]+0.15,y+rowH-0.28);
+    doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
+    wrappedCells.forEach((lines,i)=>{
+      let cy=y+0.4;
+      lines.forEach(line=>{doc.text(line,colX[i]+0.15,cy);cy+=CELL_LH;});
     });
     y+=rowH;
   }
@@ -2534,13 +2573,17 @@ function exportDayPdf(di){
   const gfW=2.6;
   const colX=[M,M+2.6,M+6.2,M+contentW-2*gfW,M+contentW-gfW];
   const colW=[2.6,3.6,contentW-6.2-2*gfW,gfW,gfW];
-  const rowH=rows.length>26?0.5:0.62,headerH=0.62;
+  const headerH=0.68;
+  // Police de cellule agrandie (9→11) pour rester lisible même sur un récap compact ; hauteur de ligne
+  // calculée à partir du texte réellement affiché (retour à la ligne mesuré) au lieu d'un seul
+  // wrapped[0] tronqué — une classe/prof trop long passe désormais sur une 2ᵉ ligne au lieu d'être coupé.
+  const CELL_FS=11,CELL_LH=0.44,ROWMIN=rows.length>26?0.56:0.66;
 
   function drawTableHeader(){
     doc.setFillColor(35,34,31);
     doc.rect(M,y,contentW,headerH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(9.5);
-    ['Horaire','Prof','Classe(s)','Garçons','Filles'].forEach((l,i)=>doc.text(l,i<3?colX[i]+0.12:colX[i]+colW[i]/2,y+headerH-0.2,i<3?undefined:{align:'center'}));
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10.5);
+    ['Horaire','Prof','Classe(s)','Garçons','Filles'].forEach((l,i)=>doc.text(l,i<3?colX[i]+0.12:colX[i]+colW[i]/2,y+headerH-0.22,i<3?undefined:{align:'center'}));
     doc.setTextColor(0,0,0);
     y+=headerH;
   }
@@ -2551,21 +2594,25 @@ function exportDayPdf(di){
     doc.text('Aucun créneau ce jour.',M,y+0.6);
   }else{
     rows.forEach((r,idx)=>{
+      doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
+      const cells=[r.h||'',vestProfLabel(r.prof),vestClassSummary(r.cl)];
+      const wrappedCells=cells.map((c,i)=>doc.splitTextToSize(String(c||''),colW[i]-0.24));
+      const maxLines=Math.max(1,...wrappedCells.map(w=>w.length));
+      const rowH=Math.max(ROWMIN,0.24+maxLines*CELL_LH);
       if(idx%2===1){doc.setFillColor(250,250,248);doc.rect(M,y,contentW,rowH,'F');}
       doc.setDrawColor(210,210,205);
       doc.rect(M,y,contentW,rowH);
       for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
-      doc.setFont('helvetica','normal');doc.setFontSize(9);
-      const cells=[r.h||'',vestProfLabel(r.prof),vestClassSummary(r.cl)];
-      cells.forEach((c,i)=>{
-        const wrapped=doc.splitTextToSize(String(c||''),colW[i]-0.24);
-        doc.text(wrapped[0]||'',colX[i]+0.12,y+rowH-0.18);
+      doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
+      wrappedCells.forEach((lines,i)=>{
+        let cy=y+0.3;
+        lines.forEach(line=>{doc.text(line,colX[i]+0.12,cy);cy+=CELL_LH;});
       });
       const gLabel=vestNumLabel(vestGet(r.id,'g'));
       const fLabel=vestNumLabel(vestGet(r.id,'f'));
-      doc.setFont('helvetica','bold');doc.setFontSize(11);
-      doc.text(gLabel,colX[3]+colW[3]/2,y+rowH-0.16,{align:'center'});
-      doc.text(fLabel,colX[4]+colW[4]/2,y+rowH-0.16,{align:'center'});
+      doc.setFont('helvetica','bold');doc.setFontSize(12);
+      doc.text(gLabel,colX[3]+colW[3]/2,y+rowH/2,{align:'center',baseline:'middle'});
+      doc.text(fLabel,colX[4]+colW[4]/2,y+rowH/2,{align:'center',baseline:'middle'});
       y+=rowH;
     });
   }
