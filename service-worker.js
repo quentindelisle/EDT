@@ -1,7 +1,7 @@
 // Incrémenter ce numéro à CHAQUE déploiement notable (en même temps que APP_VERSION
 // dans index.html) : c'est ce qui force les appareils ayant installé la PWA à
 // récupérer la nouvelle version au lieu de rester bloqués sur un cache périmé.
-const CACHE_NAME = 'edt-eps-pwa-v13';
+const CACHE_NAME = 'edt-eps-pwa-v14';
 const APP_SHELL = [
   './',
   './index.html',

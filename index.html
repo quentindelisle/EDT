@@ -808,7 +808,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v13';
+const APP_VERSION='v14';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -1527,7 +1527,11 @@ function adminRefreshLinkedSelects(){
 function adminClassNameChanged(input){
   const old=input.dataset.old||'';const neu=input.value.trim();
   if(old&&neu&&old!==neu){
-    document.querySelectorAll('select[data-class-select="1"]').forEach(sel=>{if(sel.value===old)sel.value=neu;});
+    // Renomme l'<option> EN PLACE (value + libellé) plutôt que de réaffecter select.value : réaffecter
+    // AVANT que la liste d'options ne contienne la nouvelle valeur est un no-op silencieux côté navigateur
+    // (une <select> ignore .value=X tant qu'aucune <option value="X"> n'existe), ce qui laissait
+    // l'ancien nom affiché dans les autres onglets déjà ouverts jusqu'à l'enregistrement.
+    document.querySelectorAll('select[data-class-select="1"] option').forEach(opt=>{if(opt.value===old){opt.value=neu;opt.textContent=neu;}});
     input.dataset.old=neu;
   }
   adminRefreshLinkedSelects();
@@ -1535,7 +1539,11 @@ function adminClassNameChanged(input){
 function adminProfNameChanged(input){
   const old=input.dataset.old||'';const neu=input.value.trim();
   if(old&&neu&&old!==neu){
-    document.querySelectorAll('select[data-prof-select="1"]').forEach(sel=>{if(sel.value===old)sel.value=neu;});
+    // Voir commentaire dans adminClassNameChanged : même correctif (renommage de l'<option> en place)
+    // pour que le changement de prénom soit VISIBLE immédiatement dans l'onglet Classes & créneaux,
+    // sans attendre l'enregistrement (qui, lui, remappait déjà correctement via profMap — seul l'affichage
+    // live était en retard).
+    document.querySelectorAll('select[data-prof-select="1"] option').forEach(opt=>{if(opt.value===old){opt.value=neu;opt.textContent=neu;}});
     input.dataset.old=neu;
   }
   adminRefreshLinkedSelects();
@@ -1668,7 +1676,7 @@ function adminLocsPanel(){
 function adminAddLocRow(){const tb=document.querySelector('#admin-locs tbody');const tr=document.createElement('tr');tr.className='adm-loc-row';tr.innerHTML='<td><input type="text" data-field="code" value="NOUV"></td><td><input type="color" data-field="color" value="#64748b"></td><td><label><input type="checkbox" data-field="exclusive" checked> bloquante si chevauchement</label></td><td><button class="admin-mini-btn danger" onclick="this.closest(\'tr\').remove()">Supprimer</button></td>';tb.appendChild(tr);}
 function adminProfsPanel(){
   const rows=uniqueProfs().map(p=>`<tr class="adm-prof-row" data-old="${esc(p)}"><td><input type="text" data-field="name" data-old="${esc(p)}" value="${esc(p)}" onblur="adminProfNameChanged(this)"></td><td><input type="text" data-field="lastname" value="${esc(PROF_LASTNAME[p]||'')}" placeholder="ex : Delisle"></td><td><input type="color" data-field="pc" value="${esc(PC[p]||'#334155')}"></td><td><input type="color" data-field="pb" value="${esc(PB[p]||'#e2e8f0')}"></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td></tr>`).join('');
-  return `<section class="admin-panel" data-admin-panel="profs"><div class="admin-note"><b>Professeurs.</b> Ajoute ou renomme un prof ici : il devient immédiatement disponible dans les répartitions / créneaux. Le nom de famille est optionnel : il sert uniquement aux affiches de l’onglet Vestiaires (à défaut, le prénom est affiché).</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddProfRow()">＋ Ajouter un prof</button></div><table class="admin-grid" id="admin-profs"><colgroup><col style="width:26%"><col style="width:24%"><col style="width:16%"><col style="width:16%"><col style="width:18%"></colgroup><thead><tr><th>Nom / initiales</th><th>Nom de famille</th><th>Couleur texte</th><th>Couleur fond</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
+  return `<section class="admin-panel" data-admin-panel="profs"><div class="admin-note"><b>Professeurs.</b> Le <b>prénom</b> est l’identifiant du prof utilisé partout dans l’appli (EDT, créneaux, vestiaires…) : le modifier ici renomme automatiquement toutes ses occurrences sur l’ensemble de l’emploi du temps dès l’enregistrement. Le <b>nom de famille</b> est optionnel : il sert uniquement aux affiches de l’onglet Vestiaires (à défaut, le prénom est affiché) — le modifier met aussi à jour son affichage partout où il est utilisé.</div><div class="admin-addbar"><button class="admin-mini-btn" onclick="adminAddProfRow()">＋ Ajouter un prof</button></div><table class="admin-grid" id="admin-profs"><colgroup><col style="width:26%"><col style="width:24%"><col style="width:16%"><col style="width:16%"><col style="width:18%"></colgroup><thead><tr><th>Prénom</th><th>Nom de famille</th><th>Couleur texte</th><th>Couleur fond</th><th>Action</th></tr></thead><tbody>${rows}</tbody></table></section>`;
 }
 function adminAddProfRow(){const tb=document.querySelector('#admin-profs tbody');if(!tb)return;let base='Nouveau',n=base,i=1;const existing=adminProfNamesFromPanel();while(existing.includes(n))n=base+' '+(++i);const tr=document.createElement('tr');tr.className='adm-prof-row';tr.dataset.old='';tr.innerHTML=`<td><input type="text" data-field="name" data-old="" value="${esc(n)}" onblur="adminProfNameChanged(this)"></td><td><input type="text" data-field="lastname" value=""></td><td><input type="color" data-field="pc" value="#334155"></td><td><input type="color" data-field="pb" value="#e2e8f0"></td><td><button class="admin-mini-btn danger" onclick="this.closest('tr').remove();adminRefreshLinkedSelects()">Supprimer</button></td>`;tb.appendChild(tr);adminRefreshLinkedSelects();}
 function adminSavePanel(){return `<section class="admin-panel" data-admin-panel="save"><div class="admin-note"><b>Sauvegarde.</b> Les modifications sont sauvegardées automatiquement dans le navigateur. Pour sécuriser le travail ou changer d’ordinateur, utilise l’export complet JSON.</div><div class="admin-backup"><div class="admin-card"><h3>Sauvegarde complète</h3><p>Exporte ou importe le planning, les APSA, les classes, les horaires, les regroupements, les PFMP et les installations.</p><button class="bc" onclick="exportJSON()">💾 Exporter JSON complet</button> <button class="bn" onclick="importJSON()">📂 Importer JSON</button></div><div class="admin-card"><h3>Publier pour les collègues</h3><p>L’appli est un simple site (pas de serveur) : tes modifications restent dans TON navigateur tant que tu ne publies pas. Pour qu’un changement soit visible par les autres : clique « Publier », puis remplace le fichier <code>data.json</code> à la racine du dépôt GitHub par celui téléchargé et pousse (commit + push). Chaque navigateur (le tien inclus) récupère automatiquement la dernière version publiée à son prochain chargement.</p><p><b>⚠️ Important :</b> <code>data.json</code> est un bloc généré d’un coup — il ne se fusionne jamais correctement ligne à ligne. Avant de publier, récupère (pull) la dernière version du dépôt pour éviter tout écart. Si GitHub signale un conflit sur <code>data.json</code>, ne fais JAMAIS de fusion manuelle : remplace-le entièrement par le fichier fraîchement téléchargé ici (« garder la version mienne » / écraser). Depuis peu, si un fichier corrompu ou incomplet finit quand même par être publié, l’appli affiche un avertissement au chargement plutôt que d’ignorer le problème en silence.</p><button class="bc" onclick="publishData()">📤 Publier (data.json)</button></div><div class="admin-card"><h3>Copie locale manuelle</h3><p>Crée une copie de secours dans ce navigateur.</p><button class="bc" onclick="makeLocalBackup()">Créer une copie locale</button> <button class="bn" onclick="restoreLocalBackup()">Restaurer la copie locale</button></div><div class="admin-card"><h3>Réinitialisation</h3><p>Supprime la sauvegarde locale de cette version. À utiliser seulement si tu veux repartir du fichier de base.</p><button class="bd" onclick="resetAdminLocal()">Réinitialiser la version locale</button></div></div></section>`;}
