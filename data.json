@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 5,
-  "publishedAt": "2026-09-01T07:26:29.219Z",
+  "publishedVersion": 6,
+  "publishedAt": "2026-09-01T10:00:42.619Z",
   "state": {
     "version": "v28",
     "c": {
@@ -8610,50 +8610,50 @@
           "role": ""
         },
         "26": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
         "28": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
         "29": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
         "30": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Biathlon",
+          "n": "DH",
           "ca": "CA1",
           "loc": "DH",
-          "c": "#16a34a",
+          "c": "#008000",
           "ovr": false,
           "role": ""
         },
@@ -12934,52 +12934,59 @@
           "role": ""
         },
         "26": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "27": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "31": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "34": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "35": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "Basket 3c3",
+          "n": "Badminton",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         }
       },
@@ -15344,79 +15351,83 @@
           "role": ""
         },
         "26": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "27": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "28": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "29": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "30": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "31": {
-          "n": "Biathlon",
-          "ca": "CA1",
+          "n": "Basket",
+          "ca": "CA4",
           "loc": "DH",
-          "c": "#16a34a",
-          "ovr": false,
+          "c": "#4ade80",
+          "ovr": true,
           "role": ""
         },
         "35": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "36": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "37": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "📍 PG",
-          "ca": "LOC",
+          "n": "Tennis de table",
+          "ca": "CA4",
           "loc": "PG",
-          "c": "#d35400",
+          "c": "#ea580c",
+          "ovr": false,
           "role": ""
         }
       },
@@ -16356,6 +16367,13 @@
         "loc": "GG",
         "c": "#dc2626",
         "ovr": false
+      },
+      {
+        "n": "Basket",
+        "ca": "CA4",
+        "loc": "DH",
+        "c": "#4ade80",
+        "ovr": true
       }
     ],
     "days": [
