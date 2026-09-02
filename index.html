@@ -24,17 +24,27 @@ td.td-w.merge-pick{outline:3px solid #fbbf24!important;outline-offset:-3px!impor
 td.td-w.merge-top{vertical-align:middle}
 .merge-link-icon{position:absolute;bottom:2px;right:4px;font-size:8px;opacity:.8;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4))}
 
-/* TOPBAR */
+/* TOPBAR — bandeau bleu unique, TOUJOURS visible (y compris en mode Vue/consultation, donc pour les
+   enseignants) : logo, titre, et TOUTE la navigation (Jours, Profs, Niveaux, Vestiaires, Export PDF,
+   APSA), plus le bouton Administration. Restructuré le 02/09/2026 : avant cette date, #topbar contenait
+   aussi les actions d'édition (Exporter/Importer/Fusionner…) et était entièrement masqué en mode Vue — ce
+   qui rendait au passage les menus Profs/Niveaux (alors logés ici) inaccessibles aux enseignants
+   consultant l'appli publiée. Les actions d'édition ont été déplacées dans #adminBar (masqué sauf en mode
+   Admin) ; la navigation, elle, reste ici et est désormais accessible à tous. */
 #topbar{background:#0C447C;color:var(--htxt);padding:3px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;position:sticky;top:0;z-index:400;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-#modeBar{display:flex;justify-content:flex-end;padding:2px 10px 0;background:var(--bg)}
-#modeBar .tbtn{font-size:10px;padding:4px 10px;opacity:.75}
-#modeBar .tbtn:hover{opacity:1}
-body.mode-view #topbar,body.mode-view #palbar{display:none}
-body.mode-view #tabbar{top:0}
-body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity:1}
-#topbar h1{font-size:13px;font-weight:600;white-space:nowrap;letter-spacing:.02em}
+#topbar h1{font-size:13px;font-weight:600;white-space:nowrap;letter-spacing:.02em;display:flex;align-items:center;gap:7px}
 #topbar .app-logo{width:28px;height:28px;border-radius:8px;object-fit:cover;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.22);flex-shrink:0}
-#topbar h1{display:flex;align-items:center;gap:7px}
+/* Bouton Administration ("réglages") : plaqué à droite du bandeau. En mode Vue, .tbtn (texte quasi blanc
+   translucide) est parfaitement lisible ici car #topbar a un fond FONCÉ — contrairement à l'ancien
+   #modeBar qui avait un fond clair et nécessitait un traitement spécial (leçon du 01/09/2026, toujours
+   valable si .tbtn est un jour replacé sur un fond clair ailleurs). En mode Admin, le bouton passe en
+   orange plein pour signaler clairement l'état actif. */
+#modeToggleBtn{margin-left:auto;font-weight:600}
+body.mode-admin #modeToggleBtn{background:var(--warn,#b45309);color:#fff;border-color:transparent;opacity:1}
+/* #adminBar regroupe les actions d'édition/administration (Exporter, Importer, Effacer, Fusionner…) :
+   réservées à l'administration, jamais visibles des enseignants en mode Vue. */
+#adminBar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:4px 10px;background:#0a3a69;border-bottom:1px solid rgba(0,0,0,.2)}
+body.mode-view #adminBar,body.mode-view #palbar{display:none}
 #installPwaBtn{border-color:rgba(14,165,233,.4);color:#7dd3fc}
 @media (display-mode:standalone){#installPwaBtn{display:none!important}}
 
@@ -45,7 +55,6 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 .tbtn.r{border-color:rgba(248,113,113,.3);color:#fca5a5}
 .tbtn.v{border-color:rgba(200,180,255,.4);color:#d8b4fe}
 #ss{font-size:9px;color:rgba(255,255,255,.35)}
-.version-tag{font-size:9px;font-weight:600;color:rgba(255,255,255,.45);margin-left:5px}
 .tbtn.on{background:rgba(252,211,77,.18);border-color:rgba(252,211,77,.55);color:#fde68a}
 /* Variante de .tbtn pour un fond CLAIR (cartes/sections blanches — Vestiaires, Export PDF) : .tbtn de
    base est prévu pour la barre d'outils sombre (texte quasi blanc sur fond translucide blanc), donc
@@ -60,7 +69,10 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 .helpitem{white-space:nowrap}
 
 /* PALETTE */
-#palbar{background:#0a3a69;border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:27px;z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:120px}
+/* top:var(--topbarH) au lieu d'un pixel fixe : #topbar contient désormais toute la barre d'onglets et peut
+   passer sur 2 lignes selon la largeur d'écran / le nombre de profs-niveaux — sa hauteur réelle est donc
+   mesurée en JS (voir syncTopbarHeight()) plutôt que devinée. */
+#palbar{background:#0a3a69;border-bottom:1px solid rgba(0,0,0,.2);position:sticky;top:var(--topbarH,34px);z-index:390;overflow:hidden;transition:max-height .22s ease;max-height:120px}
 #palbar.closed{max-height:0;border-bottom:none}
 #palbody{padding:4px 10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .selbox{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 7px}
@@ -92,16 +104,19 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 .legchip{font-size:8px;font-weight:600;color:#fff;border-radius:4px;padding:2px 5px;line-height:1}
 .clear-sel{font-size:9px;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.75);border-radius:4px;padding:2px 6px;cursor:pointer}.clear-sel:hover{background:rgba(255,255,255,.2);color:#fff}
 
-/* TABS */
-#tabbar{display:flex;padding:3px 10px 0;gap:3px;background:var(--bg);border-bottom:2px solid var(--brd2);flex-wrap:wrap;align-items:flex-end}
-.tab-label{align-self:center;font-size:9px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;margin:0 4px 3px 8px;opacity:.75}
+/* TABS — la barre d'onglets vit maintenant À L'INTÉRIEUR du bandeau bleu #topbar (voir buildTabs()), et
+   n'est donc plus jamais un bandeau clair séparé : .tab / .tab-label / .tab.level-tab sont stylés ici pour
+   un fond FONCÉ (mêmes tons que .tbtn/.topselect juste à côté dans le bandeau). .tab.impression-tab garde
+   son vert plein (déjà lisible sur fond bleu) ; .tab.vestiaires-tab est passé du bleu marque (#0C447C,
+   devenu invisible puisqu'identique au fond du bandeau) à un sarcelle foncé pour rester distinct. */
+#tabbar{display:flex;flex-wrap:wrap;gap:4px;align-items:center;flex:1 1 auto;min-width:0}
+.tab-label{align-self:center;font-size:9px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin:0 4px 0 8px;opacity:1}
 .tab-label:first-child{margin-left:0}
-.tab.prof-tab{padding:3px 8px}
-.tab.level-tab{padding:3px 8px;border-color:rgba(0,0,0,.04);background:rgba(255,255,255,.35)}
+.tab.level-tab{padding:3px 8px;border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.12);color:#fff}
 .tab.impression-tab{padding:3px 8px;border-color:rgba(0,0,0,.04);background:#16a34a;color:#fff;font-weight:600}
 .tab.impression-tab.on{background:#15803d}
-.tab.vestiaires-tab{padding:3px 8px;border-color:rgba(0,0,0,.04);background:#0C447C;color:#fff;font-weight:600}
-.tab.vestiaires-tab.on{background:#0a3a69}
+.tab.vestiaires-tab{padding:3px 8px;border-color:rgba(0,0,0,.04);background:#0f766e;color:#fff;font-weight:600}
+.tab.vestiaires-tab.on{background:#115e59}
 .vest-view .view-section{max-width:900px}
 .vest-table td,.vest-table th{font-size:11px}
 .vest-select{font-size:10px;border:1px solid #cbd5e1;border-radius:4px;padding:3px 5px;background:#fff;color:#111827;width:100%}
@@ -112,7 +127,15 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 .vest-tt-table{width:100%;table-layout:fixed;border-collapse:collapse}
 .vest-tt-table th,.vest-tt-table td{border:1px solid rgba(90,84,68,.14);font-size:10px;vertical-align:top;padding:3px 4px}
 .vest-tt-table th{background:#f4f2ec;font-weight:600;text-align:left}
-.vest-tt-table td.vest-tt-h{background:#f8f7f3;font-weight:600;white-space:nowrap;width:78px}
+.vest-tt-table td.vest-tt-h{background:#f8f7f3;font-weight:600;white-space:nowrap;width:56px;color:#57544a}
+.vest-tt-table td.vest-tt-h.vest-tt-h-half{font-weight:400;color:#9a9686;font-size:9px}
+/* Ligne d'heure pleine (8h, 9h, 10h…) marquée d'un trait plus net pour repérer rapidement l'échelle — les
+   demi-heures intermédiaires (8h30, 9h30…) gardent le quadrillage fin normal (border par défaut ci-dessus). */
+.vest-tt-table tr.vest-tt-hourline>td{border-top:1.5px solid rgba(46,45,41,.32)}
+/* Case occupée (rowSpan sur plusieurs lignes de 30 min) : fond teinté + liseré bleu marque à gauche, pour
+   qu'un bloc fusionné se lise comme UN SEUL créneau continu (dont la hauteur — proportionnelle au nombre de
+   lignes de 30 min qu'il couvre — rend la durée visible sans avoir besoin de l'écrire). */
+.vest-tt-table td.vest-tt-block{background:rgba(12,68,124,.07);border-left:3px solid #0C447C;vertical-align:top}
 .vest-tt-entry{display:flex;flex-direction:column;gap:0;padding:2px 3px;margin-bottom:2px;border-radius:4px;background:rgba(90,84,68,.06)}
 .vest-tt-entry:last-child{margin-bottom:0}
 .vest-tt-cl{font-weight:600;display:flex;align-items:center;gap:3px;flex-wrap:wrap}
@@ -122,10 +145,10 @@ body.mode-admin #modeBar .tbtn{background:var(--warn,#b45309);color:#fff;opacity
 /* Conteneur hors-écran utilisé pour rasteriser (html2canvas) le contenu des exports PDF (Impression) :
    pas display:none (html2canvas a besoin d'un layout réel) — juste déplacé hors du viewport visible. */
 #pdf-capture-target{position:fixed;left:-10000px;top:0;background:#fff;z-index:-1;pointer-events:none}
-.tab.level-tab.on{background:var(--surf)}
-.tab{padding:2px 10px;border-radius:4px 4px 0 0;font-size:10.5px;font-weight:500;cursor:pointer;border:1px solid transparent;color:var(--mut)}
-.tab:hover{background:var(--surf)}
-.tab.on{background:var(--surf);border-color:var(--brd2);border-bottom-color:var(--surf);color:var(--txt);font-weight:600;margin-bottom:-2px}
+.tab.level-tab.on{background:#fff;color:#0C447C}
+.tab{padding:3px 10px;border-radius:4px;font-size:10.5px;font-weight:500;cursor:pointer;border:1px solid transparent;color:rgba(255,255,255,.72)}
+.tab:hover{background:rgba(255,255,255,.14)}
+.tab.on{background:#fff;border-color:#fff;color:#0C447C;font-weight:600}
 .tbadge{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:var(--brd2);color:var(--mut);font-size:8px;font-weight:700;margin-left:3px}
 .tab.on .tbadge{background:var(--hdr);color:#fff}
 
@@ -256,8 +279,7 @@ tfoot.hidden-weeks{display:none}
 body.fullscreen-mode{--LW:148px;--WW:calc((100vw - 168px)/44);--GRIDW:calc(100vw - 20px)}
 body.fullscreen-mode #topbar{padding:2px 8px;gap:6px}
 body.fullscreen-mode #palbody{padding:3px 8px;gap:4px}
-body.fullscreen-mode #tabbar{padding:3px 8px 0;gap:3px}
-body.fullscreen-mode .scroll-outer{max-height:calc(100vh - 76px)}
+body.fullscreen-mode .scroll-outer{max-height:calc(100vh - var(--topbarH,34px) - 20px)}
 body.fullscreen-mode .view-title{display:none}
 body.fullscreen-mode .view-section{margin-right:4px;margin-bottom:5px}
 body.fullscreen-mode .view-section h3{padding:2px 0 1px}
@@ -342,17 +364,21 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
 <body>
 
 <div id="topbar">
-  <h1><img class="app-logo" src="assets/icons/icon-192.png" alt="Logo EDT EPS"> EDT EPS <span class="version-tag" id="appVersionTag"></span></h1>
-  <div class="sep"></div>
+  <h1><img class="app-logo" src="assets/icons/icon-192.png" alt="Logo EDT EPS"> EDT EPS</h1>
+  <div id="tabbar"></div>
+  <button id="modeToggleBtn" class="tbtn" onclick="toggleAppMode()">⚙️ Administration</button>
+</div>
+
+<div id="adminBar">
   <button class="tbtn g" onclick="exportJSON()">💾 Exporter</button>
   <button class="tbtn" onclick="importJSON()">📂 Importer</button>
   <button class="tbtn r" onclick="clearAll()">🗑 Effacer</button>
   <div class="sep"></div>
   <button class="tbtn v" id="role-btn" onclick="toggleRoleMode()">✍️ Préciser Cycle</button>
   <button class="tbtn v" id="merge-btn" onclick="toggleMergeMode()">🔗 Fusionner</button>
-  <select id="apsa-filter" class="topselect" onchange="setApsaFilter(this.value)" title="Filtrer l’EDT complet par APSA"><option value="">🔎 Toutes APSA</option></select>
+  <div class="sep"></div>
   <button class="tbtn" onclick="toggleFullScreen()">⛶ Plein écran</button>
-  <button class="tbtn" onclick="openAdmin()">⚙️ Administration</button>
+  <button class="tbtn" onclick="openAdmin()">⚙️ Réglages avancés</button>
   <div class="sep"></div>
   <span id="ss">● Sauvegarde auto</span>
 </div>
@@ -386,11 +412,6 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
   </div>
 </div>
 
-<div id="modeBar">
-  <button id="modeToggleBtn" class="tbtn" onclick="toggleAppMode()">⚙️ Administration</button>
-</div>
-
-<div id="tabbar"></div>
 <div id="panels"></div>
 
 <div id="conflict-toast"></div>
@@ -808,7 +829,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v15';
+const APP_VERSION='v18';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -1921,7 +1942,6 @@ function buildTabs(){
   const tb=document.getElementById('tabbar'),pn=document.getElementById('panels');
   tb.innerHTML='';pn.innerHTML='';
   let first=true;
-  const addLabel=txt=>{const s=document.createElement('span');s.className='tab-label';s.textContent=txt;tb.appendChild(s);};
   const addTab=(key,label,contentFn,cls='')=>{
     const t=document.createElement('div');t.className='tab '+cls+(first?' on':'');t.dataset.key=key;t.textContent=label;
     t.addEventListener('click',()=>swTab(key));tb.appendChild(t);
@@ -1929,16 +1949,66 @@ function buildTabs(){
     p.appendChild(contentFn());pn.appendChild(p);
     first=false;
   };
-  addLabel('Jours');
+  // Panneau construit et ajouté à #panels comme les autres, mais SANS pastille .tab dans la barre —
+  // navigable uniquement via le menu déroulant correspondant du bandeau (#prof-nav / #level-nav), sur le
+  // même principe que le filtre APSA (select du bandeau + swTab()). Utilisé pour Profs et Niveaux
+  // (01/09/2026) afin de regagner de la place dans la barre d'onglets, qui devenait très longue (un onglet
+  // par prof + un par niveau, en plus des jours).
+  const addPanelOnly=(key,contentFn)=>{
+    const p=document.createElement('div');p.className='panel'+(first?' on':'');p.dataset.key=key;p.id='pan-'+key;
+    p.appendChild(contentFn());pn.appendChild(p);
+    first=false;
+  };
+  // Menus déroulants (Profs, Niveaux, filtre APSA) recréés à chaque buildTabs() — comme le reste de la
+  // barre — et insérés directement dans #tabbar, au fil de l'eau, dans l'ordre demandé (02/09/2026) :
+  // Jours, Profs, Niveaux, Vestiaires, Export PDF, puis APSA. #tabbar vit maintenant dans le bandeau bleu
+  // #topbar, qui n'est plus jamais masqué : Profs/Niveaux redeviennent donc accessibles aux enseignants en
+  // mode consultation (ils étaient auparavant coincés dans l'ancien #topbar réservé à l'administration).
+  const addSelect=(id,firstOptionLabel,title,onChangeFn)=>{
+    const sel=document.createElement('select');
+    sel.id=id;sel.className='topselect';sel.title=title;
+    sel.innerHTML=`<option value="">${firstOptionLabel}</option>`;
+    sel.addEventListener('change',()=>onChangeFn(sel.value));
+    tb.appendChild(sel);
+    return sel;
+  };
   DAYS.forEach((day,di)=>addTab('day'+di,day.name,()=>buildSinglePanel(day,di)));
-  addLabel('Profs');
-  uniqueProfs().forEach(prof=>addTab('prof-'+prof,prof,()=>buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===prof),`Programmation annuelle — ${prof}`),'prof-tab'));
-  addLabel('Niveaux');
-  LEVEL_TABS.forEach(g=>addTab('lvl-'+g.k,g.l,()=>buildLevelPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===g.k),`Vue annuelle — ${g.l}`),'level-tab'));
-  addLabel('Filtres');
-  addTab('apsa-filter',currentApsaFilter?`APSA · ${currentApsaFilter}`:'APSA',()=>buildApsaPanel(),'level-tab');
-  addTab('impression','📄 Export PDF',()=>buildImpressionPanel(),'impression-tab');
+  addSelect('prof-nav','👤 Prof','Aller à la programmation annuelle d’un enseignant',v=>{if(v)swTab('prof-'+v);});
+  addSelect('level-nav','🎓 Niveau','Aller à la vue annuelle d’un niveau',v=>{if(v)swTab('lvl-'+v);});
   addTab('vestiaires','🧺 Vestiaires',()=>buildVestiairesPanel(),'vestiaires-tab');
+  addTab('impression','📄 Export PDF',()=>buildImpressionPanel(),'impression-tab');
+  const sep=document.createElement('div');sep.className='sep';tb.appendChild(sep);
+  addSelect('apsa-filter','🔎 Toutes APSA','Filtrer l’EDT complet par APSA',v=>setApsaFilter(v));
+  addTab('apsa-filter',currentApsaFilter?`APSA · ${currentApsaFilter}`:'APSA',()=>buildApsaPanel(),'level-tab');
+  uniqueProfs().forEach(prof=>addPanelOnly('prof-'+prof,()=>buildGroupedPanel(allRowMetas().filter(m=>m.row.prof===prof),`Programmation annuelle — ${prof}`)));
+  LEVEL_TABS.forEach(g=>addPanelOnly('lvl-'+g.k,()=>buildLevelPanel(allRowMetas().filter(m=>levelKey(m.row.cl)===g.k),`Vue annuelle — ${g.l}`)));
+  updateProfNavOptions();
+  updateLevelNavOptions();
+  updateApsaFilterOptions();
+  syncTopbarHeight();
+}
+// Mesure la hauteur réelle de #topbar (peut varier : 1 ou 2 lignes selon la largeur d'écran et le nombre
+// de profs/niveaux) pour positionner correctement #palbar juste en-dessous (voir --topbarH en CSS) plutôt
+// que de deviner une valeur fixe qui se déréglerait dès que la barre passe sur 2 lignes.
+function syncTopbarHeight(){
+  const t=document.getElementById('topbar');
+  if(t)document.documentElement.style.setProperty('--topbarH',t.offsetHeight+'px');
+}
+window.addEventListener('resize',()=>{clearTimeout(window.__topbarHT);window.__topbarHT=setTimeout(syncTopbarHeight,120);});
+// Remplit le menu déroulant "👤 Prof" du bandeau — rappelé à chaque buildTabs() pour rester à jour si un
+// prof est renommé/ajouté/retiré. Conserve la sélection en cours si le prof choisi existe toujours.
+function updateProfNavOptions(){
+  const sel=document.getElementById('prof-nav');if(!sel)return;
+  const old=sel.value;
+  const profs=uniqueProfs();
+  sel.innerHTML='<option value="">👤 Prof</option>'+profs.map(p=>`<option value="${esc(p)}">${esc(p)}</option>`).join('');
+  sel.value=profs.includes(old)?old:'';
+}
+function updateLevelNavOptions(){
+  const sel=document.getElementById('level-nav');if(!sel)return;
+  const old=sel.value;
+  sel.innerHTML='<option value="">🎓 Niveau</option>'+LEVEL_TABS.map(g=>`<option value="${esc(g.k)}">${esc(g.l)}</option>`).join('');
+  sel.value=LEVEL_TABS.some(g=>g.k===old)?old:'';
 }
 function buildImpressionPanel(){
   const o=document.createElement('div');o.className='scroll-outer multi-view';
@@ -2217,7 +2287,7 @@ function buildVestiairesPanel(){
   const ttl=document.createElement('div');ttl.className='view-title';ttl.textContent='Vestiaires — planning hebdomadaire et affectation par créneau';
   o.appendChild(ttl);
   const intro=document.createElement('div');intro.className='admin-note';intro.style.margin='0 10px 12px 0';
-  intro.innerHTML='<b>Comment ça marche.</b> Pour chaque créneau, choisis un vestiaire garçons ET un vestiaire filles (1 à 5) — ou « Pas nécessaire » si ce vestiaire ne sert pas pour cette classe (ex : pas de filles). C’est le même planning type chaque semaine, indépendant du cycle en cours. Le nom affiché est le nom de famille renseigné dans Administration → Profs (à défaut, le prénom est affiché). Une fois réglé, exporte un PDF par vestiaire tout en bas pour l’accrocher sur la porte.';
+  intro.innerHTML='<b>Comment ça marche.</b> Pour chaque créneau, choisis un vestiaire garçons ET un vestiaire filles (1 à 5) — ou « Pas nécessaire » si ce vestiaire ne sert pas pour cette classe (ex : pas de filles). C’est le même planning type chaque semaine, indépendant du cycle en cours. Le nom affiché est le nom de famille renseigné dans Administration → Profs (à défaut, le prénom est affiché). Une fois réglé, retrouve la vue d’ensemble par vestiaire tout en bas (et son export PDF).';
   o.appendChild(intro);
 
   DAYS.forEach((day,di)=>{
@@ -2235,17 +2305,6 @@ function buildVestiairesPanel(){
     }
     o.appendChild(sec);
   });
-
-  const printSec=document.createElement('section');printSec.className='view-section vest-print-section';
-  const ph=document.createElement('h3');ph.textContent='Affiches PDF à exporter (une par vestiaire)';printSec.appendChild(ph);
-  const btnRow=document.createElement('div');btnRow.className='vest-print-btns';
-  VEST_OPTIONS.forEach(n=>{
-    const b=document.createElement('button');b.className='tbtn-solid';b.textContent=`📄 PDF — Vestiaire ${n}`;
-    b.onclick=()=>exportVestiairePdf(n);
-    btnRow.appendChild(b);
-  });
-  printSec.appendChild(btnRow);
-  o.appendChild(printSec);
 
   const daySec=document.createElement('section');daySec.className='view-section vest-print-section';
   const dh=document.createElement('h3');dh.textContent='Récapitulatifs PDF compacts (un par jour, 1 page)';daySec.appendChild(dh);
@@ -2279,46 +2338,109 @@ function buildVestiairesPanel(){
 
   return o;
 }
-// Liste des horaires distincts sur toute la semaine, triés par heure de début — sert d'axe des lignes
-// pour l'emploi du temps par vestiaire (les jours n'ont pas forcément tous les mêmes créneaux).
-function vestTimetableSlots(){
-  const seen=new Set();
-  DAYS.forEach(day=>day.rows.forEach(r=>{if(r.h)seen.add(r.h);}));
-  return [...seen].sort((a,b)=>parseH(a).s-parseH(b).s);
+// ══ Grille "emploi du temps par vestiaire" à lignes de 30 minutes (v16, 01/09/2026) ══
+// Avant : une ligne par horaire TEXTUEL distinct ("8h30–10h" etc.), toutes de même hauteur — la durée
+// réelle d'un créneau n'était donc pas visible (un cours de 30 min et un cours de 2h occupaient une seule
+// ligne identique). Désormais : un axe des temps à pas fixe de 30 minutes (couvrant tout l'intervalle
+// [horaire le plus tôt, horaire le plus tard] réellement utilisé dans DAYS), et chaque créneau occupe
+// autant de lignes de 30 min que sa durée réelle (rowSpan) — la HAUTEUR du bloc rend donc la durée
+// visible sans avoir besoin de l'écrire, comme un vrai emploi du temps de calendrier.
+function fmtHmin(mins){
+  const h=Math.floor(mins/60),m=((mins%60)+60)%60;
+  return m===0?`${h}h`:`${h}h${String(m).padStart(2,'0')}`;
 }
-// Toutes les entrées (classe+genre) affectées au vestiaire n pour un jour/horaire donné — factorisé pour
-// être réutilisé à la fois par le rendu écran (vestTimetableCellHtml) et par l'export PDF.
-function vestTimetableMatches(n,di,horaire){
+// Axe des temps commun à tout l'onglet Vestiaires : pas de 30 min, bornes arrondies au dernier/prochain
+// palier de 30 min pour englober tous les horaires réellement saisis dans DAYS (indépendamment de toute
+// affectation de vestiaire — un créneau sans vestiaire assigné compte quand même pour définir l'échelle).
+function vestTimeGrid(){
+  let minS=Infinity,maxE=-Infinity;
+  DAYS.forEach(day=>day.rows.forEach(r=>{
+    if(!r.h)return;
+    const{s,e}=parseH(r.h);
+    if(!(e>s))return;
+    if(s<minS)minS=s;
+    if(e>maxE)maxE=e;
+  }));
+  const STEP=30;
+  if(!isFinite(minS)||!isFinite(maxE))return{step:STEP,start:0,end:0,rows:[]};
+  const start=Math.floor(minS/STEP)*STEP,end=Math.ceil(maxE/STEP)*STEP;
+  const rows=[];
+  for(let t=start;t<end;t+=STEP)rows.push({start:t,label:fmtHmin(t)});
+  return{step:STEP,start,end,rows};
+}
+// Pour un vestiaire et un jour donnés, regroupe les créneaux affectés en BLOCS visuels alignés sur la
+// grille de 30 min : chaque bloc = un intervalle [rowStart,rowEnd) de lignes consécutives (rowEnd-rowStart
+// = durée réelle / 30 min), portant la ou les entrées (classe+prof+genre) qui s'y trouvent. Deux créneaux
+// qui ne se chevauchent pas dans le temps donnent deux blocs séparés, chacun avec son propre rowSpan
+// proportionnel à sa durée. Deux créneaux qui SE CHEVAUCHENT (même vestiaire, même jour, plages horaires
+// différentes mais qui se recoupent — un vrai double-emploi) sont fusionnés en un seul bloc englobant avec
+// chaque entrée listée dedans (comme avant l'introduction des lignes de 30 min) : un tableau HTML ne peut
+// pas avoir deux cellules à la même position, et empiler les entrées reste le moyen le plus lisible de
+// signaler un conflit.
+function vestDayBlocks(n,di,grid){
   const day=DAYS[di];if(!day)return [];
-  const matches=[];
+  const items=[];
   day.rows.forEach(r=>{
-    if(r.h!==horaire)return;
+    if(!r.h)return;
+    const{s,e}=parseH(r.h);
+    if(!(e>s))return;
     VEST_GENDERS.forEach(g=>{
-      if(String(vestGet(r.id,g.k))===String(n))matches.push({r,g});
+      if(String(vestGet(r.id,g.k))===String(n)){
+        const rowStart=Math.max(0,Math.floor((s-grid.start)/grid.step));
+        const rowEnd=Math.min(grid.rows.length,Math.max(rowStart+1,Math.ceil((e-grid.start)/grid.step)));
+        items.push({r,g,rowStart,rowEnd});
+      }
     });
   });
-  return matches;
+  if(!items.length)return [];
+  items.sort((a,b)=>a.rowStart-b.rowStart||a.rowEnd-b.rowEnd);
+  const groups=[];let cur=null;
+  items.forEach(it=>{
+    if(cur&&it.rowStart<cur.rowEnd){cur.rowEnd=Math.max(cur.rowEnd,it.rowEnd);cur.items.push(it);}
+    else{cur={rowStart:it.rowStart,rowEnd:it.rowEnd,items:[it]};groups.push(cur);}
+  });
+  return groups;
 }
-function vestTimetableCellHtml(n,di,horaire){
-  const matches=vestTimetableMatches(n,di,horaire);
-  if(!matches.length)return '';
-  return matches.map(({r,g})=>`<div class="vest-tt-entry"><span class="vest-tt-cl">${vestClassHtml(r.cl)}</span><span class="vest-tt-prof">${esc(vestProfLabel(r.prof))}</span><span class="vest-tt-gender">${esc(g.label)}</span></div>`).join('');
+// Carte [ligne de 30 min → soit null (libre), soit {start:true,block} au début d'un bloc, soit
+// {start:false} sur les lignes couvertes par le rowSpan d'un bloc démarré plus haut] — factorisé pour être
+// réutilisé à la fois par le rendu écran (buildVestiaireTimetable) et par l'export PDF.
+function vestDayOccupancy(n,di,grid){
+  const arr=new Array(grid.rows.length).fill(null);
+  vestDayBlocks(n,di,grid).forEach(b=>{
+    for(let i=b.rowStart;i<b.rowEnd&&i<arr.length;i++)arr[i]=(i===b.rowStart)?{start:true,block:b}:{start:false};
+  });
+  return arr;
 }
 function buildVestiaireTimetable(n){
-  const slots=vestTimetableSlots();
+  const grid=vestTimeGrid();
   const table=document.createElement('table');table.className='pfmp-table vest-tt-table';
-  if(!slots.length){
+  if(!grid.rows.length){
     table.innerHTML='<tbody><tr><td class="empty-view">Aucun créneau défini pour le moment.</td></tr></tbody>';
     return table;
   }
+  const occ=DAYS.map((day,di)=>vestDayOccupancy(n,di,grid));
   const thead=`<thead><tr><th>Horaire</th>${DAYS.map(d=>`<th>${esc(d.name)}</th>`).join('')}</tr></thead>`;
-  const tbody=`<tbody>${slots.map(h=>`<tr><td class="vest-tt-h">${esc(h)}</td>${DAYS.map((day,di)=>`<td>${vestTimetableCellHtml(n,di,h)}</td>`).join('')}</tr>`).join('')}</tbody>`;
-  table.innerHTML=thead+tbody;
+  const bodyRows=grid.rows.map((row,ri)=>{
+    const isHour=row.start%60===0;
+    const cells=DAYS.map((day,di)=>{
+      const cell=occ[di][ri];
+      if(!cell)return '<td></td>';
+      if(!cell.start)return ''; // couverte par le rowSpan du bloc démarré plus haut
+      const span=cell.block.rowEnd-cell.block.rowStart;
+      const content=cell.block.items.map(({r,g})=>`<div class="vest-tt-entry"><span class="vest-tt-cl">${vestClassHtml(r.cl)}</span><span class="vest-tt-prof">${esc(vestProfLabel(r.prof))}</span><span class="vest-tt-gender">${esc(g.label)}</span></div>`).join('');
+      return `<td class="vest-tt-block" rowspan="${span}">${content}</td>`;
+    }).join('');
+    return `<tr${isHour?' class="vest-tt-hourline"':''}><td class="vest-tt-h${isHour?'':' vest-tt-h-half'}">${esc(row.label)}</td>${cells}</tr>`;
+  }).join('');
+  table.innerHTML=thead+`<tbody>${bodyRows}</tbody>`;
   return table;
 }
 // Export PDF de l'emploi du temps par vestiaire — une page par vestiaire (1 à 5) dans un seul fichier,
 // logos en tête de chaque page (site + lycée), numéro de vestiaire en très gros, aucun en-tête/pied de
 // page superflu (pas de date, pas de "page X/Y", pas d'URL) — juste le contenu utile.
+// v16 (01/09/2026) : reconstruit sur la même grille à lignes de 30 min que la vue écran
+// (buildVestiaireTimetable) — un créneau occupe désormais plusieurs lignes (rowSpan) proportionnellement
+// à sa durée réelle plutôt qu'une seule ligne de hauteur fixe quel que soit l'horaire.
 function exportVestiairesTimetablePdf(){
   const JsPDFCtor=window.jspdf&&window.jspdf.jsPDF;
   if(!JsPDFCtor){alert('Le générateur PDF n’a pas pu se charger. Recharge la page et réessaie.');return;}
@@ -2326,63 +2448,75 @@ function exportVestiairesTimetablePdf(){
   const M=1; // marges 1cm sur les 4 côtés, cohérent avec les autres exports Vestiaires
   const pageW=doc.internal.pageSize.getWidth(),pageH=doc.internal.pageSize.getHeight();
   const contentW=pageW-2*M;
-  const slots=vestTimetableSlots();
+  const grid=vestTimeGrid();
 
-  const hColW=2.9,dayColW=(contentW-hColW)/5;
+  const hColW=2.1,dayColW=(contentW-hColW)/5;
   const colX=[M,M+hColW,M+hColW+dayColW,M+hColW+dayColW*2,M+hColW+dayColW*3,M+hColW+dayColW*4];
   const colW=[hColW,dayColW,dayColW,dayColW,dayColW,dayColW];
-  const headerH=0.78;
+  const headerH=0.7;
   const BAND_Y=M+2.15+0.4; // doit rester cohérent avec bandH/gap de drawPdfHeaderBand
-  const availFirst=pageH-M-BAND_Y-headerH; // hauteur dispo pour les lignes sur une page AVEC bandeau logos
+  const availFirst=pageH-M-BAND_Y-headerH; // hauteur dispo pour la grille sur une page AVEC bandeau logos
   const contHeaderH=0.85; // hauteur du petit en-tête "(suite)" sur une page de continuation
-  const availCont=pageH-M-M-contHeaderH-headerH; // hauteur dispo sur une page de continuation
 
-  // Tailles de police nettement plus grandes et lisibles qu'avant (le tableau peut désormais se
-  // poursuivre sur une page supplémentaire "(suite)" plutôt que de réduire indéfiniment la police
-  // pour tout faire tenir sur une seule page — voir la pagination plus bas).
-  const FONT_STEPS=[{cl:12.5,pf:11},{cl:11.5,pf:10},{cl:10.5,pf:9.2},{cl:9.6,pf:8.4},{cl:8.8,pf:7.7}];
-  const CPAD=0.2,GAP=0.09,ROWMIN=0.85;
-  const LH=pt=>pt*0.05; // hauteur de ligne (cm) à la taille donnée, marge de sécurité incluse
-
-  // Dimensionnement à CONTENU CONNU (jamais approximatif) : pour chaque taille de police candidate
-  // (de la plus grande à la plus petite), on mesure le nombre RÉEL de lignes après retour à la ligne
-  // pour chaque texte affiché, dans CHAQUE vestiaire, et on en déduit la hauteur exacte requise par
-  // chaque ligne du tableau. Comme la hauteur de chaque ligne/cellule est calculée à partir du texte
-  // réellement affiché (et jamais rétrécie après coup indépendamment du texte), aucun texte ne peut
-  // déborder de sa case.
-  function layoutFor(n,step){
-    let rowH=ROWMIN;
-    return slots.map(h=>{
-      const cells=DAYS.map((day,di)=>vestTimetableMatches(n,di,h));
-      let thisRowH=ROWMIN;
-      const cellLayout=cells.map((entries,ci)=>{
-        if(!entries.length)return [];
-        const cw=colW[ci+1]-0.3;
-        let cellH=CPAD;
-        const laidOut=entries.map(({r,g},ei)=>{
-          doc.setFont('helvetica','bold');doc.setFontSize(step.cl);
-          const clLines=doc.splitTextToSize(vestClassSummary(r.cl),cw);
-          doc.setFont('helvetica','normal');doc.setFontSize(step.pf);
-          const pfLines=doc.splitTextToSize(`${vestProfLabel(r.prof)} · ${g.label}`,cw);
-          cellH+=clLines.length*LH(step.cl)+pfLines.length*LH(step.pf)+(ei>0?GAP:0);
-          return {clLines,pfLines};
-        });
-        thisRowH=Math.max(thisRowH,cellH);
-        return laidOut;
-      });
-      return {h,cellLayout,rowH:thisRowH};
+  if(!grid.rows.length){
+    VEST_OPTIONS.forEach((n,pageIdx)=>{
+      if(pageIdx>0)doc.addPage('a4','landscape');
+      const y=drawPdfHeaderBand(doc,M,`VESTIAIRE ${n}`,'Emploi du temps hebdomadaire');
+      doc.setFont('helvetica','normal');doc.setFontSize(12);
+      doc.text('Aucun créneau défini pour le moment.',M,y+0.6);
     });
+    doc.save('vestiaires-emploi-du-temps.pdf');
+    return;
+  }
+
+  // Tailles de police + hauteur de ligne (30 min) candidates, de la plus confortable à la plus compacte.
+  const FONT_STEPS=[{cl:10.5,pf:9.2,rowh:0.66},{cl:9.6,pf:8.4,rowh:0.6},{cl:8.8,pf:7.7,rowh:0.54},{cl:8,pf:7,rowh:0.48},{cl:7.2,pf:6.4,rowh:0.44}];
+  const CPAD=0.16,GAP=0.07;
+  const LH=pt=>pt*0.05;
+
+  // Hauteur de texte réellement nécessaire pour un bloc (toutes ses entrées empilées), à une taille de
+  // police donnée — même logique de mesure "à contenu connu" que les autres exports (jamais tronqué).
+  function measureBlock(block,step){
+    let h=CPAD;
+    block.items.forEach(({r,g},ei)=>{
+      doc.setFont('helvetica','bold');doc.setFontSize(step.cl);
+      const cw=dayColW-0.3;
+      const clLines=doc.splitTextToSize(vestClassSummary(r.cl),cw);
+      doc.setFont('helvetica','normal');doc.setFontSize(step.pf);
+      const pfLines=doc.splitTextToSize(`${vestProfLabel(r.prof)} · ${g.label}`,cw);
+      h+=clLines.length*LH(step.cl)+pfLines.length*LH(step.pf)+(ei>0?GAP:0);
+    });
+    return h;
+  }
+  // Pour un vestiaire et une police donnés : hauteur de CHAQUE ligne de 30 min = le palier de base, sauf
+  // la DERNIÈRE ligne d'un bloc qui absorbe l'éventuel supplément si son contenu textuel a besoin de plus
+  // de place que ce que son rowSpan (durée réelle) lui donne au palier de base — ainsi un bloc de 30 min
+  // avec un nom de classe long grandit d'exactement ce qu'il faut, sans casser l'alignement des autres
+  // colonnes sur cette même ligne (partagée par les 5 jours).
+  function layoutFor(n,step){
+    const occ=DAYS.map((day,di)=>vestDayOccupancy(n,di,grid));
+    const rowExtra=new Array(grid.rows.length).fill(0);
+    occ.forEach(dayOcc=>{
+      dayOcc.forEach(cell=>{
+        if(!cell||!cell.start)return;
+        const b=cell.block,span=b.rowEnd-b.rowStart;
+        const overflow=Math.max(0,measureBlock(b,step)-span*step.rowh);
+        const lastRow=b.rowEnd-1;
+        if(overflow>rowExtra[lastRow])rowExtra[lastRow]=overflow;
+      });
+    });
+    const rowH=grid.rows.map((row,ri)=>step.rowh+rowExtra[ri]);
+    return {occ,rowH};
   }
 
   // Choix d'UNE taille de police commune à tous les vestiaires (cohérence visuelle entre les pages) :
-  // on retient la plus grande taille qui permet à TOUS les vestiaires de tenir sur une seule page. Si
-  // aucune taille ne suffit (beaucoup de créneaux distincts), on garde la plus petite de la liste — qui
-  // reste nettement plus lisible que l'ancien palier minimal — et les vestiaires trop chargés se
-  // poursuivront sur une page "(suite)" plutôt que d'écraser encore la police.
+  // la plus grande qui permet à TOUS les vestiaires de tenir sur une seule page. Si aucune ne suffit
+  // (grand écart horaire dans la journée), on garde la plus petite — encore nettement lisible — et les
+  // vestiaires trop chargés se poursuivent sur une page "(suite)".
   let chosenStep=FONT_STEPS[FONT_STEPS.length-1],chosenLayouts=null;
   for(const step of FONT_STEPS){
     const layouts=VEST_OPTIONS.map(n=>layoutFor(n,step));
-    const allFit=layouts.every(rows=>rows.reduce((a,rd)=>a+rd.rowH,0)<=availFirst);
+    const allFit=layouts.every(({rowH})=>rowH.reduce((a,h)=>a+h,0)<=availFirst);
     if(allFit){chosenStep=step;chosenLayouts=layouts;break;}
   }
   if(!chosenLayouts)chosenLayouts=VEST_OPTIONS.map(n=>layoutFor(n,chosenStep));
@@ -2390,49 +2524,45 @@ function exportVestiairesTimetablePdf(){
   function drawColHeader(y0){
     doc.setFillColor(...PDF_BRAND);
     doc.rect(M,y0,contentW,headerH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11);
-    ['Horaire',...DAYS.map(d=>d.name)].forEach((l,i)=>doc.text(l,colX[i]+0.15,y0+headerH-0.27));
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10.5);
+    ['Horaire',...DAYS.map(d=>d.name)].forEach((l,i)=>doc.text(l,colX[i]+0.13,y0+headerH-0.24));
     doc.setTextColor(0,0,0);
     return y0+headerH;
   }
-  function drawRow(rd,y,idx){
-    const rowH=rd.rowH;
-    if(idx%2===1){doc.setFillColor(247,246,242);doc.rect(M,y,contentW,rowH,'F');}
-    doc.setDrawColor(210,210,205);
-    doc.rect(M,y,contentW,rowH);
-    for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
-    doc.setFont('helvetica','bold');doc.setFontSize(11);doc.setTextColor(0,0,0);
-    doc.text(rd.h,colX[0]+0.15,y+rowH/2+0.14,{baseline:'middle'});
-    rd.cellLayout.forEach((entries,ci)=>{
-      if(!entries.length)return;
-      const cx=colX[ci+1]+0.15;
-      let cy=y+CPAD/2+LH(chosenStep.cl)*0.78;
-      entries.forEach(({clLines,pfLines})=>{
-        doc.setFont('helvetica','bold');doc.setFontSize(chosenStep.cl);doc.setTextColor(0,0,0);
-        clLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosenStep.cl);});
-        doc.setFont('helvetica','normal');doc.setFontSize(chosenStep.pf);doc.setTextColor(95,95,95);
-        pfLines.forEach(line=>{doc.text(line,cx,cy);cy+=LH(chosenStep.pf);});
-        doc.setTextColor(0,0,0);
-        cy+=GAP;
-      });
+  // Dessine un bloc occupé (fond teinté + liseré bleu marque, comme à l'écran) : sa hauteur totale
+  // (somme des lignes de 30 min qu'il couvre) rend sa durée visible sans avoir à l'écrire.
+  function drawBlockCell(block,ci,y,h){
+    const x=colX[ci];
+    doc.setFillColor(232,238,244);doc.rect(x,y,colW[ci],h,'F');
+    doc.setDrawColor(180,180,175);doc.setLineWidth(0.012);doc.rect(x,y,colW[ci],h);
+    doc.setDrawColor(...PDF_BRAND);doc.setLineWidth(0.05);doc.line(x,y,x,y+h);
+    let cy=y+CPAD+LH(chosenStep.cl)*0.78;
+    const cw=colW[ci]-0.3;
+    block.items.forEach(({r,g})=>{
+      doc.setFont('helvetica','bold');doc.setFontSize(chosenStep.cl);doc.setTextColor(20,20,20);
+      const clLines=doc.splitTextToSize(vestClassSummary(r.cl),cw);
+      clLines.forEach(line=>{doc.text(line,x+0.15,cy);cy+=LH(chosenStep.cl);});
+      doc.setFont('helvetica','normal');doc.setFontSize(chosenStep.pf);doc.setTextColor(95,95,95);
+      const pfLines=doc.splitTextToSize(`${vestProfLabel(r.prof)} · ${g.label}`,cw);
+      pfLines.forEach(line=>{doc.text(line,x+0.15,cy);cy+=LH(chosenStep.pf);});
+      doc.setTextColor(0,0,0);
+      cy+=GAP;
     });
-    return y+rowH;
+  }
+  // Un saut de page ne peut se faire qu'à une ligne où aucun bloc n'est "en cours" (rowSpan démarré à une
+  // ligne précédente) dans AUCUNE colonne jour — sinon un bloc serait visuellement coupé en deux pages.
+  function isSafeBreak(occ,ri){
+    return occ.every(dayOcc=>{const c=dayOcc[ri];return !c||c.start;});
   }
 
   VEST_OPTIONS.forEach((n,pageIdx)=>{
     if(pageIdx>0)doc.addPage('a4','landscape');
     let y=drawPdfHeaderBand(doc,M,`VESTIAIRE ${n}`,'Emploi du temps hebdomadaire');
-
-    if(!slots.length){
-      doc.setFont('helvetica','normal');doc.setFontSize(12);
-      doc.text('Aucun créneau défini pour le moment.',M,y+0.6);
-      return;
-    }
-
-    const rows=chosenLayouts[pageIdx];
+    const {occ,rowH}=chosenLayouts[pageIdx];
     y=drawColHeader(y);
-    rows.forEach((rd,idx)=>{
-      if(y+rd.rowH>pageH-M){
+
+    for(let ri=0;ri<grid.rows.length;ri++){
+      if(y+rowH[ri]>pageH-M&&isSafeBreak(occ,ri)){
         doc.addPage('a4','landscape');
         let y2=M;
         doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(...PDF_BRAND);
@@ -2441,8 +2571,25 @@ function exportVestiairesTimetablePdf(){
         y2+=contHeaderH;
         y=drawColHeader(y2);
       }
-      y=drawRow(rd,y,idx);
-    });
+      const row=grid.rows[ri],h=rowH[ri],isHour=row.start%60===0;
+      doc.setDrawColor(210,210,205);doc.setLineWidth(isHour?0.03:0.012);
+      doc.rect(colX[0],y,colW[0],h);
+      doc.setFont('helvetica','bold');doc.setFontSize(isHour?9.5:8);
+      doc.setTextColor(isHour?30:140,isHour?30:140,isHour?30:135);
+      doc.text(fmtHmin(row.start),colX[0]+0.13,y+h/2,{baseline:'middle'});
+      doc.setTextColor(0,0,0);
+      DAYS.forEach((day,di)=>{
+        const cell=occ[di][ri],x=colX[di+1];
+        if(!cell){
+          doc.setDrawColor(210,210,205);doc.setLineWidth(isHour?0.03:0.012);
+          doc.rect(x,y,colW[di+1],h);
+        }else if(cell.start){
+          const blockH=rowH.slice(cell.block.rowStart,cell.block.rowEnd).reduce((a,v)=>a+v,0);
+          drawBlockCell(cell.block,di+1,y,blockH);
+        }
+      });
+      y+=h;
+    }
   });
 
   doc.save('vestiaires-emploi-du-temps.pdf');
@@ -2450,97 +2597,6 @@ function exportVestiairesTimetablePdf(){
 function vestHexToRgb(hex){
   const m=/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex||'');
   return m?{r:parseInt(m[1],16),g:parseInt(m[2],16),b:parseInt(m[3],16)}:{r:85,g:85,b:85};
-}
-// Affiche PDF autonome par vestiaire — paysage A4, marges 1cm, jour en très gros pour lecture sur porte.
-function exportVestiairePdf(n){
-  const JsPDFCtor=window.jspdf&&window.jspdf.jsPDF;
-  if(!JsPDFCtor){alert('Le générateur PDF n’a pas pu se charger. Recharge la page et réessaie.');return;}
-  const doc=new JsPDFCtor({orientation:'landscape',unit:'cm',format:'a4'});
-  const M=1; // marges 1cm sur les 4 côtés
-  const pageW=doc.internal.pageSize.getWidth(),pageH=doc.internal.pageSize.getHeight();
-  const contentW=pageW-2*M;
-  let y=M;
-
-  doc.setFont('helvetica','bold');doc.setFontSize(26);
-  doc.text(`Vestiaire ${n}`,M,y+0.9);
-  y+=1.45;
-  doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(100,100,100);
-  doc.text('Planning hebdomadaire — à afficher sur la porte',M,y);
-  doc.setTextColor(0,0,0);
-  y+=0.7;
-
-  const colX=[M,M+3.0,M+6.8,M+contentW-4.6];
-  const colW=[3.0,3.8,contentW-4.6-6.8,4.6];
-  const headerH=0.9,dayBarH=1.3;
-  // Police de cellule nettement agrandie (10→12.5) pour une lecture facile sur une porte de vestiaire ;
-  // la hauteur de ligne (et donc de chaque ligne du tableau) est calculée à partir du texte RÉELLEMENT
-  // affiché (retour à la ligne mesuré, jamais tronqué) — avant, une classe/prof trop long était coupé
-  // silencieusement (un seul wrapped[0] affiché) au lieu de passer sur une 2ᵉ ligne.
-  const CELL_FS=12.5,CELL_LH=0.52,ROWMIN=0.95;
-
-  function ensureSpace(neededH){
-    if(y+neededH>pageH-M){doc.addPage('a4','landscape');y=M;}
-  }
-  function drawDayHeader(dayName,colorHex){
-    ensureSpace(dayBarH+headerH);
-    const rgb=vestHexToRgb(colorHex);
-    doc.setFillColor(rgb.r,rgb.g,rgb.b);
-    doc.rect(M,y,contentW,dayBarH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);
-    doc.text(dayName.toUpperCase(),M+0.35,y+dayBarH-0.4);
-    doc.setTextColor(0,0,0);
-    y+=dayBarH+0.12;
-    drawTableHeader();
-  }
-  function drawTableHeader(){
-    doc.setFillColor(35,34,31);
-    doc.rect(M,y,contentW,headerH,'F');
-    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(11.5);
-    ['Horaire','Prof','Classe(s)','Vestiaire pour'].forEach((l,i)=>doc.text(l,colX[i]+0.15,y+headerH-0.32));
-    doc.setTextColor(0,0,0);
-    y+=headerH;
-  }
-  function drawRow(cells,idx){
-    doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
-    const wrappedCells=cells.map((c,i)=>doc.splitTextToSize(String(c||''),colW[i]-0.3));
-    const maxLines=Math.max(1,...wrappedCells.map(w=>w.length));
-    const rowH=Math.max(ROWMIN,0.34+maxLines*CELL_LH);
-    ensureSpace(rowH);
-    if(idx%2===1){doc.setFillColor(250,250,248);doc.rect(M,y,contentW,rowH,'F');}
-    doc.setDrawColor(210,210,205);
-    doc.rect(M,y,contentW,rowH);
-    for(let i=1;i<colX.length;i++)doc.line(colX[i],y,colX[i],y+rowH);
-    doc.setFont('helvetica','normal');doc.setFontSize(CELL_FS);
-    wrappedCells.forEach((lines,i)=>{
-      let cy=y+0.4;
-      lines.forEach(line=>{doc.text(line,colX[i]+0.15,cy);cy+=CELL_LH;});
-    });
-    y+=rowH;
-  }
-
-  let any=false;
-  DAYS.forEach((day,di)=>{
-    const lines=[];
-    [...day.rows].sort((a,b)=>parseH(a.h).s-parseH(b.h).s).forEach(r=>{
-      VEST_GENDERS.forEach(g=>{
-        if(String(vestGet(r.id,g.k))===String(n))lines.push({r,genderLabel:g.label});
-      });
-    });
-    if(!lines.length)return;
-    any=true;
-    drawDayHeader(day.name,DAY_COLORS[di]);
-    lines.forEach(({r,genderLabel},idx)=>{
-      drawRow([r.h||'',vestProfLabel(r.prof),vestClassSummary(r.cl),genderLabel],idx);
-    });
-    y+=0.5;
-  });
-
-  if(!any){
-    doc.setFont('helvetica','normal');doc.setFontSize(12);
-    doc.text('Aucun créneau assigné à ce vestiaire pour le moment.',M,y+0.6);
-  }
-
-  doc.save(`vestiaire-${n}.pdf`);
 }
 // Récapitulatif PDF compact par jour — toutes les classes du jour avec le numéro de vestiaire garçons/filles, tenant sur une seule page.
 function exportDayPdf(di){
@@ -2730,6 +2786,13 @@ function buildPfmpPanel(){
 function swTab(key){
   document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.key===key));
   document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.dataset.key===key));
+  // Profs/Niveaux n'ont plus de pastille .tab (voir buildTabs()) : c'est swTab() qui fait foi pour tenir
+  // les menus déroulants #prof-nav/#level-nav synchronisés avec la vue réellement affichée, quelle que
+  // soit la façon dont on y est arrivé (clic sur le menu, ou restauration par rebuildAll()).
+  const pn=document.getElementById('prof-nav');
+  if(pn)pn.value=key&&key.indexOf('prof-')===0?key.slice(5):'';
+  const ln=document.getElementById('level-nav');
+  if(ln)ln.value=key&&key.indexOf('lvl-')===0?key.slice(4):'';
   hideTip();
 }
 
@@ -3157,10 +3220,14 @@ function updateBadge(di){
   // Les onglets restent sobres : aucun compteur quotidien de leçons affiché.
 }
 function rebuildAll(){
-  const cur=document.querySelector('.tab.on');
-  const key=cur?cur.dataset.key:null;
+  // Restaure la vue active via le PANNEAU (.panel.on), pas la pastille .tab : Profs et Niveaux n'ont plus
+  // de pastille .tab depuis qu'ils sont navigables par menu déroulant (voir buildTabs()), mais ont
+  // toujours un panneau — se baser sur .tab.on laisserait l'appli retomber sur le premier jour à chaque
+  // rebuild (sauvegarde Admin, import…) si on était en train de consulter un prof ou un niveau.
+  const curPanel=document.querySelector('.panel.on');
+  const key=curPanel?curPanel.dataset.key:null;
   buildTabs();
-  if(key&&document.querySelector(`.tab[data-key="${key}"]`))swTab(key);
+  if(key&&document.querySelector(`.panel[data-key="${key}"]`))swTab(key);
 }
 
 // ══ MODAL edit cycle ══
@@ -3303,7 +3370,6 @@ function attemptAdminLogin(){
 
 // ══ INIT ══
 loadLS();initDensity();syncLocUI();buildPal();buildTabs();updateSelectionUI();applyModeUI();
-{const vt=document.getElementById('appVersionTag');if(vt)vt.textContent=APP_VERSION;}
 setInterval(saveLS,30000);
 tryFetchPublished();
 </script>
