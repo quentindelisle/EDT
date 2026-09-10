@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 9,
-  "publishedAt": "2026-09-10T06:59:57.654Z",
+  "publishedVersion": 10,
+  "publishedAt": "2026-09-10T09:07:21.524Z",
   "state": {
     "version": "v28",
     "c": {
@@ -172,6 +172,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "27": {
@@ -180,6 +181,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "28": {
@@ -188,6 +190,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "30": {
@@ -196,6 +199,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "31": {
@@ -204,6 +208,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "34": {
@@ -212,6 +217,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "35": {
@@ -220,6 +226,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "37": {
@@ -5793,66 +5800,52 @@
           "role": ""
         },
         "9": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "10": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "11": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "12": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "13": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "14": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "15": {
-          "n": "Hand",
+          "n": "Basket 3c3",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
-          "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "17": {
@@ -17254,34 +17247,40 @@
         "2MV2"
       ],
       "2DE 1": [
-        "2de 1"
+        "2DE GR1234"
       ],
       "2DE 2": [
-        "2de 2"
+        "2DE GR1234"
       ],
       "2DE 3": [
-        "2de 3"
+        "2DE GR1234"
       ],
       "2DE 4": [
-        "2de 4"
+        "2DE GR1234"
       ],
       "2DE 5": [
-        "2de 5"
+        "2DE GR5678"
       ],
       "2DE 6": [
-        "2de 6"
+        "2DE GR5678"
       ],
       "2DE 7": [
-        "2de 7"
+        "2DE GR5678"
       ],
       "2DE 8": [
-        "2de 8"
+        "2DE GR5678"
       ],
       "2DE GR1234": [
-        "2de groupe 1234"
+        "2DE 1",
+        "2DE 2",
+        "2DE 3",
+        "2DE 4"
       ],
       "2DE GR5678": [
-        "2de groupe 5678"
+        "2DE 5",
+        "2DE 6",
+        "2DE 7",
+        "2DE 8"
       ],
       "2MV1": [
         "2 CAV-MV1",
@@ -17647,14 +17646,6 @@
       },
       "TERM GR4": {
         "name": "Term gr4",
-        "voie": "GT"
-      },
-      "2DE GROUPE 1234": {
-        "name": "2de groupe 1234",
-        "voie": "GT"
-      },
-      "2DE GROUPE 5678": {
-        "name": "2de groupe 5678",
         "voie": "GT"
       }
     },
@@ -18071,10 +18062,10 @@
       },
       "Ma05": {
         "g": "1",
-        "f": "2"
+        "f": "none"
       },
       "Ma06": {
-        "g": "1",
+        "g": "3",
         "f": "2"
       },
       "Ma07": {
