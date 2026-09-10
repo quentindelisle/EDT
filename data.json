@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 11,
-  "publishedAt": "2026-09-10T09:15:23.918Z",
+  "publishedVersion": 12,
+  "publishedAt": "2026-09-10T11:20:00.930Z",
   "state": {
     "version": "v28",
     "c": {
@@ -172,6 +172,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "27": {
@@ -180,6 +181,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "28": {
@@ -188,6 +190,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "30": {
@@ -196,6 +199,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "31": {
@@ -204,6 +208,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "34": {
@@ -212,6 +217,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "35": {
@@ -220,6 +226,7 @@
           "loc": "P",
           "c": "#2563eb",
           "ovr": false,
+          "shared": true,
           "role": ""
         },
         "37": {
@@ -5798,7 +5805,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "10": {
@@ -5807,7 +5813,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "11": {
@@ -5816,7 +5821,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "12": {
@@ -5825,7 +5829,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "13": {
@@ -5834,7 +5837,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "14": {
@@ -5843,7 +5845,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "15": {
@@ -5852,7 +5853,6 @@
           "loc": "GG",
           "c": "#dc2626",
           "ovr": false,
-          "sharedWith": "",
           "role": ""
         },
         "17": {
@@ -5954,24 +5954,27 @@
           "role": ""
         },
         "37": {
-          "n": "Hand",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "38": {
-          "n": "Hand",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         },
         "39": {
-          "n": "Hand",
+          "n": "Futsal",
           "ca": "CA4",
           "loc": "GG",
           "c": "#dc2626",
+          "ovr": false,
           "role": ""
         }
       },
@@ -17254,34 +17257,40 @@
         "2MV2"
       ],
       "2DE 1": [
-        "2de 1"
+        "2DE GR1234"
       ],
       "2DE 2": [
-        "2de 2"
+        "2DE GR1234"
       ],
       "2DE 3": [
-        "2de 3"
+        "2DE GR1234"
       ],
       "2DE 4": [
-        "2de 4"
+        "2DE GR1234"
       ],
       "2DE 5": [
-        "2de 5"
+        "2DE GR5678"
       ],
       "2DE 6": [
-        "2de 6"
+        "2DE GR5678"
       ],
       "2DE 7": [
-        "2de 7"
+        "2DE GR5678"
       ],
       "2DE 8": [
-        "2de 8"
+        "2DE GR5678"
       ],
       "2DE GR1234": [
-        "2de groupe 1234"
+        "2DE 1",
+        "2DE 2",
+        "2DE 3",
+        "2DE 4"
       ],
       "2DE GR5678": [
-        "2de groupe 5678"
+        "2DE 5",
+        "2DE 6",
+        "2DE 7",
+        "2DE 8"
       ],
       "2MV1": [
         "2 CAV-MV1",
@@ -17648,31 +17657,23 @@
       "TERM GR4": {
         "name": "Term gr4",
         "voie": "GT"
-      },
-      "2DE GROUPE 1234": {
-        "name": "2de groupe 1234",
-        "voie": "GT"
-      },
-      "2DE GROUPE 5678": {
-        "name": "2de groupe 5678",
-        "voie": "GT"
       }
     },
     "pc": {
       "Eric": "#db2777",
+      "Hugo": "#ca8a04",
+      "Mathilde": "#16a34a",
       "Philippe": "#7c3aed",
       "Quentin": "#1d4ed8",
-      "Yvan": "#ea580c",
-      "Mathilde": "#16a34a",
-      "Hugo": "#ca8a04"
+      "Yvan": "#ea580c"
     },
     "pb": {
       "Eric": "#fce7f3",
+      "Hugo": "#fef3c7",
+      "Mathilde": "#dcfce7",
       "Philippe": "#f3e8ff",
       "Quentin": "#dbeafe",
-      "Yvan": "#ffedd5",
-      "Mathilde": "#dcfce7",
-      "Hugo": "#fef3c7"
+      "Yvan": "#ffedd5"
     },
     "merges": [
       {
@@ -17997,11 +17998,11 @@
       "2027-05-17": "Pentecôte"
     },
     "profLastName": {
-      "Hugo": "M Aignan",
       "Eric": "M Heurtebize",
-      "Quentin": "M Delisle",
+      "Hugo": "M Aignan",
       "Mathilde": "Mme Thibault",
       "Philippe": "M Poulain",
+      "Quentin": "M Delisle",
       "Yvan": "M Coutellec"
     },
     "vestAssign": {
@@ -18071,10 +18072,10 @@
       },
       "Ma05": {
         "g": "1",
-        "f": "2"
+        "f": "none"
       },
       "Ma06": {
-        "g": "1",
+        "g": "3",
         "f": "2"
       },
       "Ma07": {
