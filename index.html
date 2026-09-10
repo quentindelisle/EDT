@@ -186,9 +186,13 @@ tfoot th.is-ferie{background:#4a241d!important;color:#f8fafc!important}
 /* CELLS */
 td.td-lbl{position:sticky;left:0;z-index:20;background:var(--surf);border-right:2px solid rgba(90,84,68,.22);border-bottom:1px solid rgba(90,84,68,.14);border-radius:0 4px 4px 0;width:var(--LW);min-width:var(--LW);padding:1px 4px;vertical-align:middle;height:var(--RH)}
 .lbl-prof{font-weight:600;font-size:10px}
-.lbl-cl{font-size:9px;color:var(--mut)}
+/* Contraste de la 1ère colonne (nom de classe/groupe + horaire) renforcé le 03/09/2026 : .lbl-cl était en
+   var(--mut) (gris moyen peu contrasté) et .lbl-h en var(--fnt) (#aaa, très clair) + italique — repassés en
+   texte foncé/gras, l'horaire agrandi au passage (demande explicite : "un peu plus gros et doit être bien
+   plus lisible"). */
+.lbl-cl{font-size:9.5px;font-weight:600;color:var(--txt)}
 .lbl-day{font-size:8px;font-weight:600;padding:1px 4px;border-radius:2px;margin-left:4px}
-.lbl-h{font-size:7px;color:var(--fnt);font-style:italic}
+.lbl-h{font-size:9px;font-weight:700;color:var(--txt);font-style:normal}
 .row-meta{display:flex;align-items:center;gap:4px;margin-top:0}.row-main{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.05}.row-hour{display:inline-block;margin-top:0;border-top:0;padding-top:0}
 
 td.td-w{height:var(--RH);width:var(--WW);min-width:var(--WW);max-width:var(--WW);border:1px solid rgba(90,84,68,.16);border-radius:3px;padding:0;position:relative;vertical-align:middle;text-align:center;overflow:hidden;cursor:default}
@@ -208,30 +212,37 @@ tr.voie-pro td.td-w.is-empty{background:var(--pro-cell)}
 .voie-tag{font-size:6.5px;font-weight:700;border-radius:6px;padding:1px 3px;margin-left:2px;letter-spacing:.03em}
 tr.voie-gt .voie-tag{background:#bae6fd;color:#075985}
 tr.voie-pro .voie-tag{background:#fed7aa;color:#9a3412}
-.cyc-card{height:100%;width:100%;display:flex;align-items:center;justify-content:center;gap:2px;padding:0 2px;pointer-events:none;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.55)}
+/* Couleur de texte des cases APSA rendue ADAPTATIVE (03/09/2026) au lieu d'un blanc codé en dur : la case
+   hérite désormais de `color`/`--cyc-shadow` posés en JS sur le <td> lui-même (voir txc()/lum() au moment
+   du rendu de la grille) — nécessaire depuis l'éclaircissement des couleurs d'installation (voir LOC_COL)
+   car du texte blanc sur un fond pastel clair devient illisible, à l'écran comme (et surtout) à
+   l'impression PDF. */
+.cyc-card{height:100%;width:100%;display:flex;align-items:center;justify-content:center;gap:2px;padding:0 2px;pointer-events:none;color:inherit;text-shadow:var(--cyc-shadow,0 1px 2px rgba(0,0,0,.55))}
 .cyc-card-repeat{gap:3px;opacity:.92}
 .cyc-chevron{font-size:14px;font-weight:700;opacity:.85;line-height:1}
 .cyc-shared-wrap{justify-content:flex-start!important;gap:0!important;padding:0!important}
-.shared-strip{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.2);align-self:stretch;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;width:13px;border-radius:2px 0 0 2px}
+.shared-strip{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.2);align-self:stretch;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;width:13px;border-radius:2px 0 0 2px;color:#fff}
 .shared-body{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:2px;height:100%}
 .lesson-chips{display:flex;align-items:center;gap:2px;flex-wrap:wrap;justify-content:center}
-.lesson-chip{background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:1px 4px;font-size:8px;font-weight:600;line-height:1.3}
+/* Fond translucide sombre propre à la puce (indépendant de la couleur adaptative de la case) : texte
+   toujours blanc, quel que soit `color` hérité de .cyc-card. */
+.lesson-chip{background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2);border-radius:3px;padding:1px 4px;font-size:8px;font-weight:600;line-height:1.3;color:#fff}
 .cyc-card-split3{gap:3px}
 .cyc-card-split2{flex-direction:column;align-items:stretch;justify-content:center;gap:1px;padding:0 1px}
-.cyc-card-split2 .cyc-label-top{font-size:7.5px;font-weight:600;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;display:block}
+.cyc-card-split2 .cyc-label-top{font-size:9.5px;font-weight:700;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%;display:block}
 .cyc-card-split2 .cyc-bottom-row{display:flex;align-items:center;justify-content:center;gap:2px}
 .cyc-card-split2 .cyc-icon{width:10px;height:10px;min-width:10px;font-size:7px}
 .cyc-card-split3 .cyc-icon{width:11px;height:11px;min-width:11px;font-size:8px}
-.cyc-card-split3 .cyc-label{font-size:7px}
+.cyc-card-split3 .cyc-label{font-size:9px}
 .fused-chips{display:flex;align-items:center;gap:1px;flex-wrap:nowrap;justify-content:center;overflow:hidden;max-width:100%}
 .fused-chip{display:inline-flex;align-items:center;gap:1px;white-space:nowrap;flex-shrink:0}
 .fused-chip .lesson-chip{padding:0 2px;font-size:7px}
 .fused-chip .fc-ic{font-size:8px;line-height:1;flex-shrink:0}
 .cyc-icon{width:15px;height:15px;min-width:15px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(0,0,0,.26);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);font-size:10px;line-height:1}
 .cyc-info{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;overflow:hidden}
-.cyc-label{font-size:8px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding:0 2px;line-height:1.08;display:block;pointer-events:none}
+.cyc-label{font-size:10.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding:0 2px;line-height:1.08;display:block;pointer-events:none}
 .cyc-meta{display:flex;align-items:center;justify-content:center;gap:2px;white-space:nowrap;line-height:1;pointer-events:none}
-.meta-pill{font-size:6px;font-weight:600;line-height:1;border-radius:3px;padding:1px 3px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2)}
+.meta-pill{font-size:6px;font-weight:600;line-height:1;border-radius:3px;padding:1px 3px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2);color:#fff}
 .sp-label{position:absolute;left:1px;right:1px;bottom:1px;font-size:6.5px;font-weight:600;color:#5a3a00;background:rgba(255,255,255,.85);display:block;padding:1px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:3px;box-sizing:border-box;text-align:center;pointer-events:none;z-index:2}
 .role-strip{position:absolute;left:1px;right:1px;bottom:1px;display:grid;grid-template-columns:repeat(var(--role-cols,1),1fr);gap:1px;pointer-events:none;z-index:2}
 .role-slot{min-width:0;display:flex;align-items:center;justify-content:center}
@@ -254,7 +265,7 @@ tbody tr:hover td.td-w:not(.is-vac):not(.is-ferie):not(.is-sf){box-shadow:inset 
 td.td-w.editable:hover::after{content:'+';position:absolute;inset:2px;border:1px dashed rgba(0,0,0,.22);border-radius:2px;color:rgba(0,0,0,.28);font-size:10px;display:flex;align-items:center;justify-content:center;pointer-events:none}
 td.td-w[data-has-cyc='1']:hover::after{content:'préciser';font-size:8px;text-transform:uppercase;letter-spacing:.04em;background:rgba(255,255,255,.2)}
 body.role-mode td.td-w[data-has-cyc='1']:hover::after{content:'préciser';font-size:9px;text-transform:uppercase;letter-spacing:.05em;background:rgba(252,211,77,.36);color:#3b2d0b;border-color:rgba(120,89,0,.25)}
-body.compact .cyc-label,body.comfort .cyc-label{font-size:8px}body.compact .cyc-icon,body.comfort .cyc-icon{width:15px;height:15px;min-width:15px;font-size:10px}body.compact .meta-pill,body.comfort .meta-pill{font-size:6px;padding:1px 2px}body.compact .lbl-day,body.comfort .lbl-day{display:none}body.compact .role-mini,body.comfort .role-mini{font-size:7px;padding:1px 2px;max-width:20px}
+body.compact .cyc-label,body.comfort .cyc-label{font-size:10.5px}body.compact .cyc-icon,body.comfort .cyc-icon{width:15px;height:15px;min-width:15px;font-size:10px}body.compact .meta-pill,body.comfort .meta-pill{font-size:6px;padding:1px 2px}body.compact .lbl-day,body.comfort .lbl-day{display:none}body.compact .role-mini,body.comfort .role-mini{font-size:7px;padding:1px 2px;max-width:20px}
 
 
 .ferie-cell-label{display:none}
@@ -392,11 +403,11 @@ table.pfmp-table{width:100%;border-collapse:collapse;background:#fff;border:1px 
     </div>
     <div class="legend-mini" title="Légende rapide des installations">
       <span class="legend-title">Lieux</span>
-      <span class="legchip" style="background:#16a085">DH</span>
-      <span class="legchip" style="background:#8e44ad">GG</span>
-      <span class="legchip" style="background:#d35400">PG</span>
-      <span class="legchip" style="background:#c0392b">M</span>
-      <span class="legchip" style="background:#2471a3">P</span>
+      <span class="legchip" style="background:#86efac;color:#1a1917">DH</span>
+      <span class="legchip" style="background:#ef4444;color:#fff">GG</span>
+      <span class="legchip" style="background:#fdba74;color:#1a1917">PG</span>
+      <span class="legchip" style="background:#f9a8d4;color:#1a1917">M</span>
+      <span class="legchip" style="background:#93c5fd;color:#1a1917">P</span>
     </div>
     <div class="sep"></div>
     <div id="pal" style="display:flex;gap:3px;flex-wrap:wrap;align-items:center"></div>
@@ -829,7 +840,7 @@ function(t){t.__bidiEngine__=t.prototype.__bidiEngine__=function(t){var n,r,i,a,
 'use strict';
 // Version de l'appli : à incrémenter à chaque déploiement notable, EN MÊME TEMPS que
 // CACHE_NAME dans service-worker.js, pour forcer la mise à jour du cache PWA hors-ligne.
-const APP_VERSION='v18';
+const APP_VERSION='v23';
 
 // ══ CALENDRIER ══
 function isoMon(y,w){const j4=new Date(y,0,4),dw=j4.getDay()||7,r=new Date(j4);r.setDate(j4.getDate()-dw+1+(w-1)*7);return r;}
@@ -1008,13 +1019,27 @@ let APSA=[
   {n:'CED',ca:'CA5',loc:'DH',c:'#16a34a'},
 ];
 const CA_COL={CA1:'#c0392b',CA2:'#27ae60',CA3:'#8e44ad',CA4:'#2471a3',CA5:'#d35400'};
-const LOC_COL={GG:'#dc2626',PG:'#fb923c',DH:'#4ade80',M:'#ff2d95',P:'#2471a3'};
+// Couleurs d'installation (fond des cases de la grille + PDF captés via html2canvas) — éclaircies le
+// 03/09/2026 en tons pastel (au lieu de tons saturés/foncés) : (1) plus lisible à l'impression, un fond
+// clair + texte foncé imprime de façon bien plus fiable qu'un fond saturé + texte blanc (qui s'écrase
+// facilement en niveaux de gris ou en mode brouillon sur une imprimante scolaire courante) ; (2) permet au
+// texte de la case (voir txc()/--cyc-shadow plus bas) de passer systématiquement en foncé à fort contraste
+// plutôt qu'en blanc sur fond parfois déjà clair (cas GG/DH/PG avant ce correctif, à peine lisibles).
+// GG (Grand Gymnase — Basket/Hand/Volley/Badminton/Futsal) : rouge-300 (03/09/2026, lisait comme du rose)
+// puis rouge-400 (même jour, encore vu comme "saumon") puis rouge-500 le 10/09/2026 — un vrai rouge net,
+// assez saturé pour repasser SOUS le seuil clair/foncé de txc()/lum() : la case bascule donc automatiquement
+// en texte blanc (plutôt que foncé comme les autres installations, restées pastel/claires) — comportement
+// voulu, un rouge franc lisant mieux avec du texte blanc dessus qu'avec du texte noir.
+const LOC_COL={GG:'#ef4444',PG:'#fdba74',DH:'#86efac',M:'#f9a8d4',P:'#93c5fd'};
 function apsaColor(o){if(!o)return'#94a3b8';if(o.ovr)return o.c||'#94a3b8';return (o.loc&&LOC_COL[o.loc])?LOC_COL[o.loc]:(o.c||'#94a3b8');}
 const EXCL=new Set(['GG','PG','M','P']);
 function is3eCAP(cl){return/^(3e|CAP)/i.test(cl);}
 function lum(hex){const r=/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);if(!r)return.5;return(0.299*parseInt(r[1],16)+0.587*parseInt(r[2],16)+0.114*parseInt(r[3],16))/255;}
 function darken(hex,amt){const r=/^#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);if(!r)return hex;const f=(h)=>Math.max(0,Math.round(parseInt(h,16)*(1-amt))).toString(16).padStart(2,'0');return `#${f(r[1])}${f(r[2])}${f(r[3])}`;}
-function txc(hex){return lum(hex)>.55?'rgba(0,0,0,.82)':'rgba(255,255,255,.95)';}
+// Couleurs pleines (non translucides) depuis le 10/09/2026 : demande explicite "du noir et du gras
+// pour bien lire" — l'ancien rgba(0,0,0,.82) semi-transparent affaiblissait le contraste sur les
+// couleurs d'installation pastel (v19/v20). #1a1917 = même noir que --txt (texte standard de l'appli).
+function txc(hex){return lum(hex)>.55?'#1a1917':'#fff';}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 const APSA_ICON={
   'demi-fond':'🏃','relais vitesse':'⚡','natation':'🏊','golf':'⛳','biathlon':'🎯','co':'🧭','sauvetage':'🛟',
@@ -1200,7 +1225,7 @@ function migrateProfKeyedObj(obj){
 function serializableState(){
   return {version:'v28',c:cycles,a:APSA,days:DAYS,pfFull:PF_FULL,pfPart:PF_PART,locCol:LOC_COL,exclusiveLocs:[...EXCL],adminGroups:ADMIN_GROUPS,classMeta:CLASS_META,pc:PC,pb:PB,merges:MERGES,vacs:VACS,feries:FERIES,profLastName:PROF_LASTNAME,vestAssign:VEST_ASSIGN};
 }
-const CANON_LOC_COL={GG:'#dc2626',PG:'#fb923c',DH:'#4ade80',M:'#ff2d95'};
+const CANON_LOC_COL={GG:'#ef4444',PG:'#fdba74',DH:'#86efac',M:'#f9a8d4'};
 const OVR_COLORS={co:'#14532d',golf:'#eab308'};
 function ovrColorFor(n){const k=String(n||'').trim().toLowerCase();return OVR_COLORS[k]||null;}
 function migrateHandName(n){return /^hand\W*(int|ext)/i.test(String(n||'').trim())?'Hand':n;}
@@ -1408,7 +1433,7 @@ function renderCaApsaList(){
     chip.style.background=apsaColor(a);chip.style.color=txc(apsaColor(a));
     chip.dataset.ai=i;
     chip.title=`Sélectionner ${a.ca} — ${a.n} [${a.loc}]`;
-    chip.innerHTML=`<span class="chip-ico">${apsaIcon(a)}</span><span class="chip-name">${esc(a.n)}</span><span class="chip-loc" style="background:${LOC_COL[a.loc]||'#555'}">${a.loc}</span>`;
+    chip.innerHTML=`<span class="chip-ico">${apsaIcon(a)}</span><span class="chip-name">${esc(a.n)}</span><span class="chip-loc" style="background:${LOC_COL[a.loc]||'#555'};color:${txc(LOC_COL[a.loc]||'#555')}">${a.loc}</span>`;
     listWrap.appendChild(chip);
   });
 }
@@ -1422,7 +1447,7 @@ function syncLocUI(){
   if(nloc){const old=nloc.value||'GG';nloc.innerHTML=Object.keys(LOC_COL).sort().map(k=>`<option value="${esc(k)}">${esc(k)}</option>`).join('');nloc.value=LOC_COL[old]?old:(Object.keys(LOC_COL)[0]||'');}
   syncNcFromLoc();
   const leg=document.querySelector('.legend-mini');
-  if(leg){leg.innerHTML='<span class="legend-title">Lieux</span>'+Object.entries(LOC_COL).map(([k,c])=>`<span class="legchip" style="background:${esc(c)}" title="${EXCL.has(k)?'Installation bloquante':'Installation partageable'}">${esc(k)}</span>`).join('');}
+  if(leg){leg.innerHTML='<span class="legend-title">Lieux</span>'+Object.entries(LOC_COL).map(([k,c])=>`<span class="legchip" style="background:${esc(c)};color:${txc(c)}" title="${EXCL.has(k)?'Installation bloquante':'Installation partageable'}">${esc(k)}</span>`).join('');}
 }
 
 // Clic sur palette via délégation
@@ -2058,6 +2083,52 @@ function buildImpressionPanel(){
   sec2.appendChild(row2);
   o.appendChild(sec2);
 
+  // ── Exports Vestiaires — regroupés ici (avec tous les autres exports PDF de l'appli) depuis la v23 :
+  // avant, ils vivaient dans l'onglet Vestiaires, séparés des autres exports, ce qui obligeait à changer
+  // d'onglet pour s'y retrouver. Demande explicite de l'utilisateur : "TOUS les exports dans l'onglet
+  // EXPORT, ce serait plus simple et visuel".
+  const vestDivider=document.createElement('div');vestDivider.className='view-title';vestDivider.style.cssText='margin-top:22px;font-size:13px;opacity:.6';
+  vestDivider.textContent='🧺 Exports Vestiaires';
+  o.appendChild(vestDivider);
+
+  const sec3=document.createElement('section');sec3.className='view-section';
+  const h3=document.createElement('h3');h3.textContent='Récapitulatifs PDF compacts (un par jour, 1 page)';sec3.appendChild(h3);
+  const note3=document.createElement('div');note3.className='admin-note';note3.style.margin='0 0 8px 0';
+  note3.textContent='Pour chaque jour : toutes les classes avec le numéro de vestiaire garçons/filles, en format compact tenant sur une seule page.';
+  sec3.appendChild(note3);
+  const row3=document.createElement('div');row3.style.cssText='display:flex;gap:6px;flex-wrap:wrap;padding:4px 0';
+  DAYS.forEach((day,di)=>{
+    const b=document.createElement('button');b.className='tbtn-solid';b.textContent=`📄 PDF — ${day.name}`;
+    b.onclick=()=>exportDayPdf(di);
+    row3.appendChild(b);
+  });
+  sec3.appendChild(row3);
+  o.appendChild(sec3);
+
+  const sec4=document.createElement('section');sec4.className='view-section';
+  const h4=document.createElement('h3');h4.textContent='Emploi du temps PAR PROF, avec vestiaires (1 page par prof)';sec4.appendChild(h4);
+  const note4=document.createElement('div');note4.className='admin-note';note4.style.margin='0 0 8px 0';
+  note4.textContent='Pour chaque enseignant : sa semaine type présentée comme un emploi du temps classique (jours en colonnes, heures en lignes), avec le vestiaire garçons/filles affiché sous chaque classe.';
+  sec4.appendChild(note4);
+  const row4=document.createElement('div');row4.style.cssText='display:flex;gap:6px;flex-wrap:wrap;padding:4px 0';
+  const b4=document.createElement('button');b4.className='tbtn-solid';b4.textContent='📄 Exporter le PDF (une page par prof)';
+  b4.onclick=()=>withBusyButton(b4,'⏳ Génération…',()=>exportVestiairesByProfPdf());
+  row4.appendChild(b4);
+  sec4.appendChild(row4);
+  o.appendChild(sec4);
+
+  const sec5=document.createElement('section');sec5.className='view-section';
+  const h5=document.createElement('h3');h5.textContent='Emploi du temps par vestiaire (une page par vestiaire)';sec5.appendChild(h5);
+  const note5=document.createElement('div');note5.className='admin-note';note5.style.margin='0 0 8px 0';
+  note5.textContent='Vue type « salle de classe » : pour chaque vestiaire, qui l’occupe selon le jour et l’horaire — pratique pour repérer un double-emploi. L’aperçu à l’écran reste dans l’onglet Vestiaires.';
+  sec5.appendChild(note5);
+  const row5=document.createElement('div');row5.style.cssText='display:flex;gap:6px;flex-wrap:wrap;padding:4px 0';
+  const b5=document.createElement('button');b5.className='tbtn-solid';b5.textContent='📄 Exporter le PDF (une page par vestiaire)';
+  b5.onclick=()=>withBusyButton(b5,'⏳ Génération…',()=>exportVestiairesTimetablePdf());
+  row5.appendChild(b5);
+  sec5.appendChild(row5);
+  o.appendChild(sec5);
+
   return o;
 }
 function pdfSlug(s){
@@ -2177,7 +2248,19 @@ function drawPdfHeaderBand(doc,M,title,subtitle){
   try{softLogoCard(M,siteCardW,bandH,LOGO_SITE_PNG,logoDrawH,logoDrawH);}catch(e){}
   try{softLogoCard(M+contentW-lyceeCardW,lyceeCardW,bandH,LOGO_LYCEE_PNG,lyceeDrawW,logoDrawH);}catch(e){}
 
-  doc.setFont('helvetica','bold');doc.setFontSize(30);
+  // Taille du titre auto-réduite si besoin : à 30pt fixe, un titre plus long que quelques mots (ex.
+  // "Vestiaires Classes de M Heurtebize") débordait sur le logo du lycée à droite. Le titre est centré
+  // sur le MILIEU DE PAGE (pageW/2), qui n'est PAS le centre de l'espace libre entre les deux cartes logo
+  // puisqu'elles n'ont pas la même largeur (logo lycée nettement plus large) — donc comparer juste la
+  // largeur totale du texte à la largeur du couloir ne suffit pas : il faut vérifier séparément la marge
+  // disponible à gauche et à droite du centre de page, et se caler sur la plus courte des deux.
+  const centerX=pageW/2,pad2=0.3;
+  const leftLimit=M+siteCardW+pad2,rightLimit=M+contentW-lyceeCardW-pad2;
+  const maxHalfW=Math.min(centerX-leftLimit,rightLimit-centerX);
+  doc.setFont('helvetica','bold');
+  let titleFS=30;
+  doc.setFontSize(titleFS);
+  while(titleFS>14&&doc.getTextWidth(title)/2>maxHalfW){titleFS-=1;doc.setFontSize(titleFS);}
   doc.setTextColor(...PDF_BRAND);
   doc.text(title,pageW/2,y+bandH*0.58,{align:'center'});
   if(subtitle){
@@ -2287,7 +2370,7 @@ function buildVestiairesPanel(){
   const ttl=document.createElement('div');ttl.className='view-title';ttl.textContent='Vestiaires — planning hebdomadaire et affectation par créneau';
   o.appendChild(ttl);
   const intro=document.createElement('div');intro.className='admin-note';intro.style.margin='0 10px 12px 0';
-  intro.innerHTML='<b>Comment ça marche.</b> Pour chaque créneau, choisis un vestiaire garçons ET un vestiaire filles (1 à 5) — ou « Pas nécessaire » si ce vestiaire ne sert pas pour cette classe (ex : pas de filles). C’est le même planning type chaque semaine, indépendant du cycle en cours. Le nom affiché est le nom de famille renseigné dans Administration → Profs (à défaut, le prénom est affiché). Une fois réglé, retrouve la vue d’ensemble par vestiaire tout en bas (et son export PDF).';
+  intro.innerHTML='<b>Comment ça marche.</b> Pour chaque créneau, choisis un vestiaire garçons ET un vestiaire filles (1 à 5) — ou « Pas nécessaire » si ce vestiaire ne sert pas pour cette classe (ex : pas de filles). C’est le même planning type chaque semaine, indépendant du cycle en cours. Le nom affiché est le nom de famille renseigné dans Administration → Profs (à défaut, le prénom est affiché). Une fois réglé, retrouve la vue d’ensemble par vestiaire tout en bas — tous les exports PDF (par jour, par prof, par vestiaire) sont dans l’onglet <b>📄 Export PDF</b>.';
   o.appendChild(intro);
 
   DAYS.forEach((day,di)=>{
@@ -2306,30 +2389,18 @@ function buildVestiairesPanel(){
     o.appendChild(sec);
   });
 
-  const daySec=document.createElement('section');daySec.className='view-section vest-print-section';
-  const dh=document.createElement('h3');dh.textContent='Récapitulatifs PDF compacts (un par jour, 1 page)';daySec.appendChild(dh);
-  const dayNote=document.createElement('div');dayNote.className='admin-note';dayNote.style.margin='0 0 8px 0';
-  dayNote.textContent='Pour chaque jour : toutes les classes avec le numéro de vestiaire garçons/filles, en format compact tenant sur une seule page.';
-  daySec.appendChild(dayNote);
-  const dayBtnRow=document.createElement('div');dayBtnRow.className='vest-print-btns';
-  DAYS.forEach((day,di)=>{
-    const b=document.createElement('button');b.className='tbtn-solid';b.textContent=`📄 PDF — ${day.name}`;
-    b.onclick=()=>exportDayPdf(di);
-    dayBtnRow.appendChild(b);
-  });
-  daySec.appendChild(dayBtnRow);
-  o.appendChild(daySec);
+  // Les exports PDF (récap par jour, par prof, par vestiaire) ne sont plus ici : ils ont tous été
+  // regroupés dans l'onglet 📄 Export PDF (buildImpressionPanel) pour que TOUS les exports de
+  // l'application se trouvent au même endroit — demande explicite de l'utilisateur (v23, 10/09/2026).
+  const exportPointer=document.createElement('div');exportPointer.className='admin-note';exportPointer.style.margin='0 0 12px 0';
+  exportPointer.innerHTML='📄 Les exports PDF (récap par jour, par prof, par vestiaire) sont regroupés dans l\'onglet <b>Export PDF</b>.';
+  o.appendChild(exportPointer);
 
   const ttSec=document.createElement('section');ttSec.className='view-section vest-tt-section';
   const tth=document.createElement('h3');tth.textContent='Emploi du temps par vestiaire (aperçu)';ttSec.appendChild(tth);
   const ttNote=document.createElement('div');ttNote.className='admin-note';ttNote.style.margin='0 0 10px 0';
   ttNote.textContent='Vue type « salle de classe » : pour chaque vestiaire, qui l’occupe selon le jour et l’horaire — pratique pour repérer un double-emploi.';
   ttSec.appendChild(ttNote);
-  const ttBtnRow=document.createElement('div');ttBtnRow.className='vest-print-btns';ttBtnRow.style.margin='0 0 12px';
-  const ttBtn=document.createElement('button');ttBtn.className='tbtn-solid';ttBtn.textContent='📄 Exporter le PDF (une page par vestiaire)';
-  ttBtn.onclick=()=>exportVestiairesTimetablePdf();
-  ttBtnRow.appendChild(ttBtn);
-  ttSec.appendChild(ttBtnRow);
   VEST_OPTIONS.forEach(n=>{
     const h4=document.createElement('h4');h4.className='vest-tt-h4';h4.textContent=`Vestiaire ${n}`;ttSec.appendChild(h4);
     ttSec.appendChild(buildVestiaireTimetable(n));
@@ -2676,6 +2747,157 @@ function exportDayPdf(di){
   doc.save(`vestiaires-${slugifyDayName(day.name)}.pdf`);
 }
 
+// Emploi du temps PAR PROF avec vestiaires affichés à côté (v22, 10/09/2026 — reconstruit en v23,
+// 10/09/2026 suite au retour "je n'aime pas la vue") : chaque prof a sa propre page, mais présentée
+// désormais comme un VRAI emploi du temps hebdomadaire — jours en colonnes, horaires en lignes, exactement
+// la lecture à laquelle un enseignant est habitué — plutôt que l'ancienne liste "un jour empilé sur
+// l'autre". Le vestiaire garçons/filles est affiché SOUS le nom de la/des classe(s), dans chaque case.
+// Titre de page = "Vestiaires des Classes de <nom de famille>" (PROF_LASTNAME via vestProfLabel — jamais
+// le prénom), sans sous-titre : l'utilisateur a explicitement demandé de retirer la ligne
+// "Vestiaires — planning hebdomadaire" et la ligne du prénom du prof, redondantes avec le titre.
+// v23-bis : nom de classe centré horizontalement dans chaque case, "Horaire" centré dans son en-tête, et
+// "G"/"F" écrits en toutes lettres ("Garçons"/"Filles") — 4 retouches de finition demandées après coup.
+// Dessiné en vectoriel jsPDF pur (comme exportDayPdf/exportVestiairesTimetablePdf), pas de capture
+// html2canvas — donc pas concerné par les couleurs d'installation ni les pièges sticky/overflow.
+function exportVestiairesByProfPdf(){
+  const JsPDFCtor=window.jspdf&&window.jspdf.jsPDF;
+  if(!JsPDFCtor){alert('Le générateur PDF n’a pas pu se charger. Recharge la page et réessaie.');return;}
+  const profs=uniqueProfs();
+  if(!profs.length){alert('Aucun enseignant trouvé dans l’emploi du temps.');return;}
+  const doc=new JsPDFCtor({orientation:'landscape',unit:'cm',format:'a4'});
+  const M=1;
+  const pageW=doc.internal.pageSize.getWidth(),pageH=doc.internal.pageSize.getHeight();
+  const contentW=pageW-2*M;
+
+  // Colonnes : Horaire (ligne) | une colonne par jour de la semaine (grille classique).
+  const hColW=2.6;
+  const dayColW=(contentW-hColW)/DAYS.length;
+  const colX=[M];DAYS.forEach((d,di)=>colX.push(M+hColW+dayColW*di));
+  const colW=[hColW,...DAYS.map(()=>dayColW)];
+  const headerH=0.75;
+  const HOR_FS=13;   // horaire en ligne : gros et gras, toujours demandé bien lisible
+  const CL_FS=10.3,VEST_FS=9,LH1=0.42,ROWMIN=1.05;
+  const CPAD=0.16;
+
+  function drawGridHeader(yTop){
+    doc.setFillColor(35,34,31);
+    doc.rect(colX[0],yTop,colW[0],headerH,'F');
+    doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(10.5);
+    doc.text('Horaire',colX[0]+colW[0]/2,yTop+headerH/2,{align:'center',baseline:'middle'});
+    DAYS.forEach((day,di)=>{
+      const rgb=vestHexToRgb(DAY_COLORS[di]);
+      doc.setFillColor(rgb.r,rgb.g,rgb.b);
+      doc.rect(colX[di+1],yTop,colW[di+1],headerH,'F');
+      doc.text(day.name,colX[di+1]+colW[di+1]/2,yTop+headerH/2,{align:'center',baseline:'middle'});
+    });
+    doc.setTextColor(0,0,0);
+    return yTop+headerH;
+  }
+
+  profs.forEach((prof,pIdx)=>{
+    if(pIdx>0)doc.addPage('a4','landscape');
+    const profTitle=`Vestiaires des Classes de ${vestProfLabel(prof)}`;
+    let y=drawPdfHeaderBand(doc,M,profTitle,'');
+
+    // Trame TYPE de la semaine (DAYS[di].rows), pas le calendrier annuel : le vestiaire est affecté une
+    // fois par créneau récurrent, pas par semaine — comme partout ailleurs dans l'onglet Vestiaires.
+    const items=[];
+    DAYS.forEach((day,di)=>{
+      day.rows.filter(r=>r.prof===prof).forEach(r=>items.push({di,row:r}));
+    });
+
+    if(!items.length){
+      drawGridHeader(y);
+      doc.setFont('helvetica','normal');doc.setFontSize(12);
+      doc.text('Aucun créneau pour cet enseignant.',M,y+headerH+0.6);
+      return;
+    }
+
+    // Axe des lignes = les horaires distincts utilisés par ce prof (quel que soit le jour), triés par
+    // heure de début — comme un emploi du temps papier classique.
+    const horSet=new Map();
+    items.forEach(it=>{const h=it.row.h||'';if(h&&!horSet.has(h))horSet.set(h,parseH(h));});
+    const horaires=[...horSet.keys()].sort((a,b)=>horSet.get(a).s-horSet.get(b).s);
+
+    // grid[horaire][di] = liste des créneaux de ce prof à ce jour+horaire (quasi toujours 0 ou 1).
+    const grid={};
+    horaires.forEach(h=>grid[h]=DAYS.map(()=>null));
+    items.forEach(it=>{
+      const h=it.row.h||'';
+      if(!grid[h])return;
+      (grid[h][it.di]=grid[h][it.di]||[]).push(it.row);
+    });
+
+    // Mesure une case (classe(s) + ligne vestiaire G/F par créneau qu'elle contient) une seule fois,
+    // réutilisée à la fois pour calculer la hauteur de ligne et pour dessiner — jamais recalculée deux
+    // fois différemment (piège déjà rencontré en v22 : mesure et rendu doivent rester rigoureusement
+    // cohérents pour un centrage vertical correct).
+    function measureCell(rows,cw){
+      if(!rows||!rows.length)return null;
+      let lines=0;
+      const wrapped=rows.map(r=>{
+        doc.setFont('helvetica','bold');doc.setFontSize(CL_FS);
+        const w=doc.splitTextToSize(vestClassSummary(r.cl)||'',cw);
+        lines+=w.length+1; // +1 pour la ligne "G … · F …"
+        return w;
+      });
+      return {wrapped,lines};
+    }
+
+    y=drawGridHeader(y);
+
+    horaires.forEach((h,ri)=>{
+      const cw=dayColW-2*CPAD;
+      const cellData=DAYS.map((day,di)=>measureCell(grid[h][di],cw));
+      const maxLines=Math.max(1,...cellData.map(c=>c?c.lines:0));
+      const rowH=Math.max(ROWMIN,2*CPAD+maxLines*LH1);
+
+      if(y+rowH>pageH-M){
+        doc.addPage('a4','landscape');
+        y=M;
+        doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(...PDF_BRAND);
+        doc.text(`${profTitle} (suite)`,M,y+0.5);
+        doc.setTextColor(0,0,0);
+        y+=0.85;
+        y=drawGridHeader(y);
+      }
+
+      if(ri%2===1){doc.setFillColor(250,250,248);doc.rect(M,y,contentW,rowH,'F');}
+      doc.setDrawColor(210,210,205);
+      doc.rect(M,y,contentW,rowH);
+      for(let k=1;k<colX.length;k++)doc.line(colX[k],y,colX[k],y+rowH);
+
+      // Horaire : gros et gras, centré verticalement — point explicitement demandé.
+      doc.setFont('helvetica','bold');doc.setFontSize(HOR_FS);doc.setTextColor(20,20,20);
+      doc.text(h,colX[0]+0.14,y+rowH/2,{baseline:'middle',maxWidth:colW[0]-0.24});
+      doc.setTextColor(0,0,0);
+
+      DAYS.forEach((day,di)=>{
+        const cell=cellData[di],rows=grid[h][di];
+        if(!cell||!rows)return;
+        const x=colX[di+1],xCenter=x+colW[di+1]/2;
+        let cy=y+rowH/2-(cell.lines*LH1)/2+LH1*0.78;
+        rows.forEach((r,ri2)=>{
+          // Nom de classe centré horizontalement dans la case — demande explicite.
+          doc.setFont('helvetica','bold');doc.setFontSize(CL_FS);doc.setTextColor(20,20,20);
+          cell.wrapped[ri2].forEach(line=>{doc.text(line,xCenter,cy,{align:'center',maxWidth:cw});cy+=LH1;});
+          const gLabel=vestNumLabel(vestGet(r.id,'g'));
+          const fLabel=vestNumLabel(vestGet(r.id,'f'));
+          // "Garçons"/"Filles" en toutes lettres (au lieu de G/F) — demande explicite.
+          doc.setFont('helvetica','bold');doc.setFontSize(VEST_FS);doc.setTextColor(95,95,95);
+          doc.text(`Garçons ${gLabel}  ·  Filles ${fLabel}`,xCenter,cy,{align:'center',maxWidth:cw});
+          cy+=LH1;
+          doc.setTextColor(0,0,0);
+        });
+      });
+
+      y+=rowH;
+    });
+  });
+
+  doc.save('vestiaires-par-prof.pdf');
+}
+
 function buildSinglePanel(day,di){
   const o=document.createElement('div');o.className='scroll-outer';o.appendChild(buildTable(day,di));return o;
 }
@@ -2923,6 +3145,16 @@ function buildRow(row,di,slots,opts={}){
       const bgCol=apsaColor(cyc);
       td.style.background=bgCol;td.style.borderColor='rgba(0,0,0,.1)';
       td.style.boxShadow=`inset 0 3px 0 ${darken(bgCol,.28)}`;
+      // Texte adaptatif (03/09/2026, halo blanc retiré le 10/09/2026) : couleur posée en JS sur le <td>
+      // lui-même — `.cyc-card` hérite via `color:inherit`/`text-shadow:var(--cyc-shadow,...)`. Un fond
+      // clair (désormais le cas courant depuis l'éclaircissement de LOC_COL) reçoit du texte NOIR plein
+      // + gras, SANS halo (le halo blanc autour des lettres, présent en v19/v20, gênait la lecture —
+      // signalé par l'utilisateur comme des "bordures blanches sur la police") ; un fond resté sombre
+      // (couleur perso, CO, Golf…) garde le texte blanc + l'ombre portée sombre d'origine, qui reste
+      // nécessaire là pour détacher les glyphes d'un fond sombre. Sans adaptation de couleur, tout texte
+      // blanc sur un fond devenu clair deviendrait illisible — à l'écran, et encore davantage imprimé en PDF.
+      td.style.color=txc(bgCol);
+      td.style.setProperty('--cyc-shadow', lum(bgCol)>.55 ? 'none' : '0 1px 2px rgba(0,0,0,.55)');
       const meta=segmentMeta(row.id,di,si,span);
       const pnote=info.type==='part'?`<span class="sp-label" title="${esc(info.who)} en PFMP · En cours : ${esc(partialCourseLabel(row.cl,info.who,info.course))}">${esc(partialCourseLabel(row.cl,info.who,info.course))}</span>`:'';
       const isSplit=largestSegMap[si]?.split;
