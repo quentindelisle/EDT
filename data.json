@@ -1,6 +1,6 @@
 {
-  "publishedVersion": 12,
-  "publishedAt": "2026-09-10T11:20:00.930Z",
+  "publishedVersion": 13,
+  "publishedAt": "2026-09-10T11:54:53.777Z",
   "state": {
     "version": "v28",
     "c": {
@@ -2375,58 +2375,58 @@
       },
       "V12": {
         "0": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "1": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "2": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "3": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "4": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "5": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
         "6": {
-          "n": "Tennis de table",
-          "ca": "CA4",
-          "loc": "PG",
-          "c": "#ea580c",
+          "n": "Demi-fond",
+          "ca": "CA1",
+          "loc": "DH",
+          "c": "#16a34a",
           "ovr": false,
           "role": ""
         },
@@ -3691,6 +3691,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "1": {
@@ -3698,6 +3700,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "2": {
@@ -3705,6 +3709,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "3": {
@@ -3712,6 +3718,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "4": {
@@ -3719,6 +3727,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "5": {
@@ -3726,6 +3736,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "6": {
@@ -3733,6 +3745,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "9": {
@@ -3740,6 +3754,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "10": {
@@ -3747,6 +3763,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "11": {
@@ -3754,6 +3772,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "12": {
@@ -3761,6 +3781,8 @@
           "ca": "CA1",
           "loc": "DH",
           "c": "#16a34a",
+          "ovr": false,
+          "sharedWith": "",
           "role": ""
         },
         "13": {
@@ -13856,40 +13878,40 @@
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "27": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "28": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "30": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "31": {
           "n": "Golf",
           "ca": "CA2",
           "loc": "DH",
           "c": "#eab308",
-          "role": "",
-          "ovr": true
+          "ovr": true,
+          "role": ""
         },
         "37": {
           "n": "Golf",
@@ -17661,307 +17683,34 @@
     },
     "pc": {
       "Eric": "#db2777",
-      "Hugo": "#ca8a04",
-      "Mathilde": "#16a34a",
       "Philippe": "#7c3aed",
       "Quentin": "#1d4ed8",
-      "Yvan": "#ea580c"
+      "Yvan": "#ea580c",
+      "Mathilde": "#16a34a",
+      "Hugo": "#ca8a04"
     },
     "pb": {
       "Eric": "#fce7f3",
-      "Hugo": "#fef3c7",
-      "Mathilde": "#dcfce7",
       "Philippe": "#f3e8ff",
       "Quentin": "#dbeafe",
-      "Yvan": "#ffedd5"
+      "Yvan": "#ffedd5",
+      "Mathilde": "#dcfce7",
+      "Hugo": "#fef3c7"
     },
     "merges": [
       {
         "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 0,
-        "span": 7
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 37,
-        "span": 6
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 26,
-        "span": 3
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 30,
-        "span": 2
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 34,
-        "span": 2
-      },
-      {
-        "di": 0,
-        "topId": "L01",
-        "botId": "L02",
-        "start": 17,
-        "span": 7
-      },
-      {
-        "di": 0,
-        "topId": "L16",
-        "botId": "L15",
-        "start": 0,
-        "span": 4
-      },
-      {
-        "di": 0,
-        "topId": "L16",
-        "botId": "L15",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 0,
-        "topId": "L16",
-        "botId": "L15",
-        "start": 17,
-        "span": 7
-      },
-      {
-        "di": 0,
-        "topId": "L16",
-        "botId": "L15",
-        "start": 26,
-        "span": 3
-      },
-      {
-        "di": 0,
         "topId": "L16",
         "botId": "L15",
         "start": 30,
         "span": 2
       },
       {
-        "di": 0,
-        "topId": "L16",
-        "botId": "L15",
-        "start": 37,
-        "span": 3
-      },
-      {
-        "di": 4,
-        "topId": "V07",
-        "botId": "V05",
-        "start": 0,
-        "span": 7
-      },
-      {
-        "di": 4,
-        "topId": "V07",
-        "botId": "V05",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 4,
-        "topId": "V07",
-        "botId": "V05",
-        "start": 17,
-        "span": 7
-      },
-      {
-        "di": 4,
-        "topId": "V07",
-        "botId": "V05",
-        "start": 26,
-        "span": 6
-      },
-      {
-        "di": 4,
-        "topId": "V07",
-        "botId": "V05",
-        "start": 35,
-        "span": 4
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 0,
-        "span": 7
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 17,
-        "span": 3
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 20,
-        "span": 3
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 23,
-        "span": 1
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 26,
-        "span": 2
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 31,
-        "span": 1
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 28,
-        "span": 3
-      },
-      {
-        "di": 4,
-        "topId": "V11",
-        "botId": "V12",
-        "start": 35,
-        "span": 5
-      },
-      {
-        "di": 3,
-        "topId": "J03",
-        "botId": "J02",
-        "start": 0,
-        "span": 4
-      },
-      {
-        "di": 3,
-        "topId": "J03",
-        "botId": "J02",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 3,
-        "topId": "J03",
-        "botId": "J02",
-        "start": 17,
-        "span": 7
-      },
-      {
-        "di": 3,
-        "topId": "J03",
-        "botId": "J02",
-        "start": 26,
-        "span": 6
-      },
-      {
-        "di": 3,
-        "topId": "J03",
-        "botId": "J02",
-        "start": 37,
-        "span": 3
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 0,
-        "span": 7
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 9,
-        "span": 7
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 17,
-        "span": 3
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 20,
-        "span": 3
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 23,
-        "span": 1
-      },
-      {
         "di": 2,
         "topId": "Me08",
         "botId": "Me10",
         "start": 26,
         "span": 2
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 28,
-        "span": 3
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 31,
-        "span": 1
-      },
-      {
-        "di": 2,
-        "topId": "Me08",
-        "botId": "Me10",
-        "start": 35,
-        "span": 5
       }
     ],
     "vacs": [
@@ -17998,11 +17747,11 @@
       "2027-05-17": "Pentecôte"
     },
     "profLastName": {
-      "Eric": "M Heurtebize",
       "Hugo": "M Aignan",
+      "Eric": "M Heurtebize",
+      "Quentin": "M Delisle",
       "Mathilde": "Mme Thibault",
       "Philippe": "M Poulain",
-      "Quentin": "M Delisle",
       "Yvan": "M Coutellec"
     },
     "vestAssign": {
